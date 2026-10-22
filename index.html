@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>WIRELESS — Mobiles, Repairs & Accessories</title>
     <meta name="description" content="Mobiles, Lamination, Repairing, Second Hand Phones & Accessories at Subhash Nagar, Dehradun">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -10,6 +10,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
     <style>
+        html, body {
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            touch-action: manipulation;
+        }
+        /* Mobile zoom prevention: iOS Safari auto-zooms if font-size < 16px */
+        input, textarea, select {
+            font-size: 16px !important;
+        }
+        button, a {
+            -webkit-tap-highlight-color: transparent;
+        }
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #F1F5F9;
@@ -71,7 +83,7 @@
         .modal-service-item.is-selected .modal-checkmark { opacity: 1; transform: scale(1); }
     </style>
 </head>
-<body class="antialiased selection:bg-amber-400 selection:text-slate-950 pb-28">
+<body class="antialiased selection:bg-amber-400 selection:text-slate-950 pb-32" style="padding-bottom: max(7rem, calc(6rem + env(safe-area-inset-bottom)));">
 
     <!-- APP CONTAINER (Modern Light Theme) -->
     <div class="max-w-md mx-auto relative min-h-screen bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)] overflow-hidden border-x border-slate-200/80">
@@ -406,7 +418,7 @@
 
                 <!-- Textarea -->
                 <div class="relative">
-                    <textarea id="aiReviewOutput" rows="4" class="w-full text-xs font-medium text-slate-800 bg-white border-2 border-slate-200 rounded-2xl p-3.5 leading-relaxed focus:bg-white focus:outline-none focus:ring-4 focus:ring-amber-200/50 focus:border-amber-500 transition-all resize-none shadow-2xs"></textarea>
+                    <textarea id="aiReviewOutput" rows="4" class="w-full text-base sm:text-sm font-medium text-slate-800 bg-white border-2 border-slate-200 rounded-2xl p-3.5 leading-relaxed focus:bg-white focus:outline-none focus:ring-4 focus:ring-amber-200/50 focus:border-amber-500 transition-all resize-none shadow-2xs" style="font-size: 16px;"></textarea>
                     <button type="button" onclick="regenerateReview()" class="absolute bottom-3 right-3 p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-2xs hover:bg-slate-200 text-slate-700 hover:text-slate-950 hover:rotate-180 transition-all duration-300" title="Generate another review draft">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                     </button>
@@ -732,7 +744,7 @@
         </main>
 
         <!-- 14. FIXED BOTTOM ACTION BAR (DOCK) WITH REAL BRAND LOGOS -->
-        <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-2xl border-t border-slate-200/90 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] py-2 px-3">
+        <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-2xl border-t border-slate-200/90 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] py-2 px-3" style="padding-bottom: max(0.5rem, env(safe-area-inset-bottom));">
             <div class="max-w-md mx-auto grid grid-cols-4 gap-1.5 text-center">
                 <!-- 1. View on Map (Official Multi-Color Google Maps Pin) -->
                 <a href="https://www.google.com/maps?cid=13211634425347864029" target="_blank" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
@@ -783,7 +795,7 @@
 
     <!-- 15. WELCOME MODAL (Clean Light Modal) -->
     <div id="welcomeModal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 transition-opacity duration-300">
-        <div class="w-full max-w-sm bg-white rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto text-slate-900">
+        <div class="w-full max-w-sm bg-white rounded-t-3xl sm:rounded-3xl p-5 pb-8 sm:pb-5 shadow-2xl border border-slate-200 max-h-[85vh] overflow-y-auto text-slate-900" style="padding-bottom: max(2.5rem, calc(1.5rem + env(safe-area-inset-bottom)));">
             <div class="text-center mb-4">
                 <span class="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full border border-amber-300 bg-amber-50 text-amber-800 shadow-2xs">Interactive Service Selector</span>
                 <h3 class="text-base sm:text-lg font-black text-slate-950 mt-2 leading-tight">What service did you get<br>at WIRELESS?</h3>
@@ -1382,9 +1394,7 @@
         function focusReviewGenerator() {
             const el = document.getElementById('aiSection');
             if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
-                const ta = document.getElementById('aiReviewOutput');
-                if (ta) ta.focus();
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
