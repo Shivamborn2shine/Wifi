@@ -46,13 +46,13 @@
         <!-- 1. HERO BANNER WITH STORE PHOTO & NEON OVERLAYS -->
         <section class="relative w-full h-[330px] sm:h-[360px] overflow-hidden bg-slate-950">
             <!-- Storefront Photo Background -->
-            <img src="./assets/images/wireless/wireless-storefront.jpg" alt="WIRELESS Storefront" class="w-full h-full object-cover object-center filter brightness-90">
+            <img src="./assets/images/wireless/storefront.jpg" alt="WIRELESS Storefront" class="w-full h-full object-cover object-center filter brightness-90">
             <!-- Dark Gradient Vignette Overlay -->
             <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/45 to-black/90"></div>
 
             <!-- Top Right Phone Pill -->
             <div class="absolute top-3.5 right-3.5 z-20">
-                <a href="tel:919837044095" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold border border-white/20 shadow-md hover:bg-black/90 transition-all">
+                <a href="tel:+919837044095" data-link="call" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold border border-white/20 shadow-md hover:bg-black/90 transition-all">
                     <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
                     <span>9837044095</span>
                 </a>
@@ -122,7 +122,7 @@
             <!-- Google Star Rating -->
             <div class="flex items-center justify-center gap-1.5 mt-1.5 flex-wrap">
                 <div class="flex text-amber-400 text-sm tracking-tighter">★★★★★</div>
-                <span class="text-sm font-extrabold text-slate-900">5</span>
+                <span class="text-sm font-extrabold text-slate-900">5.0</span>
                 <span class="text-xs text-slate-500 font-medium">(3 reviews)</span>
                 <span class="inline-flex items-center text-sm font-bold tracking-tight ml-1">
                     <span class="text-[#4285F4]">G</span><span class="text-[#EA4335]">o</span><span class="text-[#FBBC05]">o</span><span class="text-[#4285F4]">g</span><span class="text-[#34A853]">l</span><span class="text-[#EA4335]">e</span>
@@ -170,7 +170,7 @@
             <!-- 4. ABOUT BLURB WITH YELLOW ACCENT BAR & PHONE GRAPHIC -->
             <div class="mt-4 rounded-2xl bg-[#F8FAFC] border-l-4 border-amber-400 p-4 border border-slate-100/90 relative overflow-hidden flex items-center justify-between gap-3 shadow-xs">
                 <div class="flex-1 pr-1">
-                    <p class="text-xs text-slate-700 font-medium leading-relaxed">
+                    <p id="aboutQuoteText" class="text-xs text-slate-700 font-medium leading-relaxed">
                         Your trusted destination for mobiles, second hand phones, accessories, lamination and expert repairs. Genuine products, honest service and the latest accessories — all under one roof at <strong class="font-extrabold text-slate-900">WIRELESS</strong>.
                     </p>
                 </div>
@@ -220,31 +220,12 @@
 
                 <!-- Category Chips -->
                 <div class="flex flex-wrap gap-1.5 mb-3">
-                    
-        <button type="button" data-cat="ALL" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all chip-active" onclick="toggleCategoryChip(this, 'ALL')">
-            Overall Experience ✨
-        </button>
-    
-
-        <button type="button" data-cat="REPAIR" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all" onclick="toggleCategoryChip(this, 'REPAIR')">
-            Repair Quality 🔧
-        </button>
-    
-
-        <button type="button" data-cat="PRODUCTS" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all" onclick="toggleCategoryChip(this, 'PRODUCTS')">
-            Product Range 📱
-        </button>
-    
-
-        <button type="button" data-cat="SERVICE" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all" onclick="toggleCategoryChip(this, 'SERVICE')">
-            Staff &amp; Service 🤝
-        </button>
-    
-
-        <button type="button" data-cat="VALUE" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all" onclick="toggleCategoryChip(this, 'VALUE')">
-            Value for Money 💸
-        </button>
-    
+                    <button type="button" data-cat="ALL" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all chip-active" onclick="selectCategoryChip('ALL', this)">Overall Experience ✨</button>
+                    <button type="button" data-cat="REPAIR" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all" onclick="selectCategoryChip('REPAIR', this)">Phone Repair 🔧</button>
+                    <button type="button" data-cat="LAMINATION" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all" onclick="selectCategoryChip('LAMINATION', this)">Lamination & Skins 🛡️</button>
+                    <button type="button" data-cat="MOBILES" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all" onclick="selectCategoryChip('MOBILES', this)">Mobiles & 2nd Hand 📱</button>
+                    <button type="button" data-cat="ACCESSORIES" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all" onclick="selectCategoryChip('ACCESSORIES', this)">Accessories 🎧</button>
+                    <button type="button" data-cat="SERVICE" class="category-chip px-3 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all" onclick="selectCategoryChip('SERVICE', this)">Staff & Support 🤝</button>
                 </div>
 
                 <!-- Selected Service Summary -->
@@ -257,16 +238,16 @@
                 <div class="flex items-center justify-between mb-2">
                     <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Review Language</span>
                     <div class="inline-flex p-0.5 rounded-xl bg-slate-100 text-xs font-bold">
-                        <button type="button" class="lang-btn px-2.5 py-1 rounded-lg transition-all bg-white text-slate-900 shadow-xs" onclick="setLanguage('ENGLISH')">English</button>
-                        <button type="button" class="lang-btn px-2.5 py-1 rounded-lg transition-all text-slate-500 hover:text-slate-900" onclick="setLanguage('HINGLISH')">Hinglish</button>
-                        <button type="button" class="lang-btn px-2.5 py-1 rounded-lg transition-all text-slate-500 hover:text-slate-900" onclick="setLanguage('HINDI')">हिंदी</button>
+                        <button type="button" class="lang-btn px-2.5 py-1 rounded-lg transition-all bg-white text-slate-900 shadow-xs" onclick="setLanguage('ENGLISH', this)">English</button>
+                        <button type="button" class="lang-btn px-2.5 py-1 rounded-lg transition-all text-slate-500 hover:text-slate-900" onclick="setLanguage('HINGLISH', this)">Hinglish</button>
+                        <button type="button" class="lang-btn px-2.5 py-1 rounded-lg transition-all text-slate-500 hover:text-slate-900" onclick="setLanguage('HINDI', this)">हिंदी</button>
                     </div>
                 </div>
 
                 <!-- Textarea -->
                 <div class="relative">
                     <textarea id="aiReviewOutput" rows="4" class="w-full text-xs font-medium text-slate-800 bg-slate-50 border border-slate-200 rounded-2xl p-3 leading-relaxed focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-all resize-none"></textarea>
-                    <button type="button" onclick="regenerateReview()" class="absolute bottom-2.5 right-2.5 p-1.5 rounded-xl bg-white border border-slate-200 shadow-xs hover:bg-slate-50 text-slate-600 hover:text-amber-600 transition-colors" title="Generate another review draft">
+                    <button type="button" onclick="regenerateReviewDraft()" class="absolute bottom-2.5 right-2.5 p-1.5 rounded-xl bg-white border border-slate-200 shadow-xs hover:bg-slate-50 text-slate-600 hover:text-amber-600 transition-colors" title="Generate another review draft">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                     </button>
                 </div>
@@ -288,46 +269,34 @@
                     <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-300 bg-amber-50 text-amber-700">4 Photos</span>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
-                    
-        <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer bg-slate-900 aspect-square border border-slate-200/80"
-            onclick="openGalleryModal('./assets/images/wireless/wireless-storefront.jpg', 'WIRELESS Storefront', 'Our Store', 'The iconic WIRELESS signage on Post Office Road, Subhash Nagar — your one-stop mobile solution.')">
-            <img src="./assets/images/wireless/wireless-storefront.jpg" alt="WIRELESS Storefront" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex flex-col justify-end p-2.5">
-                <span class="text-[9px] font-black uppercase tracking-wider text-amber-300">Our Store</span>
-                <h4 class="text-xs font-bold text-white leading-tight mt-0.5 line-clamp-1">WIRELESS Storefront</h4>
-            </div>
-        </div>
-    
-
-        <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer bg-slate-900 aspect-square border border-slate-200/80"
-            onclick="openGalleryModal('./assets/images/wireless/wireless-accessories-display.jpg', 'Premium Accessories Wall', 'Skins &amp; Wraps', 'Huge collection of designer skins, wraps, cases and screen protectors for all phone models.')">
-            <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Premium Accessories Wall" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex flex-col justify-end p-2.5">
-                <span class="text-[9px] font-black uppercase tracking-wider text-amber-300">Skins &amp; Wraps</span>
-                <h4 class="text-xs font-bold text-white leading-tight mt-0.5 line-clamp-1">Premium Accessories Wall</h4>
-            </div>
-        </div>
-    
-
-        <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer bg-slate-900 aspect-square border border-slate-200/80"
-            onclick="openGalleryModal('./assets/images/wireless/wireless-interior-night.jpg', 'Inside WIRELESS', 'Store Interior', 'Well-organized interior with wide range of mobiles, accessories and expert service counters.')">
-            <img src="./assets/images/wireless/wireless-interior-night.jpg" alt="Inside WIRELESS" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex flex-col justify-end p-2.5">
-                <span class="text-[9px] font-black uppercase tracking-wider text-amber-300">Store Interior</span>
-                <h4 class="text-xs font-bold text-white leading-tight mt-0.5 line-clamp-1">Inside WIRELESS</h4>
-            </div>
-        </div>
-    
-
-        <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer bg-slate-900 aspect-square border border-slate-200/80"
-            onclick="openGalleryModal('./assets/images/wireless/wireless-grand-opening.jpg', 'Grand Opening Celebration', 'Inauguration', 'WIRELESS grand opening with festive decorations — a celebration of our commitment to quality service.')">
-            <img src="./assets/images/wireless/wireless-grand-opening.jpg" alt="Grand Opening Celebration" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex flex-col justify-end p-2.5">
-                <span class="text-[9px] font-black uppercase tracking-wider text-amber-300">Inauguration</span>
-                <h4 class="text-xs font-bold text-white leading-tight mt-0.5 line-clamp-1">Grand Opening Celebration</h4>
-            </div>
-        </div>
-    
+                    <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer bg-slate-900 aspect-square border border-slate-200/80" onclick="openGalleryModal('./assets/images/wireless/storefront.jpg', 'WIRELESS Storefront', 'Our Store', 'Lit neon signage on Post Office Road, Subhash Nagar.')">
+                        <img src="./assets/images/wireless/storefront.jpg" alt="Storefront" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex flex-col justify-end p-2.5">
+                            <span class="text-[9px] font-black uppercase tracking-wider text-amber-300">Our Store</span>
+                            <h4 class="text-xs font-bold text-white leading-tight mt-0.5 line-clamp-1">WIRELESS Storefront</h4>
+                        </div>
+                    </div>
+                    <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer bg-slate-900 aspect-square border border-slate-200/80" onclick="openGalleryModal('./assets/images/wireless/accessories.jpg', 'Accessories Wall', 'Cases & Skins', 'Wide selection of designer skins, covers and screen guards.')">
+                        <img src="./assets/images/wireless/accessories.jpg" alt="Accessories" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex flex-col justify-end p-2.5">
+                            <span class="text-[9px] font-black uppercase tracking-wider text-amber-300">Cases & Skins</span>
+                            <h4 class="text-xs font-bold text-white leading-tight mt-0.5 line-clamp-1">Accessories Wall</h4>
+                        </div>
+                    </div>
+                    <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer bg-slate-900 aspect-square border border-slate-200/80" onclick="openGalleryModal('./assets/images/wireless/interior.jpg', 'Inside WIRELESS', 'Store Interior', 'Well-organized counters with expert service technicians.')">
+                        <img src="./assets/images/wireless/interior.jpg" alt="Interior" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex flex-col justify-end p-2.5">
+                            <span class="text-[9px] font-black uppercase tracking-wider text-amber-300">Store Interior</span>
+                            <h4 class="text-xs font-bold text-white leading-tight mt-0.5 line-clamp-1">Inside WIRELESS</h4>
+                        </div>
+                    </div>
+                    <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all cursor-pointer bg-slate-900 aspect-square border border-slate-200/80" onclick="openGalleryModal('./assets/images/wireless/wireless-grand-opening.jpg', 'Grand Opening', 'Our Journey', 'Festive grand opening celebrating quality mobile care.')">
+                        <img src="./assets/images/wireless/wireless-grand-opening.jpg" alt="Grand Opening" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex flex-col justify-end p-2.5">
+                            <span class="text-[9px] font-black uppercase tracking-wider text-amber-300">Our Journey</span>
+                            <h4 class="text-xs font-bold text-white leading-tight mt-0.5 line-clamp-1">Grand Opening Celebration</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -335,33 +304,34 @@
             <div class="mt-6 pt-5 border-t border-slate-100">
                 <h3 class="text-xs font-black text-slate-950 uppercase tracking-tight mb-2.5">Why Choose WIRELESS</h3>
                 <div class="space-y-2">
-                    
-        <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-            <span class="text-xl flex-shrink-0">🔧</span>
-            <div>
-                <h4 class="text-xs font-bold text-slate-900">Expert Phone Repairs</h4>
-                <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">Professional screen replacement, battery repair, software fixes &amp; more for all brands</p>
-            </div>
-        </div>
-    
-
-        <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-            <span class="text-xl flex-shrink-0">🛡️</span>
-            <div>
-                <h4 class="text-xs font-bold text-slate-900">Premium Lamination &amp; Skins</h4>
-                <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">Massive collection of designer skins, wraps &amp; screen protectors with precise application</p>
-            </div>
-        </div>
-    
-
-        <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-            <span class="text-xl flex-shrink-0">💰</span>
-            <div>
-                <h4 class="text-xs font-bold text-slate-900">Best Prices Guaranteed</h4>
-                <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">Competitive pricing on new phones, accessories &amp; reliable second-hand devices</p>
-            </div>
-        </div>
-    
+                    <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                        <span class="text-xl flex-shrink-0">🔧</span>
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-900">Expert Phone Repairs</h4>
+                            <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">Same-day screen replacement, battery repair & motherboard fixes</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                        <span class="text-xl flex-shrink-0">🛡️</span>
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-900">Precision Lamination & Skins</h4>
+                            <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">Zero bubble wrap, premium matte/gloss finishes for all smartphone models</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                        <span class="text-xl flex-shrink-0">💰</span>
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-900">Best Prices Guaranteed</h4>
+                            <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">Competitive pricing on new phones, accessories & reliable 2nd hand devices</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                        <span class="text-xl flex-shrink-0">🤝</span>
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-900">Honest & Transparent</h4>
+                            <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">Clear upfront quotes with genuine parts and customer satisfaction</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -372,7 +342,7 @@
                     <div class="flex items-start gap-2.5 p-2.5 rounded-xl bg-slate-50 border border-slate-100">
                         <span class="text-amber-500 mt-0.5">🕒</span>
                         <div>
-                            <span class="font-bold text-slate-900">Open Now • Closes 9:00 PM</span>
+                            <span class="font-bold text-slate-900">Open Daily</span>
                             <p class="text-[11px] text-slate-500 mt-0.5">Monday - Sunday: 10:00 AM - 9:00 PM</p>
                         </div>
                     </div>
@@ -385,12 +355,11 @@
                     </div>
                 </div>
 
-                
                 <div class="mt-3 rounded-2xl overflow-hidden border border-slate-200/80 h-44 shadow-xs">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.0!2d77.9959916!3d30.2705399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b9bd1c976e3%3A0xb7592782f92e75dd!2sWIRELESS!5e0!3m2!1sen!2sin!4v1697900000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe data-link="mapEmbed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.0!2d77.9959916!3d30.2705399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b9bd1c976e3%3A0xb7592782f92e75dd!2sWIRELESS!5e0!3m2!1sen!2sin!4v1697900000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
 
-                <a href="https://www.google.com/maps?cid=13211634425347864029" target="_blank" class="w-full mt-3 py-2.5 px-3 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-slate-800 transition-colors">
+                <a href="https://www.google.com/maps?cid=13211634425347864029" data-link="directions" target="_blank" class="w-full mt-3 py-2.5 px-3 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-slate-800 transition-colors">
                     <span>Open in Google Maps</span>
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 </a>
@@ -407,7 +376,7 @@
         <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_25px_rgba(0,0,0,0.08)] py-2 px-3">
             <div class="max-w-md mx-auto grid grid-cols-4 gap-1 text-center">
                 <!-- 1. View on Map -->
-                <a href="https://www.google.com/maps?cid=13211634425347864029" target="_blank" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
+                <a href="https://www.google.com/maps?cid=13211634425347864029" data-link="directions" target="_blank" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
                     <div class="w-9 h-9 rounded-full bg-rose-50 flex items-center justify-center text-rose-500 mb-1 group-hover:scale-105 transition-transform">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                     </div>
@@ -415,7 +384,7 @@
                 </a>
 
                 <!-- 2. Call Now -->
-                <a href="tel:919837044095" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
+                <a href="tel:+919837044095" data-link="call" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
                     <div class="w-9 h-9 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500 mb-1 group-hover:scale-105 transition-transform">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
                     </div>
@@ -423,7 +392,7 @@
                 </a>
 
                 <!-- 3. Visit Website / Instagram -->
-                <a href="https://www.instagram.com/wireless_95" target="_blank" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
+                <a href="https://www.instagram.com/wireless_95" data-link="instagram" target="_blank" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
                     <div class="w-9 h-9 rounded-full bg-sky-50 flex items-center justify-center text-sky-500 mb-1 group-hover:scale-105 transition-transform">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
                     </div>
@@ -431,7 +400,7 @@
                 </a>
 
                 <!-- 4. WhatsApp -->
-                <a href="https://wa.me/919837044095?text=Hi%20WIRELESS%2C%20I%20am%20interested%20in%20your%20services!" target="_blank" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
+                <a href="https://wa.me/919837044095?text=Hi%20WIRELESS%2C%20I%20am%20interested%20in%20your%20services!" data-link="whatsapp" target="_blank" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
                     <div class="w-9 h-9 rounded-full bg-emerald-50 flex items-center justify-center text-[#25D366] mb-1 group-hover:scale-105 transition-transform">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
                     </div>
@@ -452,63 +421,55 @@
             </div>
 
             <div class="grid grid-cols-3 gap-3 mb-5">
-                
-            <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'REPAIR', 'SERVICE')">
-                <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-interior-night.jpg" alt="Phone Repair" class="w-full h-full object-cover">
-                    <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Phone Repair</span>
-            </button>
-
-            <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'LAMINATION', 'SERVICE')">
-                <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Lamination / Skin" class="w-full h-full object-cover">
-                    <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Lamination / Skin</span>
-            </button>
-
-            <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'SCREEN_GUARD', 'ACCESSORIES')">
-                <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Screen Protection" class="w-full h-full object-cover">
-                    <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Screen Protection</span>
-            </button>
-
-            <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'PHONE_CASE', 'ACCESSORIES')">
-                <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Phone Case" class="w-full h-full object-cover">
-                    <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Phone Case</span>
-            </button>
-
-            <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'NEW_PHONE', 'MOBILES')">
-                <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-storefront.jpg" alt="New Phone Purchase" class="w-full h-full object-cover">
-                    <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">New Phone Purchase</span>
-            </button>
-
-            <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'SECOND_HAND', 'MOBILES')">
-                <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-interior-night.jpg" alt="Second Hand Phone" class="w-full h-full object-cover">
-                    <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Second Hand Phone</span>
-            </button>
-
-            <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'ACCESSORIES', 'ACCESSORIES')">
-                <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Other Accessories" class="w-full h-full object-cover">
-                    <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Other Accessories</span>
-            </button>
-
+                <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'REPAIR', 'REPAIR')">
+                    <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
+                        <img src="./assets/images/wireless/interior.jpg" alt="Phone Repair" class="w-full h-full object-cover">
+                        <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Phone Repair</span>
+                </button>
+                <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'LAMINATION', 'LAMINATION')">
+                    <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
+                        <img src="./assets/images/wireless/accessories.jpg" alt="Lamination" class="w-full h-full object-cover">
+                        <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Lamination / Skin</span>
+                </button>
+                <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'SCREEN', 'ACCESSORIES')">
+                    <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
+                        <img src="./assets/images/wireless/accessories.jpg" alt="Screen Guard" class="w-full h-full object-cover">
+                        <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Screen Guard</span>
+                </button>
+                <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'CASE', 'ACCESSORIES')">
+                    <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
+                        <img src="./assets/images/wireless/accessories.jpg" alt="Phone Case" class="w-full h-full object-cover">
+                        <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Phone Case</span>
+                </button>
+                <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'NEW_PHONE', 'MOBILES')">
+                    <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
+                        <img src="./assets/images/wireless/storefront.jpg" alt="New Phone" class="w-full h-full object-cover">
+                        <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">New Phone</span>
+                </button>
+                <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'SECOND_HAND', 'MOBILES')">
+                    <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
+                        <img src="./assets/images/wireless/interior.jpg" alt="Second Hand" class="w-full h-full object-cover">
+                        <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">2nd Hand Phone</span>
+                </button>
+                <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'ACCESSORIES', 'ACCESSORIES')">
+                    <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-50 border-2 border-slate-200">
+                        <img src="./assets/images/wireless/accessories.jpg" alt="Accessories" class="w-full h-full object-cover">
+                        <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">✓</div>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Accessories</span>
+                </button>
                 <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'ALL', 'ALL')">
                     <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-100 flex items-center justify-center border-2 border-slate-200">
                         <svg class="w-7 h-7 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
@@ -550,492 +511,12 @@
         <span id="toastMessage">Copied!</span>
     </div>
 
-    <!-- CLIENT SCRIPT RUNTIME -->
-    <script>
-        const STORE_CONFIG = {
-  "id": "wireless",
-  "name": "WIRELESS",
-  "shortName": "Wireless",
-  "initials": "W",
-  "businessType": "cell_phone_store",
-  "tagline": "Mobiles, Lamination, Repairing, Second Hand Phones & Accessories at Subhash Nagar, Dehradun",
-  "statusBadge": "Open Now • Subhash Nagar, Dehradun",
-  "categoryBadge": "📱 Mobiles, Repairs & Accessories",
-  "categorySubtitle": "Mobiles, Repairs & Accessories",
-  "heroHandwriting": "Your Device\nOur Care",
-  "heroOverlays": {
-    "topLeft": "Your Device Our Care",
-    "topRight": "Mobiles Accessories Repairs & More",
-    "phoneBadge": "9837044095"
-  },
-  "rating": 5,
-  "ratingStars": "★★★★★",
-  "ratingCountText": "(3 reviews)",
-  "badgeText": "Trusted Cell Phone Store",
-  "theme": {
-    "primary": "#F59E0B",
-    "primaryHover": "#D97706",
-    "primaryLight": "#FFFBEB",
-    "primaryShadow": "rgba(245, 158, 11, 0.35)",
-    "accent": "#F59E0B",
-    "accentGlow": "rgba(245, 158, 11, 0.25)",
-    "secondary": "#1E293B",
-    "gradientBg": "linear-gradient(135deg, #1E293B 0%, #0F172A 50%, #1E293B 100%)",
-    "heroGradient": "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 50%, #FBBF24 100%)"
-  },
-  "featureTags": [
-    {
-      "icon": "📱",
-      "text": "Mobile Sales",
-      "bg": "bg-amber-50",
-      "textCol": "text-amber-700",
-      "border": "border-amber-200/60"
-    },
-    {
-      "icon": "🔧",
-      "text": "Phone Repairs",
-      "bg": "bg-blue-50",
-      "textCol": "text-blue-700",
-      "border": "border-blue-200/60"
-    },
-    {
-      "icon": "🛡️",
-      "text": "Lamination & Skins",
-      "bg": "bg-emerald-50",
-      "textCol": "text-emerald-700",
-      "border": "border-emerald-200/60"
-    },
-    {
-      "icon": "🎧",
-      "text": "Accessories",
-      "bg": "bg-purple-50",
-      "textCol": "text-purple-700",
-      "border": "border-purple-200/60"
-    }
-  ],
-  "heroImage": "./assets/images/wireless/wireless-storefront.jpg",
-  "promoBanner": {
-    "image": "./assets/images/wireless/wireless-accessories-display.jpg",
-    "alt": "WIRELESS — Premium Accessories, Skins & Wraps Collection"
-  },
-  "welcomeModal": {
-    "heading": "What service did you get<br>at WIRELESS?",
-    "subheading": "Choose one or more services",
-    "items": [
-      {
-        "key": "REPAIR",
-        "categoryKey": "SERVICE",
-        "label": "Phone Repair",
-        "image": "./assets/images/wireless/wireless-interior-night.jpg"
-      },
-      {
-        "key": "LAMINATION",
-        "categoryKey": "SERVICE",
-        "label": "Lamination / Skin",
-        "image": "./assets/images/wireless/wireless-accessories-display.jpg"
-      },
-      {
-        "key": "SCREEN_GUARD",
-        "categoryKey": "ACCESSORIES",
-        "label": "Screen Protection",
-        "image": "./assets/images/wireless/wireless-accessories-display.jpg"
-      },
-      {
-        "key": "PHONE_CASE",
-        "categoryKey": "ACCESSORIES",
-        "label": "Phone Case",
-        "image": "./assets/images/wireless/wireless-accessories-display.jpg"
-      },
-      {
-        "key": "NEW_PHONE",
-        "categoryKey": "MOBILES",
-        "label": "New Phone Purchase",
-        "image": "./assets/images/wireless/wireless-storefront.jpg"
-      },
-      {
-        "key": "SECOND_HAND",
-        "categoryKey": "MOBILES",
-        "label": "Second Hand Phone",
-        "image": "./assets/images/wireless/wireless-interior-night.jpg"
-      },
-      {
-        "key": "ACCESSORIES",
-        "categoryKey": "ACCESSORIES",
-        "label": "Other Accessories",
-        "image": "./assets/images/wireless/wireless-accessories-display.jpg"
-      },
-      {
-        "key": "ALL",
-        "categoryKey": "ALL",
-        "label": "Not Sure",
-        "isNotSure": true
-      }
-    ]
-  },
-  "specialities": [
-    {
-      "category": "SERVICE",
-      "name": "Phone Repair",
-      "price": "Expert",
-      "gradient": "from-blue-500 to-cyan-600",
-      "image": "./assets/images/wireless/wireless-interior-night.jpg"
-    },
-    {
-      "category": "SERVICE",
-      "name": "Lamination",
-      "price": "Premium",
-      "gradient": "from-amber-500 to-yellow-600",
-      "image": "./assets/images/wireless/wireless-accessories-display.jpg"
-    },
-    {
-      "category": "ACCESSORIES",
-      "name": "Skins & Wraps",
-      "price": "Trendy",
-      "gradient": "from-purple-500 to-pink-600",
-      "image": "./assets/images/wireless/wireless-accessories-display.jpg"
-    },
-    {
-      "category": "MOBILES",
-      "name": "New Phones",
-      "price": "Best Price",
-      "gradient": "from-emerald-500 to-teal-600",
-      "image": "./assets/images/wireless/wireless-storefront.jpg"
-    },
-    {
-      "category": "MOBILES",
-      "name": "2nd Hand",
-      "price": "Verified",
-      "gradient": "from-orange-500 to-red-600",
-      "image": "./assets/images/wireless/wireless-interior-night.jpg"
-    },
-    {
-      "category": "ACCESSORIES",
-      "name": "Cases",
-      "price": "All Brands",
-      "gradient": "from-indigo-500 to-violet-600",
-      "image": "./assets/images/wireless/wireless-accessories-display.jpg"
-    }
-  ],
-  "gallery": [
-    {
-      "id": "storefront-day",
-      "title": "WIRELESS Storefront",
-      "badge": "Our Store",
-      "desc": "The iconic WIRELESS signage on Post Office Road, Subhash Nagar — your one-stop mobile solution.",
-      "image": "./assets/images/wireless/wireless-storefront.jpg"
-    },
-    {
-      "id": "accessories-wall",
-      "title": "Premium Accessories Wall",
-      "badge": "Skins & Wraps",
-      "desc": "Huge collection of designer skins, wraps, cases and screen protectors for all phone models.",
-      "image": "./assets/images/wireless/wireless-accessories-display.jpg"
-    },
-    {
-      "id": "interior-view",
-      "title": "Inside WIRELESS",
-      "badge": "Store Interior",
-      "desc": "Well-organized interior with wide range of mobiles, accessories and expert service counters.",
-      "image": "./assets/images/wireless/wireless-interior-night.jpg"
-    },
-    {
-      "id": "grand-opening",
-      "title": "Grand Opening Celebration",
-      "badge": "Inauguration",
-      "desc": "WIRELESS grand opening with festive decorations — a celebration of our commitment to quality service.",
-      "image": "./assets/images/wireless/wireless-grand-opening.jpg"
-    }
-  ],
-  "about": {
-    "title": "Welcome to WIRELESS",
-    "callout": "Your trusted destination for mobiles, second hand phones, accessories, lamination and expert repairs. Genuine products, honest service and the latest accessories — all under one roof at WIRELESS.",
-    "story": "Located on Post Office Road in Subhash Nagar, Dehradun, WIRELESS is your trusted destination for all mobile phone needs. From expert phone repairs and premium lamination to genuine accessories, stylish skins & wraps, new phones, and verified second-hand devices — we offer it all under one roof with a commitment to quality and customer satisfaction.",
-    "highlights": [
-      {
-        "icon": "🔧",
-        "title": "Expert Phone Repairs",
-        "subtitle": "Professional screen replacement, battery repair, software fixes & more for all brands"
-      },
-      {
-        "icon": "🛡️",
-        "title": "Premium Lamination & Skins",
-        "subtitle": "Massive collection of designer skins, wraps & screen protectors with precise application"
-      },
-      {
-        "icon": "💰",
-        "title": "Best Prices Guaranteed",
-        "subtitle": "Competitive pricing on new phones, accessories & reliable second-hand devices"
-      }
-    ]
-  },
-  "hours": {
-    "display": "Monday - Sunday: 10:00 AM - 9:00 PM",
-    "status": "Open Now • Closes 9:00 PM"
-  },
-  "contact": {
-    "phone": "+919837044095",
-    "phoneBadge": "9837044095",
-    "phoneDisplay": "+91 98370 44095",
-    "whatsapp": "919837044095",
-    "address": "Post Office Rd, Subhash Nagar, Dehradun, Bharu Wala Grant, Uttarakhand 248002",
-    "shortAddress": "Post Office Rd, Subhash Nagar, Dehradun"
-  },
-  "links": {
-    "googlePlaceId": "ChIJ43bJ0ZsrCTkR3XUu-YInWbc",
-    "googleReviewUrl": "https://search.google.com/local/writereview?placeid=ChIJ43bJ0ZsrCTkR3XUu-YInWbc",
-    "googleMapsUrl": "https://www.google.com/maps?cid=13211634425347864029",
-    "mapsEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.0!2d77.9959916!3d30.2705399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b9bd1c976e3%3A0xb7592782f92e75dd!2sWIRELESS!5e0!3m2!1sen!2sin!4v1697900000000!5m2!1sen!2sin",
-    "instagramUrl": "https://www.instagram.com/wireless_95"
-  },
-  "marketing": {
-    "instagramHandle": "onescan360",
-    "instagramUrl": "https://www.instagram.com/onescan360",
-    "email": "onescan360@gmail.com"
-  },
-  "reviewCategories": {
-    "chips": [
-      {
-        "label": "Overall Experience ✨",
-        "key": "ALL"
-      },
-      {
-        "label": "Repair Quality 🔧",
-        "key": "REPAIR"
-      },
-      {
-        "label": "Product Range 📱",
-        "key": "PRODUCTS"
-      },
-      {
-        "label": "Staff & Service 🤝",
-        "key": "SERVICE"
-      },
-      {
-        "label": "Value for Money 💸",
-        "key": "VALUE"
-      }
-    ],
-    "reviews": {
-      "ENGLISH": [
-        "Had an amazing experience at WIRELESS! The repair quality was outstanding, the staff was super helpful, and prices were very fair. Highly recommended for any mobile phone needs!",
-        "One of the best cell phone stores in Dehradun! Got my phone screen replaced and it looks brand new. They also have a fantastic collection of skins and accessories. Definitely coming back!",
-        "Loved everything about WIRELESS! Great range of phones and accessories, expert repair service, and the lamination work was flawless. 5 stars all the way!"
-      ],
-      "HINGLISH": [
-        "WIRELESS ka experience bohot hi shaandaar tha! Phone repair ekdum professional tha, staff bohot helpful tha aur prices bhi reasonable. Definitely recommended for all mobile needs!",
-        "Bohot hi mast phone store hai! Screen replacement karwaya aur bilkul new jaisa lag raha hai. Skins aur wraps ka collection bhi zabardast hai. Zaroor visit karo!",
-        "Inka repair work aur service dono lajawab the! Super value for money aur genuine accessories milte hain. 5 stars!"
-      ],
-      "HINDI": [
-        "WIRELESS में बहुत ही शानदार अनुभव रहा! फोन रिपेयर बिल्कुल प्रोफेशनल था और स्टाफ़ का व्यवहार भी बहुत विनम्र था। मोबाइल से जुड़ी किसी भी ज़रूरत के लिए ज़रूर आएं!",
-        "यहाँ की सर्विस और प्रोडक्ट रेंज दोनों ही लाजवाब हैं! स्क्रीन बदलवाई और बिल्कुल नए जैसी लग रही है। 5 स्टार अनुभव!",
-        "फोन रिपेयर, लैमिनेशन और एक्सेसरीज़ के लिए बेहतरीन जगह। कीमत भी उचित और काम भी बढ़िया।"
-      ]
-    }
-  }
-};
-        let selectedChips = new Set(['ALL']);
-        let currentLang = 'ENGLISH';
-        let chosenItems = [];
-
-        const REVIEWS_LIBRARY = {
-          "ENGLISH": [
-                    "Had an amazing experience at WIRELESS! The repair quality was outstanding, the staff was super helpful, and prices were very fair. Highly recommended for any mobile phone needs!",
-                    "One of the best cell phone stores in Dehradun! Got my phone screen replaced and it looks brand new. They also have a fantastic collection of skins and accessories. Definitely coming back!",
-                    "Loved everything about WIRELESS! Great range of phones and accessories, expert repair service, and the lamination work was flawless. 5 stars all the way!"
-          ],
-          "HINGLISH": [
-                    "WIRELESS ka experience bohot hi shaandaar tha! Phone repair ekdum professional tha, staff bohot helpful tha aur prices bhi reasonable. Definitely recommended for all mobile needs!",
-                    "Bohot hi mast phone store hai! Screen replacement karwaya aur bilkul new jaisa lag raha hai. Skins aur wraps ka collection bhi zabardast hai. Zaroor visit karo!",
-                    "Inka repair work aur service dono lajawab the! Super value for money aur genuine accessories milte hain. 5 stars!"
-          ],
-          "HINDI": [
-                    "WIRELESS में बहुत ही शानदार अनुभव रहा! फोन रिपेयर बिल्कुल प्रोफेशनल था और स्टाफ़ का व्यवहार भी बहुत विनम्र था। मोबाइल से जुड़ी किसी भी ज़रूरत के लिए ज़रूर आएं!",
-                    "यहाँ की सर्विस और प्रोडक्ट रेंज दोनों ही लाजवाब हैं! स्क्रीन बदलवाई और बिल्कुल नए जैसी लग रही है। 5 स्टार अनुभव!",
-                    "फोन रिपेयर, लैमिनेशन और एक्सेसरीज़ के लिए बेहतरीन जगह। कीमत भी उचित और काम भी बढ़िया।"
-          ]
-};
-
-        function showToast(msg, icon = '✨') {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMessage').textContent = msg;
-            document.getElementById('toastIcon').textContent = icon;
-            toast.classList.remove('opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'pointer-events-none');
-            }, 2500);
-        }
-
-        function toggleWelcomeItem(btn, key, categoryKey) {
-            btn.classList.toggle('is-selected');
-            updateModalConfirmBtn();
-        }
-
-        function updateModalConfirmBtn() {
-            const selected = document.querySelectorAll('.modal-service-item.is-selected');
-            const btn = document.getElementById('modalConfirmBtn');
-            if (selected.length > 0) {
-                btn.removeAttribute('disabled');
-                btn.classList.remove('opacity-50', 'cursor-not-allowed');
-            } else {
-                btn.setAttribute('disabled', 'true');
-                btn.classList.add('opacity-50', 'cursor-not-allowed');
-            }
-        }
-
-        function confirmWelcomeModal() {
-            const selected = document.querySelectorAll('.modal-service-item.is-selected');
-            chosenItems = [];
-            let targetCategory = 'ALL';
-            selected.forEach(el => {
-                const text = el.querySelector('span').textContent.trim();
-                chosenItems.push(text);
-            });
-            closeWelcomeModal();
-            if (chosenItems.length > 0) {
-                const summary = document.getElementById('selectedMenuSummary');
-                const summaryText = document.getElementById('selectedMenuSummaryText');
-                if (summary && summaryText) {
-                    summaryText.textContent = chosenItems.join(', ');
-                    summary.classList.remove('hidden');
-                }
-            }
-            regenerateReview();
-            const aiSec = document.getElementById('aiSection');
-            if (aiSec) aiSec.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function closeWelcomeModal() {
-            document.getElementById('welcomeModal').classList.add('hidden');
-        }
-
-        function openWelcomeModal() {
-            document.getElementById('welcomeModal').classList.remove('hidden');
-        }
-
-        function toggleCategoryChip(btn, category) {
-            if (category === 'ALL') {
-                selectedChips.clear();
-                selectedChips.add('ALL');
-                document.querySelectorAll('.category-chip').forEach(b => b.classList.remove('chip-active'));
-                btn.classList.add('chip-active');
-            } else {
-                selectedChips.delete('ALL');
-                const allChip = document.querySelector('.category-chip[data-cat="ALL"]');
-                if (allChip) allChip.classList.remove('chip-active');
-                if (selectedChips.has(category)) {
-                    if (selectedChips.size > 1) {
-                        selectedChips.delete(category);
-                        btn.classList.remove('chip-active');
-                    }
-                } else {
-                    selectedChips.add(category);
-                    btn.classList.add('chip-active');
-                }
-            }
-            regenerateReview();
-        }
-
-        function quickSelectCategory(catKey, serviceName) {
-            if (catKey) {
-                selectedChips.clear();
-                selectedChips.add(catKey);
-                document.querySelectorAll('.category-chip').forEach(btn => {
-                    if (btn.getAttribute('data-cat') === catKey) {
-                        btn.classList.add('chip-active');
-                    } else {
-                        btn.classList.remove('chip-active');
-                    }
-                });
-            }
-            if (serviceName) {
-                chosenItems = [serviceName];
-                const summary = document.getElementById('selectedMenuSummary');
-                const summaryText = document.getElementById('selectedMenuSummaryText');
-                if (summary && summaryText) {
-                    summaryText.textContent = serviceName;
-                    summary.classList.remove('hidden');
-                }
-            }
-            regenerateReview();
-            const aiSec = document.getElementById('aiSection');
-            if (aiSec) {
-                aiSec.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        function focusReviewGenerator() {
-            const aiSec = document.getElementById('aiSection');
-            if (aiSec) {
-                aiSec.scrollIntoView({ behavior: 'smooth' });
-                const textarea = document.getElementById('aiReviewOutput');
-                if (textarea) {
-                    textarea.focus();
-                    textarea.classList.add('ring-2', 'ring-amber-400');
-                    setTimeout(() => textarea.classList.remove('ring-2', 'ring-amber-400'), 1200);
-                }
-            }
-            regenerateReview();
-        }
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(b => {
-                b.classList.remove('bg-white', 'text-slate-900', 'shadow-xs');
-                b.classList.add('text-slate-500');
-            });
-            event.target.classList.add('bg-white', 'text-slate-900', 'shadow-xs');
-            event.target.classList.remove('text-slate-500');
-            regenerateReview();
-        }
-
-        let reviewIndex = 0;
-        function regenerateReview() {
-            const list = REVIEWS_LIBRARY[currentLang] || REVIEWS_LIBRARY.ENGLISH;
-            let text = list[reviewIndex % list.length];
-            reviewIndex++;
-            if (chosenItems.length > 0) {
-                const itemsText = chosenItems.slice(0, 2).join(' & ');
-                if (currentLang === 'HINGLISH') {
-                    text += " Especially " + itemsText + " service/quality bohot hi shaandaar thi!";
-                } else if (currentLang === 'HINDI') {
-                    text += " विशेष रूप से " + itemsText + " का काम और क्वालिटी बहुत ही बढ़िया थी!";
-                } else {
-                    text += " Their " + itemsText + " service was truly exceptional!";
-                }
-            }
-            document.getElementById('aiReviewOutput').value = text;
-        }
-
-        function copyAndRedirectReview() {
-            const text = document.getElementById('aiReviewOutput').value;
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('Review copied! Opening Google Maps...', '📋');
-                setTimeout(() => {
-                    const rUrl = STORE_CONFIG.links?.googleReviewUrl || STORE_CONFIG.links?.googleMapsUrl || '#';
-                    window.open(rUrl, '_blank');
-                }, 900);
-            }).catch(() => {
-                window.open(STORE_CONFIG.links?.googleReviewUrl || '#', '_blank');
-            });
-        }
-
-        function openGalleryModal(img, title, badge, desc) {
-            document.getElementById('galleryModalImg').src = img;
-            document.getElementById('galleryModalTitle').textContent = title;
-            document.getElementById('galleryModalBadge').textContent = badge;
-            document.getElementById('galleryModalDesc').textContent = desc;
-            document.getElementById('galleryModal').classList.remove('hidden');
-        }
-
-        function closeGalleryModal() {
-            document.getElementById('galleryModal').classList.add('hidden');
-        }
-
-        // Init on load
-        window.addEventListener('DOMContentLoaded', () => {
-            regenerateReview();
-        });
-    </script>
+    <!-- MODULAR SCRIPTS (Learned from Scoop n Brew & Bluedoor 2.0) -->
+    <script src="./js/config.js"></script>
+    <script src="./js/telemetry.js"></script>
+    <script src="./js/reviews-db.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/dev-editor.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 </html>
