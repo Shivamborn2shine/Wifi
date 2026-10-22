@@ -334,11 +334,21 @@
                     </div>
                 </div>
 
+                <!-- Textarea with Live AI Typing Header -->
+                <div class="flex items-center justify-between mb-1.5 px-0.5">
+                    <span class="text-[10px] font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                        <span class="text-amber-500">✍️</span> Review Draft
+                    </span>
+                    <span id="aiTypingStatus" class="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-amber-700 bg-amber-50 border border-amber-200/80 px-2.5 py-0.5 rounded-full transition-all">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span> AI is typing...
+                    </span>
+                </div>
+
                 <!-- Textarea -->
                 <div class="relative">
-                    <textarea id="aiReviewOutput" rows="4" class="w-full text-base sm:text-sm font-medium text-slate-800 bg-white border-2 border-slate-200 rounded-2xl p-3.5 leading-relaxed focus:bg-white focus:outline-none focus:ring-4 focus:ring-amber-200/50 focus:border-amber-500 transition-all resize-none shadow-2xs" style="font-size: 16px;"></textarea>
-                    <button type="button" onclick="regenerateReview()" class="absolute bottom-3 right-3 p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-2xs hover:bg-slate-200 text-slate-700 hover:text-slate-950 hover:rotate-180 transition-all duration-300" title="Generate another review draft">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    <textarea id="aiReviewOutput" rows="4" placeholder="✨ AI is generating your personalized 5-star review..." class="w-full text-base sm:text-sm font-medium text-slate-800 bg-white border-2 border-slate-200 rounded-2xl p-3.5 leading-relaxed focus:bg-white focus:outline-none focus:ring-4 focus:ring-amber-200/50 focus:border-amber-500 transition-all resize-none shadow-2xs" style="font-size: 16px;"></textarea>
+                    <button id="regenerateBtn" type="button" onclick="regenerateReview(true)" class="absolute bottom-3 right-3 p-2 rounded-xl bg-slate-100/90 border border-slate-300 shadow-2xs hover:bg-slate-200 text-slate-700 hover:text-slate-950 transition-all duration-300" title="Generate another review draft">
+                        <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                     </button>
                 </div>
 
@@ -1315,6 +1325,12 @@
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+            if (!hasAutoTypedOnScroll) {
+                hasAutoTypedOnScroll = true;
+                setTimeout(() => {
+                    regenerateReview(true);
+                }, 280);
+            }
         }
 
         function toggleFaq(btn) {
@@ -1433,8 +1449,71 @@
             regenerateReview();
         }
 
+        let typingTimer = null;
+        let currentFullReviewText = '';
+        let hasAutoTypedOnScroll = false;
         let reviewIndex = 0;
-        function regenerateReview() {
+
+        function typeReviewText(text) {
+            currentFullReviewText = text;
+            const ta = document.getElementById('aiReviewOutput');
+            const status = document.getElementById('aiTypingStatus');
+            const refreshBtn = document.getElementById('regenerateBtn');
+            if (!ta) return;
+
+            if (typingTimer) {
+                clearTimeout(typingTimer);
+                typingTimer = null;
+            }
+
+            if (refreshBtn) {
+                const svg = refreshBtn.querySelector('svg');
+                if (svg) svg.classList.add('animate-spin');
+            }
+
+            if (status) {
+                status.classList.remove('text-emerald-700', 'bg-emerald-50', 'border-emerald-200');
+                status.classList.add('text-amber-700', 'bg-amber-50', 'border-amber-200');
+                status.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span> AI is typing...';
+            }
+
+            ta.classList.add('border-amber-400', 'ring-2', 'ring-amber-200/60');
+            ta.value = '';
+
+            let i = 0;
+            function typeNext() {
+                if (i < text.length) {
+                    const step = (text[i] === ' ' || text[i] === '.' || text[i] === '!' || text[i] === ',') ? 1 : 2;
+                    i = Math.min(i + step, text.length);
+                    ta.value = text.slice(0, i);
+                    ta.scrollTop = ta.scrollHeight;
+
+                    let delay = 16;
+                    const char = text[i - 1];
+                    if (char === '.' || char === '!') delay = 45;
+                    else if (char === ',') delay = 30;
+
+                    typingTimer = setTimeout(typeNext, delay);
+                } else {
+                    typingTimer = null;
+                    ta.value = text;
+                    ta.classList.remove('border-amber-400', 'ring-2', 'ring-amber-200/60');
+                    if (refreshBtn) {
+                        const svg = refreshBtn.querySelector('svg');
+                        if (svg) svg.classList.remove('animate-spin');
+                    }
+                    if (status) {
+                        status.classList.remove('text-amber-700', 'bg-amber-50', 'border-amber-200');
+                        status.classList.add('text-emerald-700', 'bg-emerald-50', 'border-emerald-200');
+                        status.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Ready to copy';
+                    }
+                }
+            }
+
+            typeNext();
+        }
+
+        function regenerateReview(animate = true) {
             let activeCat = 'ALL';
             for (let c of selectedChips) {
                 if (c !== 'ALL') {
@@ -1470,12 +1549,39 @@
                     text += " Their " + itemsText + " service was truly exceptional!";
                 }
             }
-            document.getElementById('aiReviewOutput').value = text;
+
+            if (animate) {
+                typeReviewText(text);
+            } else {
+                currentFullReviewText = text;
+                const ta = document.getElementById('aiReviewOutput');
+                if (ta) ta.value = text;
+            }
         }
 
         function copyAndRedirectReview() {
-            const text = document.getElementById('aiReviewOutput').value;
-            navigator.clipboard.writeText(text).then(() => {
+            if (typingTimer) {
+                clearTimeout(typingTimer);
+                typingTimer = null;
+            }
+            const ta = document.getElementById('aiReviewOutput');
+            const status = document.getElementById('aiTypingStatus');
+            const refreshBtn = document.getElementById('regenerateBtn');
+            if (refreshBtn) {
+                const svg = refreshBtn.querySelector('svg');
+                if (svg) svg.classList.remove('animate-spin');
+            }
+            if (status) {
+                status.classList.remove('text-amber-700', 'bg-amber-50', 'border-amber-200');
+                status.classList.add('text-emerald-700', 'bg-emerald-50', 'border-emerald-200');
+                status.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Ready to copy';
+            }
+            if (ta && currentFullReviewText) {
+                ta.value = currentFullReviewText;
+                ta.classList.remove('border-amber-400', 'ring-2', 'ring-amber-200/60');
+            }
+            const textToCopy = (ta && ta.value) ? ta.value : currentFullReviewText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
                 showToast('Review copied! Opening Google Maps...', '📋');
                 setTimeout(() => {
                     const rUrl = STORE_CONFIG.links?.googleReviewUrl || STORE_CONFIG.links?.googleMapsUrl || '#';
@@ -1498,9 +1604,35 @@
             document.getElementById('galleryModal').classList.add('hidden');
         }
 
-        // Init on load
+        // Init on load with IntersectionObserver for review typing animation
         window.addEventListener('DOMContentLoaded', () => {
-            regenerateReview();
+            const ta = document.getElementById('aiReviewOutput');
+            if (ta) {
+                ta.addEventListener('input', () => {
+                    if (typingTimer) {
+                        clearTimeout(typingTimer);
+                        typingTimer = null;
+                    }
+                    currentFullReviewText = ta.value;
+                });
+            }
+
+            const aiSec = document.getElementById('aiSection');
+            if ('IntersectionObserver' in window && aiSec) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !hasAutoTypedOnScroll) {
+                            hasAutoTypedOnScroll = true;
+                            observer.disconnect();
+                            regenerateReview(true);
+                        }
+                    });
+                }, { threshold: 0.15 });
+                observer.observe(aiSec);
+            } else {
+                hasAutoTypedOnScroll = true;
+                regenerateReview(true);
+            }
         });
     </script>
 </body>
