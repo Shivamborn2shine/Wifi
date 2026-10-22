@@ -88,15 +88,15 @@
     <!-- APP CONTAINER (Modern Light Theme) -->
     <div class="max-w-md mx-auto relative min-h-screen bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)] overflow-hidden border-x border-slate-200/80">
 
-        <!-- 1. HERO BANNER WITH STORE PHOTO & NEON OVERLAYS -->
-        <section class="relative w-full h-[330px] sm:h-[360px] overflow-hidden bg-slate-900">
-            <!-- Storefront Photo Background -->
-            <img src="./assets/images/wireless/wireless-storefront.jpg" alt="WIRELESS Storefront" class="w-full h-full object-cover object-center filter brightness-95">
-            <!-- Clean Gradient Vignette Overlay (keeps storefront photo clearly visible while making text pop) -->
-            <div class="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-black/35 to-black/75"></div>
+        <!-- 1. HERO BANNER WITH STORE PHOTO & 3D DEVICE ACCENTS (Matches Mockup) -->
+        <section class="relative w-full h-[340px] sm:h-[370px] overflow-hidden bg-slate-950">
+            <!-- Real Storefront Photo Background -->
+            <img src="./assets/images/wireless/storefront.jpg" alt="WIRELESS Storefront" class="w-full h-full object-cover object-center filter brightness-100">
+            <!-- Subtle Vignette Overlay for Crisp Readability -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/60"></div>
 
-            <!-- Top Right Phone Pill (Frosted White Glass) -->
-            <div class="absolute top-3.5 right-3.5 z-20">
+            <!-- Top Right Phone Pill -->
+            <div class="absolute top-3.5 right-3.5 z-30">
                 <a href="tel:919837044095" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-slate-900 text-[11px] font-extrabold border border-white/80 shadow-md hover:bg-white hover:scale-105 transition-all">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
@@ -105,62 +105,58 @@
             </div>
 
             <!-- Top Left Script: Your Device Our Care -->
-            <div class="absolute top-6 left-4 z-10 select-none">
-                <p class="font-script text-amber-300 text-xl sm:text-2xl font-bold -rotate-6 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-                    Your Device Our Care
+            <div class="absolute top-5 left-4 z-20 select-none">
+                <p class="font-script text-[#FACC15] text-2xl font-bold -rotate-6 leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                    Your Device<br>Our Care
                 </p>
             </div>
 
             <!-- Top Right Script: Mobiles Accessories Repairs & More -->
-            <div class="absolute top-12 right-4 z-10 select-none text-right">
-                <p class="font-script text-amber-200 text-xs sm:text-sm font-bold rotate-6 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-                    Mobiles Accessories Repairs & More
+            <div class="absolute top-12 right-4 z-20 select-none text-right">
+                <p class="font-script text-[#FACC15] text-xs sm:text-sm font-bold rotate-6 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                    Mobiles<br>Accessories<br>Repairs<br>& More
                 </p>
             </div>
 
-            <!-- Floating Device Graphics on Sides -->
-            <!-- Left iPhone Camera Bump -->
-            <div class="absolute -left-8 bottom-6 w-24 h-40 rounded-3xl bg-gradient-to-tr from-slate-800 via-slate-900 to-slate-950 border border-slate-700/60 shadow-2xl -rotate-12 opacity-85 pointer-events-none p-1.5 flex flex-col justify-start">
-                <div class="w-10 h-10 rounded-2xl bg-slate-950/90 p-1.5 grid grid-cols-2 gap-1 border border-amber-400/30 shadow-inner">
-                    <div class="w-3 h-3 rounded-full bg-slate-800 border border-amber-400/50 shadow-2xs"></div>
-                    <div class="w-3 h-3 rounded-full bg-slate-800 border border-amber-400/50 shadow-2xs"></div>
-                    <div class="w-3 h-3 rounded-full bg-slate-800 border border-amber-400/50 shadow-2xs"></div>
-                    <div class="w-1.5 h-1.5 rounded-full bg-amber-400 self-center justify-center animate-pulse"></div>
+            <!-- Floating 3D Device Accents on Sides -->
+            <!-- Left: Silver Titanium iPhone 15 Pro Back -->
+            <div class="absolute -left-7 bottom-4 w-24 h-44 rounded-[28px] bg-gradient-to-tr from-slate-200 via-slate-100 to-slate-300 border-[2.5px] border-slate-300 shadow-2xl -rotate-12 opacity-95 pointer-events-none p-2 flex flex-col justify-start">
+                <div class="w-11 h-11 rounded-2xl bg-slate-200/90 border border-slate-300 p-1.5 grid grid-cols-2 gap-1 shadow-inner">
+                    <div class="w-3.5 h-3.5 rounded-full bg-slate-900 border-2 border-slate-400 shadow-2xs"></div>
+                    <div class="w-3.5 h-3.5 rounded-full bg-slate-900 border-2 border-slate-400 shadow-2xs"></div>
+                    <div class="w-3.5 h-3.5 rounded-full bg-slate-900 border-2 border-slate-400 shadow-2xs"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-amber-400 self-center justify-self-center"></div>
                 </div>
             </div>
 
-            <!-- Right Over-ear Headphones Accent -->
-            <div class="absolute -right-5 top-5 w-18 h-18 rounded-full bg-slate-900/90 border border-amber-400/30 shadow-[0_0_20px_rgba(245,158,11,0.2)] rotate-12 opacity-80 pointer-events-none flex items-center justify-center p-2.5">
-                <svg class="w-10 h-10 text-amber-300 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12v5c0 1.66 1.34 3 3 3h2v-8H4v-2c0-4.41 3.59-8 8-8s8 3.59 8 8v2h-3v8h2c1.66 0 3-1.34 3-3v-5c0-5.52-4.48-10-10-10z"/></svg>
+            <!-- Right: Matte Black Over-ear Headphones Accent -->
+            <div class="absolute -right-5 top-8 w-20 h-20 rounded-full bg-slate-950/90 border-2 border-slate-800 shadow-[0_4px_25px_rgba(0,0,0,0.6)] rotate-12 opacity-95 pointer-events-none flex items-center justify-center p-3">
+                <svg class="w-11 h-11 text-slate-300 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12v5c0 1.66 1.34 3 3 3h2v-8H4v-2c0-4.41 3.59-8 8-8s8 3.59 8 8v2h-3v8h2c1.66 0 3-1.34 3-3v-5c0-5.52-4.48-10-10-10z"/></svg>
             </div>
 
-            <!-- Right Tilted Phone Back -->
-            <div class="absolute -right-8 bottom-5 w-20 h-36 rounded-2xl bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-950 border border-slate-700/60 shadow-2xl rotate-12 opacity-80 pointer-events-none p-2 flex flex-col items-center justify-center">
-                <span class="text-xs text-amber-400 font-mono"></span>
-            </div>
-
-            <!-- Center Glowing Neon Title & Subtitle -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center -mt-3 px-4 text-center z-10 pointer-events-none">
-                <h2 class="neon-wireless font-script text-5xl sm:text-6xl font-black text-[#FACC15] tracking-wide select-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
-                    WIRELESS
-                </h2>
-                <div class="mt-2.5 px-3.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-white/80 text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-slate-900 shadow-lg">
-                    ⚡ MOBILES • LAMINATION • REPAIRS • 2ND HAND • ACCESSORIES
+            <!-- Right: Dark Tilted iPhone Back -->
+            <div class="absolute -right-7 bottom-3 w-20 h-38 rounded-2xl bg-gradient-to-tr from-slate-950 via-slate-900 to-slate-800 border border-slate-700 shadow-2xl rotate-12 opacity-90 pointer-events-none p-2 flex flex-col items-center justify-center">
+                <div class="w-7 h-7 rounded-xl bg-slate-950 border border-slate-700 p-0.5 grid grid-cols-2 gap-0.5 shadow-inner">
+                    <div class="w-2 h-2 rounded-full bg-slate-800"></div>
+                    <div class="w-2 h-2 rounded-full bg-slate-800"></div>
+                    <div class="w-2 h-2 rounded-full bg-slate-800"></div>
                 </div>
+                <div class="mt-4 text-[10px] text-slate-400 font-mono"></div>
             </div>
         </section>
 
         <!-- 2. CENTRAL LUXURY LIGHT CARD (OVERLAPPING HERO) -->
-        <main class="relative z-20 -mt-10 bg-white rounded-t-[38px] shadow-[0_-15px_40px_rgba(0,0,0,0.06)] border-t border-slate-100 px-4 sm:px-6 pt-0 pb-12 text-slate-800">
+        <main class="relative z-20 -mt-10 bg-white rounded-t-[36px] shadow-[0_-15px_40px_rgba(0,0,0,0.06)] border-t border-slate-100 px-4 sm:px-6 pt-0 pb-12 text-slate-800">
             
-            <!-- Ambient Golden Glow Orb -->
+            <!-- Ambient Golden Glow -->
             <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            <!-- Circular Logo Avatar Overlapping the Hero -->
-            <div class="relative -mt-11 mx-auto w-22 h-22 rounded-full bg-white border-[3.5px] border-amber-400 shadow-xl shadow-amber-500/20 flex items-center justify-center group">
-                <span class="font-script text-amber-500 text-2xl font-black tracking-wide drop-shadow-2xs">WIRELESS</span>
+            <!-- Circular Logo Avatar Overlapping the Hero (Exact match to Mockup) -->
+            <div class="relative -mt-12 mx-auto w-24 h-24 rounded-full bg-slate-950 border-[3.5px] border-[#FACC15] shadow-2xl flex flex-col items-center justify-center p-1 select-none">
+                <span class="font-script text-[#FACC15] text-2xl font-bold tracking-wider leading-none">WIRELESS</span>
+                <div class="w-8 h-0.5 bg-[#FACC15] mt-1 rounded-full"></div>
                 <!-- Green Verified Checkmark -->
-                <div class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white shadow-md">
+                <div class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-[#10B981] border-2 border-white flex items-center justify-center text-white shadow-md">
                     <svg class="w-3.5 h-3.5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                 </div>
             </div>
@@ -169,183 +165,105 @@
             <h1 class="text-3xl sm:text-4xl font-black text-slate-950 uppercase tracking-tight text-center mt-3">WIRELESS</h1>
 
             <!-- Google Star Rating with Official Google Colors -->
-            <div class="flex items-center justify-center gap-2 mt-2 flex-wrap">
-                <div class="flex text-amber-400 text-base drop-shadow-2xs">★★★★★</div>
+            <div class="flex items-center justify-center gap-1.5 mt-2 flex-wrap">
+                <div class="flex text-amber-400 text-sm">★★★★★</div>
                 <span class="text-sm font-black text-slate-900">5</span>
                 <span class="text-xs text-slate-500 font-semibold">(3 reviews)</span>
-                <span class="inline-flex items-center text-sm font-bold tracking-tight ml-1 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
+                <span class="inline-flex items-center text-sm font-bold tracking-tight ml-1 px-2.5 py-0.5 rounded-full bg-slate-100 border border-slate-200">
                     <span class="text-[#4285F4]">G</span><span class="text-[#EA4335]">o</span><span class="text-[#FBBC05]">o</span><span class="text-[#4285F4]">g</span><span class="text-[#34A853]">l</span><span class="text-[#EA4335]">e</span>
                 </span>
             </div>
 
-            <!-- Live Status Radar Pill -->
-            <div class="flex items-center justify-center gap-2 mt-2">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold shadow-2xs">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span>Open Now • Closes 9:00 PM</span>
-                </span>
-            </div>
-
             <!-- Subtitle -->
-            <p class="text-xs sm:text-sm font-medium text-slate-600 text-center mt-1.5">Mobiles • Screen Repairs • 3M Lamination • 2nd Hand Phones • Accessories</p>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500 text-center mt-1.5">Mobiles, Repairs & Accessories</p>
 
-            <!-- Feature Tags (Pastel Rounded Light Chips) -->
-            <div class="flex items-center justify-center gap-1.5 flex-wrap mt-3">
-                
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-[10px] font-extrabold border border-amber-200/60 shadow-2xs hover:scale-105 transition-all">
-            <span>📱</span> <span>Mobile Sales</span>
-        </span>
-    
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-[10px] font-extrabold border border-blue-200/60 shadow-2xs hover:scale-105 transition-all">
-            <span>🔧</span> <span>Phone Repairs</span>
-        </span>
-    
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-extrabold border border-emerald-200/60 shadow-2xs hover:scale-105 transition-all">
-            <span>🛡️</span> <span>Lamination & Skins</span>
-        </span>
-    
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-[10px] font-extrabold border border-purple-200/60 shadow-2xs hover:scale-105 transition-all">
-            <span>🎧</span> <span>Accessories</span>
-        </span>
-    
-            </div>
-
-            <!-- Specialities Story Rail -->
-            <div class="mt-5 pt-4 border-t border-slate-100">
-                <div class="flex items-center justify-between mb-3 px-1">
-                    <span class="text-[11px] font-black uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                        <span>✨</span> <span>Signature Services</span>
-                    </span>
-                    <button type="button" onclick="openWelcomeModal()" class="text-[11px] font-extrabold text-amber-600 hover:text-amber-700 transition-colors flex items-center gap-1">
-                        <span>Custom Selector</span> ➔
-                    </button>
-                </div>
-                <div class="flex items-center gap-2.5 overflow-x-auto hide-scrollbar pb-1 -mx-1 px-1">
-                    
-        <div class="flex-shrink-0 flex flex-col items-center w-20 cursor-pointer group select-none transition-transform hover:-translate-y-1" onclick="quickSelectCategory('SERVICE', 'Phone Repair')">
-            <div class="relative w-16 h-16 rounded-full p-[2.5px] bg-gradient-to-tr from-blue-500 to-cyan-600 shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all">
-                <img src="./assets/images/wireless/wireless-interior-night.jpg" alt="Phone Repair" class="w-full h-full object-cover rounded-full border border-white">
-            </div>
-            <span class="text-[10px] font-extrabold text-slate-800 text-center mt-1.5 leading-tight line-clamp-1 group-hover:text-amber-700 transition-colors">Phone Repair</span>
-            <span class="text-[9px] font-black text-amber-900 bg-amber-100/90 px-2 py-0.5 rounded-full mt-0.5 border border-amber-300 shadow-2xs">Expert</span>
-        </div>
-    
-        <div class="flex-shrink-0 flex flex-col items-center w-20 cursor-pointer group select-none transition-transform hover:-translate-y-1" onclick="quickSelectCategory('SERVICE', 'Lamination')">
-            <div class="relative w-16 h-16 rounded-full p-[2.5px] bg-gradient-to-tr from-amber-500 to-yellow-600 shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all">
-                <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Lamination" class="w-full h-full object-cover rounded-full border border-white">
-            </div>
-            <span class="text-[10px] font-extrabold text-slate-800 text-center mt-1.5 leading-tight line-clamp-1 group-hover:text-amber-700 transition-colors">Lamination</span>
-            <span class="text-[9px] font-black text-amber-900 bg-amber-100/90 px-2 py-0.5 rounded-full mt-0.5 border border-amber-300 shadow-2xs">Premium</span>
-        </div>
-    
-        <div class="flex-shrink-0 flex flex-col items-center w-20 cursor-pointer group select-none transition-transform hover:-translate-y-1" onclick="quickSelectCategory('ACCESSORIES', 'Skins &amp; Wraps')">
-            <div class="relative w-16 h-16 rounded-full p-[2.5px] bg-gradient-to-tr from-purple-500 to-pink-600 shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all">
-                <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Skins &amp; Wraps" class="w-full h-full object-cover rounded-full border border-white">
-            </div>
-            <span class="text-[10px] font-extrabold text-slate-800 text-center mt-1.5 leading-tight line-clamp-1 group-hover:text-amber-700 transition-colors">Skins &amp; Wraps</span>
-            <span class="text-[9px] font-black text-amber-900 bg-amber-100/90 px-2 py-0.5 rounded-full mt-0.5 border border-amber-300 shadow-2xs">Trendy</span>
-        </div>
-    
-        <div class="flex-shrink-0 flex flex-col items-center w-20 cursor-pointer group select-none transition-transform hover:-translate-y-1" onclick="quickSelectCategory('MOBILES', 'New Phones')">
-            <div class="relative w-16 h-16 rounded-full p-[2.5px] bg-gradient-to-tr from-emerald-500 to-teal-600 shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all">
-                <img src="./assets/images/wireless/wireless-storefront.jpg" alt="New Phones" class="w-full h-full object-cover rounded-full border border-white">
-            </div>
-            <span class="text-[10px] font-extrabold text-slate-800 text-center mt-1.5 leading-tight line-clamp-1 group-hover:text-amber-700 transition-colors">New Phones</span>
-            <span class="text-[9px] font-black text-amber-900 bg-amber-100/90 px-2 py-0.5 rounded-full mt-0.5 border border-amber-300 shadow-2xs">Best Price</span>
-        </div>
-    
-        <div class="flex-shrink-0 flex flex-col items-center w-20 cursor-pointer group select-none transition-transform hover:-translate-y-1" onclick="quickSelectCategory('MOBILES', '2nd Hand')">
-            <div class="relative w-16 h-16 rounded-full p-[2.5px] bg-gradient-to-tr from-orange-500 to-red-600 shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all">
-                <img src="./assets/images/wireless/wireless-interior-night.jpg" alt="2nd Hand" class="w-full h-full object-cover rounded-full border border-white">
-            </div>
-            <span class="text-[10px] font-extrabold text-slate-800 text-center mt-1.5 leading-tight line-clamp-1 group-hover:text-amber-700 transition-colors">2nd Hand</span>
-            <span class="text-[9px] font-black text-amber-900 bg-amber-100/90 px-2 py-0.5 rounded-full mt-0.5 border border-amber-300 shadow-2xs">Verified</span>
-        </div>
-    
-        <div class="flex-shrink-0 flex flex-col items-center w-20 cursor-pointer group select-none transition-transform hover:-translate-y-1" onclick="quickSelectCategory('ACCESSORIES', 'Cases')">
-            <div class="relative w-16 h-16 rounded-full p-[2.5px] bg-gradient-to-tr from-indigo-500 to-violet-600 shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all">
-                <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Cases" class="w-full h-full object-cover rounded-full border border-white">
-            </div>
-            <span class="text-[10px] font-extrabold text-slate-800 text-center mt-1.5 leading-tight line-clamp-1 group-hover:text-amber-700 transition-colors">Cases</span>
-            <span class="text-[9px] font-black text-amber-900 bg-amber-100/90 px-2 py-0.5 rounded-full mt-0.5 border border-amber-300 shadow-2xs">All Brands</span>
-        </div>
-    
-                </div>
-            </div>
-
-            <!-- 3. FOUR SERVICE QUICK CARDS (Grid of 4 in Light Theme) -->
-            <div class="grid grid-cols-4 gap-2 mt-4">
+            <!-- 3. FOUR FEATURE QUICK CARDS (Exact 4-column match to Mockup) -->
+            <div class="grid grid-cols-4 gap-2 mt-5">
                 <!-- Card 1: New & Second Hand Phones -->
-                <div class="service-pill group bg-slate-50/90 hover:bg-amber-50/70 border border-slate-200/90 hover:border-amber-400 rounded-2xl p-2.5 flex flex-col items-center text-center cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5" onclick="quickSelectCategory('MOBILES', 'New & 2nd Hand Phones')">
-                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-500 text-slate-950 flex items-center justify-center mb-1.5 shadow-md shadow-amber-500/20 group-hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3" ry="3"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5" stroke-linecap="round"/></svg>
+                <button type="button" onclick="quickSelectCategory('MOBILES', 'New & 2nd Hand Phones')" class="flex flex-col items-center justify-start p-2 rounded-2xl bg-white border border-slate-100 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all group text-center cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-100/70 border border-amber-200/60 flex items-center justify-center mb-1.5 group-hover:scale-105 transition-transform shadow-2xs">
+                        <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <rect x="5" y="2" width="14" height="20" rx="3" stroke-width="1.8"/>
+                            <path d="M12 18h.01" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
                     </div>
-                    <span class="text-[10px] font-extrabold text-slate-800 leading-tight group-hover:text-amber-900">New & 2nd Hand</span>
-                </div>
+                    <span class="text-[10px] font-extrabold text-slate-800 leading-tight">New &<br>Second Hand Phones</span>
+                </button>
 
                 <!-- Card 2: Repairs & Services -->
-                <div class="service-pill group bg-slate-50/90 hover:bg-sky-50/70 border border-slate-200/90 hover:border-sky-400 rounded-2xl p-2.5 flex flex-col items-center text-center cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5" onclick="quickSelectCategory('REPAIR', 'Phone Repair')">
-                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white flex items-center justify-center mb-1.5 shadow-md shadow-sky-500/20 group-hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                <button type="button" onclick="quickSelectCategory('SERVICE', 'Phone Repair')" class="flex flex-col items-center justify-start p-2 rounded-2xl bg-white border border-slate-100 shadow-2xs hover:shadow-md hover:border-blue-300 transition-all group text-center cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-100/70 border border-blue-200/60 flex items-center justify-center mb-1.5 group-hover:scale-105 transition-transform shadow-2xs">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
                     </div>
-                    <span class="text-[10px] font-extrabold text-slate-800 leading-tight group-hover:text-sky-900">Phone Repairs</span>
-                </div>
+                    <span class="text-[10px] font-extrabold text-slate-800 leading-tight">Repairs &<br>Services</span>
+                </button>
 
                 <!-- Card 3: Accessories -->
-                <div class="service-pill group bg-slate-50/90 hover:bg-purple-50/70 border border-slate-200/90 hover:border-purple-400 rounded-2xl p-2.5 flex flex-col items-center text-center cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5" onclick="quickSelectCategory('ACCESSORIES', 'Mobile Accessories')">
-                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 text-white flex items-center justify-center mb-1.5 shadow-md shadow-purple-500/20 group-hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 18v-6a9 9 0 0118 0v6"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3v5zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3v5z"/></svg>
+                <button type="button" onclick="quickSelectCategory('ACCESSORIES', 'Accessories')" class="flex flex-col items-center justify-start p-2 rounded-2xl bg-white border border-slate-100 shadow-2xs hover:shadow-md hover:border-purple-300 transition-all group text-center cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-100/70 border border-purple-200/60 flex items-center justify-center mb-1.5 group-hover:scale-105 transition-transform shadow-2xs">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                        </svg>
                     </div>
-                    <span class="text-[10px] font-extrabold text-slate-800 leading-tight group-hover:text-purple-900">Accessories</span>
-                </div>
+                    <span class="text-[10px] font-extrabold text-slate-800 leading-tight">Accessories</span>
+                </button>
 
                 <!-- Card 4: Lamination -->
-                <div class="service-pill group bg-slate-50/90 hover:bg-emerald-50/70 border border-slate-200/90 hover:border-emerald-400 rounded-2xl p-2.5 flex flex-col items-center text-center cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5" onclick="quickSelectCategory('LAMINATION', 'Lamination & Skins')">
-                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center mb-1.5 shadow-md shadow-emerald-500/20 group-hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2" stroke-dasharray="2 2"/><rect x="8" y="5" width="8" height="14" rx="1"/></svg>
+                <button type="button" onclick="quickSelectCategory('SERVICE', 'Lamination & Skins')" class="flex flex-col items-center justify-start p-2 rounded-2xl bg-white border border-slate-100 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all group text-center cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-100/70 border border-amber-200/60 flex items-center justify-center mb-1.5 group-hover:scale-105 transition-transform shadow-2xs">
+                        <svg class="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <rect x="6" y="2" width="12" height="20" rx="2.5"/>
+                            <path d="M10 18h4"/>
+                        </svg>
                     </div>
-                    <span class="text-[10px] font-extrabold text-slate-800 leading-tight group-hover:text-emerald-900">Lamination</span>
-                </div>
+                    <span class="text-[10px] font-extrabold text-slate-800 leading-tight">Lamination</span>
+                </button>
             </div>
 
-            <!-- 4. ABOUT BLURB WITH GOLD ACCENT BAR & PHONE GRAPHIC -->
-            <div class="mt-4 rounded-2xl bg-gradient-to-r from-amber-50/90 via-amber-50/40 to-white border-l-4 border-amber-500 p-4 border border-amber-200/70 relative overflow-hidden flex items-center justify-between gap-3 shadow-2xs">
-                <div class="flex-1 pr-1">
-                    <p class="text-xs text-slate-700 font-medium leading-relaxed">
-                        Your trusted destination for mobiles, second-hand phones, premium accessories, lamination and expert repairs. Genuine products, honest service, and the latest accessories — all under one roof at <strong class="font-extrabold text-slate-900">WIRELESS</strong>.
+            <!-- 4. STORE INTRO CARD WITH ACCENT BAR & TILTED PHONE (Exact match to Mockup) -->
+            <div class="mt-5 p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-100 shadow-xs relative overflow-hidden flex items-center justify-between gap-3">
+                <div class="border-l-4 border-amber-400 pl-3 flex-1">
+                    <p class="text-[11px] sm:text-xs text-slate-600 font-medium leading-relaxed">
+                        Your trusted destination for mobiles, second hand phones, accessories, lamination and expert repairs. Genuine products, honest service, and the latest accessories — all under one roof at <strong class="text-slate-900 font-black">WIRELESS</strong>.
                     </p>
                 </div>
-                <!-- Stylized Phone Graphic with Sparkles -->
-                <div class="relative w-14 h-20 flex-shrink-0 flex items-center justify-center">
-                    <div class="w-12 h-18 rounded-xl bg-gradient-to-tr from-slate-900 to-slate-800 border border-amber-400/50 shadow-md rotate-6 flex flex-col p-1 relative">
-                        <div class="w-5 h-5 rounded-md bg-slate-950 p-0.5 grid grid-cols-2 gap-0.5 border border-slate-700">
-                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
-                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
-                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
+                <!-- 3D Phone with yellow sparkles on the right -->
+                <div class="relative w-18 h-24 flex-shrink-0 flex items-center justify-center select-none">
+                    <span class="absolute -top-1 left-0 text-amber-400 text-xs select-none">✨</span>
+                    <span class="absolute top-1/2 -left-1 text-amber-400 text-[10px] select-none">✨</span>
+                    <span class="absolute -bottom-1 right-1 text-amber-400 text-xs select-none">✨</span>
+                    <!-- Tilted 3D Matte Dark Phone -->
+                    <div class="w-13 h-22 rounded-2xl bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-950 border border-slate-700 shadow-xl rotate-12 flex flex-col items-center justify-start p-1.5 relative overflow-hidden">
+                        <div class="w-6 h-6 rounded-xl bg-slate-950 border border-slate-700 p-0.5 grid grid-cols-2 gap-0.5 shadow-inner">
+                            <div class="w-2 h-2 rounded-full bg-slate-800 border border-slate-600"></div>
+                            <div class="w-2 h-2 rounded-full bg-slate-800 border border-slate-600"></div>
+                            <div class="w-2 h-2 rounded-full bg-slate-800 border border-slate-600"></div>
                         </div>
-                        <div class="mt-auto self-center text-[7px] text-amber-300 font-mono"></div>
+                        <div class="mt-3.5 text-[9px] text-slate-400 font-mono select-none"></div>
                     </div>
-                    <span class="absolute -top-1 -right-1 text-amber-500 text-sm animate-bounce">✨</span>
-                    <span class="absolute bottom-0 -left-1 text-amber-500 text-xs">✨</span>
                 </div>
             </div>
 
-            <!-- 5. "WRITE A GOOGLE REVIEW WITH AI" CTA BANNER (Metallic Gold) -->
-            <div class="mt-5 rounded-3xl bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 p-5 text-slate-950 shadow-lg shadow-amber-300/40 relative overflow-hidden neon-glow-btn">
+            <!-- 5. WRITE A GOOGLE REVIEW WITH AI BANNER (Exact match to Mockup) -->
+            <div class="mt-5 p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-[#FACC15] via-[#FDE047] to-[#F59E0B] shadow-lg shadow-amber-400/25 relative overflow-hidden">
                 <div class="flex items-start gap-3.5 relative z-10">
-                    <div class="relative w-12 h-12 flex-shrink-0 bg-slate-950 rounded-2xl shadow-md flex items-center justify-center border border-amber-300/40">
-                        <div class="flex items-center gap-0.5 text-amber-400 text-[10px]">★★★</div>
-                        <div class="absolute -bottom-1 -right-1 px-1.5 py-0.2 rounded-full bg-amber-400 text-slate-950 text-[9px] font-black uppercase tracking-wider shadow-2xs">AI</div>
+                    <!-- Chat bubble with AI badge & 3 stars -->
+                    <div class="relative w-14 h-14 rounded-2xl bg-white shadow-md flex flex-col items-center justify-center flex-shrink-0 border border-amber-200/60">
+                        <div class="flex items-center gap-0.5 text-amber-400 text-xs">★★★</div>
+                        <div class="absolute -bottom-1 -right-1 px-1.5 py-0.2 rounded-full bg-slate-950 text-white text-[9px] font-black uppercase tracking-wider shadow-2xs">AI</div>
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-base font-black text-slate-950 leading-tight">Write a Google Review with AI</h3>
-                        <p class="text-xs font-bold text-slate-900/90 mt-0.5 leading-snug">Love WIRELESS? Generate a customized 5-star review in seconds!</p>
+                        <h3 class="text-base sm:text-lg font-black text-slate-950 leading-tight">Write a Google Review with AI</h3>
+                        <p class="text-xs font-semibold text-slate-900/90 mt-1 leading-snug">Help us grow! Get a personalized review draft in seconds.</p>
                     </div>
                 </div>
-                <button type="button" onclick="focusReviewGenerator()" class="w-full mt-3.5 py-3.5 px-5 rounded-2xl bg-slate-950 hover:bg-slate-900 active:scale-[0.99] text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xl transition-all group border border-amber-400/30">
+                <button type="button" onclick="openWelcomeModal()" class="w-full mt-3.5 py-3.5 px-6 rounded-full bg-slate-950 hover:bg-slate-900 active:scale-[0.99] text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xl transition-all cursor-pointer">
                     <span class="text-amber-400 text-base">✨</span>
-                    <span>Generate My 5-Star Review</span>
-                    <svg class="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    <span>Generate My Review</span>
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                 </button>
             </div>
 
@@ -743,12 +661,12 @@
             </footer>
         </main>
 
-        <!-- 14. FIXED BOTTOM ACTION BAR (DOCK) WITH REAL BRAND LOGOS -->
+        <!-- 14. FIXED BOTTOM ACTION BAR (DOCK) MATCHING MOCKUP -->
         <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-2xl border-t border-slate-200/90 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] py-2 px-3" style="padding-bottom: max(0.5rem, env(safe-area-inset-bottom));">
-            <div class="max-w-md mx-auto grid grid-cols-4 gap-1.5 text-center">
-                <!-- 1. View on Map (Official Multi-Color Google Maps Pin) -->
+            <div class="max-w-md mx-auto grid grid-cols-4 gap-2 text-center">
+                <!-- 1. View on Map -->
                 <a href="https://www.google.com/maps?cid=13211634425347864029" target="_blank" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
-                    <div class="w-11 h-11 rounded-2xl bg-white border border-slate-200/90 shadow-md shadow-slate-200 flex items-center justify-center mb-1 group-hover:scale-110 group-hover:shadow-lg transition-transform">
+                    <div class="w-12 h-12 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
                             <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2Z" fill="#EA4335"/>
                             <path d="M12 22C12 22 19 14.25 19 9C19 6.79 17.98 4.82 16.4 3.52L12 22Z" fill="#D93025"/>
@@ -758,35 +676,36 @@
                             <circle cx="12" cy="9" r="1.8" fill="#4285F4"/>
                         </svg>
                     </div>
-                    <span class="text-[10px] font-extrabold text-slate-700 leading-none group-hover:text-slate-950">View on Map</span>
+                    <span class="text-[10px] font-bold text-slate-700 leading-none group-hover:text-slate-950">View on Map</span>
                 </a>
 
-                <!-- 2. Call Now (Official Phone Icon in Emerald Green) -->
+                <!-- 2. Call Now -->
                 <a href="tel:919837044095" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
-                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-green-500 shadow-md shadow-emerald-500/25 flex items-center justify-center text-white mb-1 group-hover:scale-110 group-hover:shadow-lg transition-transform">
-                        <svg class="w-5 h-5 text-white drop-shadow-2xs" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <div class="w-12 h-12 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-[#10B981]" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
                     </div>
-                    <span class="text-[10px] font-extrabold text-slate-700 leading-none group-hover:text-slate-950">Call Now</span>
+                    <span class="text-[10px] font-bold text-slate-700 leading-none group-hover:text-slate-950">Call Now</span>
                 </a>
 
-                <!-- 3. Instagram (Official Instagram Camera Logo with Signature Gradient) -->
+                <!-- 3. Visit Website -->
                 <a href="https://www.instagram.com/wireless_95" target="_blank" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
-                    <div class="w-11 h-11 rounded-2xl shadow-md shadow-pink-500/20 flex items-center justify-center text-white mb-1 group-hover:scale-110 group-hover:shadow-lg transition-transform" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
-                        <svg class="w-5 h-5 text-white drop-shadow-2xs" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    <div class="w-12 h-12 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-[#2563EB]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
                         </svg>
                     </div>
-                    <span class="text-[10px] font-extrabold text-slate-700 leading-none group-hover:text-slate-950">Instagram</span>
+                    <span class="text-[10px] font-bold text-slate-700 leading-none group-hover:text-slate-950">Visit Website</span>
                 </a>
 
-                <!-- 4. WhatsApp (Official WhatsApp Speech Bubble with Phone Handset) -->
+                <!-- 4. WhatsApp -->
                 <a href="https://wa.me/919837044095?text=Hi%20WIRELESS%2C%20I%20am%20interested%20in%20your%20services!" target="_blank" class="flex flex-col items-center justify-center py-1 rounded-xl hover:bg-slate-50 transition-colors group">
-                    <div class="w-11 h-11 rounded-2xl bg-[#25D366] shadow-md shadow-[#25D366]/30 flex items-center justify-center text-white mb-1 group-hover:scale-110 group-hover:shadow-lg transition-transform">
-                        <svg class="w-5 h-5 text-white drop-shadow-2xs" fill="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
                         </svg>
                     </div>
-                    <span class="text-[10px] font-extrabold text-slate-700 leading-none group-hover:text-slate-950">WhatsApp</span>
+                    <span class="text-[10px] font-bold text-slate-700 leading-none group-hover:text-slate-950">WhatsApp</span>
                 </a>
             </div>
         </nav>
