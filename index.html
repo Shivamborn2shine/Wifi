@@ -81,6 +81,15 @@
         }
         .modal-checkmark { opacity: 0; transform: scale(0.5); transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .modal-service-item.is-selected .modal-checkmark { opacity: 1; transform: scale(1); }
+
+        /* Hide Netlify branding badge */
+        #nl-badge-frame,
+        iframe[title="Powered by Netlify"],
+        [id^="netlify-"] {
+            display: none !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-amber-400 selection:text-slate-950 pb-32" style="padding-bottom: max(7rem, calc(6rem + env(safe-area-inset-bottom)));">
@@ -735,7 +744,7 @@
                 
             <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'REPAIR', 'SERVICE')">
                 <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-100 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-interior-night.jpg" alt="Phone Repair" class="w-full h-full object-cover">
+                    <img src="./assets/images/wireless/service-phone-repair.jpg" alt="Phone Repair" class="w-full h-full object-cover">
                     <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-black border-2 border-white shadow-xs">✓</div>
                 </div>
                 <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Phone Repair</span>
@@ -743,7 +752,7 @@
 
             <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'LAMINATION', 'SERVICE')">
                 <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-100 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Lamination / Skin" class="w-full h-full object-cover">
+                    <img src="./assets/images/wireless/service-lamination-skin.jpg" alt="Lamination / Skin" class="w-full h-full object-cover">
                     <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-black border-2 border-white shadow-xs">✓</div>
                 </div>
                 <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Lamination / Skin</span>
@@ -751,7 +760,7 @@
 
             <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'SCREEN_GUARD', 'ACCESSORIES')">
                 <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-100 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Screen Protection" class="w-full h-full object-cover">
+                    <img src="./assets/images/wireless/service-screen-protection.jpg" alt="Screen Protection" class="w-full h-full object-cover">
                     <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-black border-2 border-white shadow-xs">✓</div>
                 </div>
                 <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Screen Protection</span>
@@ -759,7 +768,7 @@
 
             <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'PHONE_CASE', 'ACCESSORIES')">
                 <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-100 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Phone Case" class="w-full h-full object-cover">
+                    <img src="./assets/images/wireless/service-phone-case.jpg" alt="Phone Case" class="w-full h-full object-cover">
                     <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-black border-2 border-white shadow-xs">✓</div>
                 </div>
                 <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Phone Case</span>
@@ -767,7 +776,7 @@
 
             <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'NEW_PHONE', 'MOBILES')">
                 <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-100 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-storefront.jpg" alt="New Phone Purchase" class="w-full h-full object-cover">
+                    <img src="./assets/images/wireless/service-new-phone.jpg" alt="New Phone Purchase" class="w-full h-full object-cover">
                     <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-black border-2 border-white shadow-xs">✓</div>
                 </div>
                 <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">New Phone Purchase</span>
@@ -775,7 +784,7 @@
 
             <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'SECOND_HAND', 'MOBILES')">
                 <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-100 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-interior-night.jpg" alt="Second Hand Phone" class="w-full h-full object-cover">
+                    <img src="./assets/images/wireless/service-second-hand-phone.jpg" alt="Second Hand Phone" class="w-full h-full object-cover">
                     <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-black border-2 border-white shadow-xs">✓</div>
                 </div>
                 <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Second Hand Phone</span>
@@ -783,7 +792,7 @@
 
             <button type="button" class="modal-service-item flex flex-col items-center gap-1.5" onclick="toggleWelcomeItem(this, 'ACCESSORIES', 'ACCESSORIES')">
                 <div class="modal-circle relative w-[68px] h-[68px] rounded-full overflow-hidden shadow-sm bg-slate-100 border-2 border-slate-200">
-                    <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Other Accessories" class="w-full h-full object-cover">
+                    <img src="./assets/images/wireless/interior.jpg" alt="Other Accessories" class="w-full h-full object-cover">
                     <div class="modal-checkmark absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-black border-2 border-white shadow-xs">✓</div>
                 </div>
                 <span class="text-[10px] font-bold text-slate-700 text-center leading-tight">Other Accessories</span>
@@ -906,43 +915,43 @@
         "key": "REPAIR",
         "categoryKey": "SERVICE",
         "label": "Phone Repair",
-        "image": "./assets/images/wireless/wireless-interior-night.jpg"
+        "image": "./assets/images/wireless/service-phone-repair.jpg"
       },
       {
         "key": "LAMINATION",
         "categoryKey": "SERVICE",
         "label": "Lamination / Skin",
-        "image": "./assets/images/wireless/wireless-accessories-display.jpg"
+        "image": "./assets/images/wireless/service-lamination-skin.jpg"
       },
       {
         "key": "SCREEN_GUARD",
         "categoryKey": "ACCESSORIES",
         "label": "Screen Protection",
-        "image": "./assets/images/wireless/wireless-accessories-display.jpg"
+        "image": "./assets/images/wireless/service-screen-protection.jpg"
       },
       {
         "key": "PHONE_CASE",
         "categoryKey": "ACCESSORIES",
         "label": "Phone Case",
-        "image": "./assets/images/wireless/wireless-accessories-display.jpg"
+        "image": "./assets/images/wireless/service-phone-case.jpg"
       },
       {
         "key": "NEW_PHONE",
         "categoryKey": "MOBILES",
         "label": "New Phone Purchase",
-        "image": "./assets/images/wireless/wireless-storefront.jpg"
+        "image": "./assets/images/wireless/service-new-phone.jpg"
       },
       {
         "key": "SECOND_HAND",
         "categoryKey": "MOBILES",
         "label": "Second Hand Phone",
-        "image": "./assets/images/wireless/wireless-interior-night.jpg"
+        "image": "./assets/images/wireless/service-second-hand-phone.jpg"
       },
       {
         "key": "ACCESSORIES",
         "categoryKey": "ACCESSORIES",
         "label": "Other Accessories",
-        "image": "./assets/images/wireless/wireless-accessories-display.jpg"
+        "image": "./assets/images/wireless/interior.jpg"
       },
       {
         "key": "ALL",
