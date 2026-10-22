@@ -1,0 +1,11 @@
+{
+  "name": "wireless-review-experience",
+  "version": "1.0.0",
+  "description": "AI-Powered Google Reviews & Experience Landing Page for WIRELESS",
+  "scripts": {
+    "dev": "npx serve . -l 3000",
+    "preview": "npx serve . -l 8080"
+  },
+  "author": "devanshmittal3",
+  "license": "MIT"
+}
