@@ -1,24 +1,21 @@
-﻿{
-  name: wireless-review-experience,
-  version: 1.0.0,
-  description: Standalone AI-Powered Google Reviews & Experience Landing Page for WIRELESS,
-  main: index.html,
-  scripts: {
-    dev: npx serve . -l 3000,
-    start: npx serve . -l 3000,
-    preview: npx serve . -l 8080
+{
+  "name": "wireless-review-experience",
+  "version": "1.0.0",
+  "description": "Standalone AI-Powered Google Reviews & Experience Landing Page for WIRELESS",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve . -l 3000",
+    "start": "npx serve . -l 4000",
+    "preview": "npx serve . -l 8080"
   },
-  keywords: [
-    ai-reviews,
-    qr-experience,
-    wireless,
-    dehradun,
-    google-maps-reviews,
-    onescan
+  "keywords": [
+    "ai-reviews",
+    "qr-experience",
+    "wireless",
+    "dehradun",
+    "google-maps-reviews",
+    "onescan"
   ],
-  author: ONESCAN Reviews Engine,
-  license: MIT,
-  devDependencies: {
-    serve: ^14.2.4
-  }
+  "author": "ONESCAN Reviews Engine",
+  "license": "MIT"
 }
