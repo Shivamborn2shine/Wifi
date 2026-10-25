@@ -97,81 +97,22 @@
     <!-- APP CONTAINER (Modern Light Theme) -->
     <div class="max-w-md mx-auto relative min-h-screen bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)] overflow-hidden border-x border-slate-200/80">
 
-        <!-- 1. HERO BANNER WITH STORE PHOTO & 3D DEVICE ACCENTS (Matches Mockup) -->
-        <section class="relative w-full h-[340px] sm:h-[370px] overflow-hidden bg-slate-950">
-            <!-- Real Storefront Photo Background -->
-            <img src="./assets/images/wireless/storefront.jpg" alt="WIRELESS Storefront" class="w-full h-full object-cover object-center filter brightness-100">
-            <!-- Subtle Vignette Overlay for Crisp Readability -->
-            <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/60"></div>
-
-            <!-- Top Right Phone Pill -->
-            <div class="absolute top-3.5 right-3.5 z-30">
-                <a href="tel:919837044095" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-slate-900 text-[11px] font-extrabold border border-white/80 shadow-md hover:bg-white hover:scale-105 transition-all">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                    <span>9837044095</span>
-                </a>
-            </div>
-
-            <!-- Top Left Script: Your Device Our Care -->
-            <div class="absolute top-5 left-4 z-20 select-none">
-                <p class="font-script text-[#FACC15] text-2xl font-bold -rotate-6 leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                    Your Device<br>Our Care
-                </p>
-            </div>
-
-            <!-- Top Right Script: Mobiles Accessories Repairs & More -->
-            <div class="absolute top-12 right-4 z-20 select-none text-right">
-                <p class="font-script text-[#FACC15] text-xs sm:text-sm font-bold rotate-6 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                    Mobiles<br>Accessories<br>Repairs<br>& More
-                </p>
-            </div>
-
-            <!-- Floating 3D Device Accents on Sides -->
-            <!-- Left: Silver Titanium iPhone 15 Pro Back -->
-            <div class="absolute -left-7 bottom-4 w-24 h-44 rounded-[28px] bg-gradient-to-tr from-slate-200 via-slate-100 to-slate-300 border-[2.5px] border-slate-300 shadow-2xl -rotate-12 opacity-95 pointer-events-none p-2 flex flex-col justify-start">
-                <div class="w-11 h-11 rounded-2xl bg-slate-200/90 border border-slate-300 p-1.5 grid grid-cols-2 gap-1 shadow-inner">
-                    <div class="w-3.5 h-3.5 rounded-full bg-slate-900 border-2 border-slate-400 shadow-2xs"></div>
-                    <div class="w-3.5 h-3.5 rounded-full bg-slate-900 border-2 border-slate-400 shadow-2xs"></div>
-                    <div class="w-3.5 h-3.5 rounded-full bg-slate-900 border-2 border-slate-400 shadow-2xs"></div>
-                    <div class="w-1.5 h-1.5 rounded-full bg-amber-400 self-center justify-self-center"></div>
-                </div>
-            </div>
-
-            <!-- Right: Matte Black Over-ear Headphones Accent -->
-            <div class="absolute -right-5 top-8 w-20 h-20 rounded-full bg-slate-950/90 border-2 border-slate-800 shadow-[0_4px_25px_rgba(0,0,0,0.6)] rotate-12 opacity-95 pointer-events-none flex items-center justify-center p-3">
-                <svg class="w-11 h-11 text-slate-300 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12v5c0 1.66 1.34 3 3 3h2v-8H4v-2c0-4.41 3.59-8 8-8s8 3.59 8 8v2h-3v8h2c1.66 0 3-1.34 3-3v-5c0-5.52-4.48-10-10-10z"/></svg>
-            </div>
-
-            <!-- Right: Dark Tilted iPhone Back -->
-            <div class="absolute -right-7 bottom-3 w-20 h-38 rounded-2xl bg-gradient-to-tr from-slate-950 via-slate-900 to-slate-800 border border-slate-700 shadow-2xl rotate-12 opacity-90 pointer-events-none p-2 flex flex-col items-center justify-center">
-                <div class="w-7 h-7 rounded-xl bg-slate-950 border border-slate-700 p-0.5 grid grid-cols-2 gap-0.5 shadow-inner">
-                    <div class="w-2 h-2 rounded-full bg-slate-800"></div>
-                    <div class="w-2 h-2 rounded-full bg-slate-800"></div>
-                    <div class="w-2 h-2 rounded-full bg-slate-800"></div>
-                </div>
-                <div class="mt-4 text-[10px] text-slate-400 font-mono"></div>
-            </div>
-        </section>
-
-        <!-- 2. CENTRAL LUXURY LIGHT CARD (OVERLAPPING HERO) -->
-        <main class="relative z-20 -mt-10 bg-white rounded-t-[36px] shadow-[0_-15px_40px_rgba(0,0,0,0.06)] border-t border-slate-100 px-4 sm:px-6 pt-0 pb-12 text-slate-800">
+        <!-- 1. EXACT HERO HEADER & PROFILE (From User Design Mockup) -->
+        <header class="relative w-full overflow-hidden bg-white select-none">
+            <img src="./assets/images/wireless/exact-top-ui.png" alt="WIRELESS — Mobiles, Repairs &amp; Accessories" class="w-full h-auto block">
             
-            <!-- Ambient Golden Glow -->
-            <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+            <!-- Clickable Phone Call Overlay over the 9837044095 pill -->
+            <a href="tel:919837044095" class="absolute top-[1.3%] right-[15%] w-[23%] h-[7%] rounded-full cursor-pointer z-20" title="Call WIRELESS at 9837044095" aria-label="Call 9837044095"></a>
 
-            <!-- Circular Logo Avatar Overlapping the Hero (Exact match to Mockup) -->
-            <div class="relative -mt-12 mx-auto w-24 h-24 rounded-full bg-slate-950 border-[3.5px] border-[#FACC15] shadow-2xl flex flex-col items-center justify-center p-1 select-none">
-                <span class="font-script text-[#FACC15] text-2xl font-bold tracking-wider leading-none">WIRELESS</span>
-                <div class="w-8 h-0.5 bg-[#FACC15] mt-1 rounded-full"></div>
-                <!-- Green Verified Checkmark -->
-                <div class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-[#10B981] border-2 border-white flex items-center justify-center text-white shadow-md">
-                    <svg class="w-3.5 h-3.5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                </div>
-            </div>
+            <!-- Clickable Profile Avatar Overlay to open service selector -->
+            <button type="button" onclick="openWelcomeModal()" class="absolute top-[62%] left-[36%] w-[28%] h-[30%] rounded-full cursor-pointer z-20" title="Select Service" aria-label="Select Service"></button>
 
-            <!-- Title: WIRELESS (Clean Dark Headline) -->
-            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight text-center mt-3.5">WIRELESS</h1>
+            <!-- Accessible hidden H1 for SEO and screen readers -->
+            <h1 class="sr-only">WIRELESS — Mobiles, Repairs &amp; Accessories</h1>
+        </header>
+
+        <!-- 2. CENTRAL LUXURY LIGHT CARD -->
+        <main class="relative z-20 bg-white px-4 sm:px-6 pt-0 pb-12 text-slate-800">
 
             <!-- Google Star Rating with Official Google Colors -->
             <div class="flex items-center justify-center gap-2 mt-2 flex-wrap">
@@ -745,7 +686,7 @@
     </div>
 
     <!-- 15. WELCOME MODAL (Clean Light Modal) -->
-    <div id="welcomeModal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 transition-opacity duration-300">
+    <div id="welcomeModal" class="fixed inset-0 z-50 hidden flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 transition-opacity duration-300">
         <div class="w-full max-w-sm bg-white rounded-t-3xl sm:rounded-3xl p-5 pb-8 sm:pb-5 shadow-2xl border border-slate-200 max-h-[85vh] overflow-y-auto text-slate-900" style="padding-bottom: max(2.5rem, calc(1.5rem + env(safe-area-inset-bottom)));">
             <div class="text-center mb-4">
                 <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-amber-300 bg-amber-50 text-amber-800 shadow-2xs">Interactive Service Selector</span>
