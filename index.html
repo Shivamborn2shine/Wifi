@@ -89,6 +89,31 @@
         .modal-checkmark { opacity: 0; transform: scale(0.5); transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .modal-service-item.is-selected .modal-checkmark { opacity: 1; transform: scale(1); }
 
+        /* Guided Review Tour Spotlight & Animations */
+        .tour-highlight {
+            position: relative !important;
+            z-index: 95 !important;
+            border-color: #F59E0B !important;
+            background-color: #ffffff !important;
+            box-shadow: 0 0 0 4px #F59E0B, 0 0 35px rgba(245, 158, 11, 0.75) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        @keyframes tourPulseGlow {
+            0%, 100% { box-shadow: 0 0 0 4px #F59E0B, 0 0 24px rgba(245, 158, 11, 0.6); }
+            50% { box-shadow: 0 0 0 7px #FBBF24, 0 0 42px rgba(245, 158, 11, 0.9); }
+        }
+        .tour-pulse {
+            animation: tourPulseGlow 1.8s infinite ease-in-out !important;
+        }
+        @keyframes fingerBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-7px) scale(1.15); }
+        }
+        .finger-bounce {
+            display: inline-block;
+            animation: fingerBounce 1.1s infinite ease-in-out;
+        }
+
         /* Hide Netlify branding badge */
         #nl-badge-frame,
         iframe[title="Powered by Netlify"],
@@ -230,8 +255,23 @@
                     <span class="text-amber-400 text-base select-none">✨</span>
                 </div>
 
+                <!-- Guided Assistant Banner (Handholding Mode Trigger) -->
+                <div id="tourBanner" class="mb-3.5 p-2.5 sm:p-3 rounded-2xl bg-gradient-to-r from-amber-100/90 via-yellow-100/75 to-amber-100/90 border border-amber-300/80 shadow-2xs flex items-center justify-between gap-2.5">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span class="text-xl flex-shrink-0 finger-bounce">🤝</span>
+                        <div class="min-w-0">
+                            <h4 class="text-xs sm:text-[13px] font-black text-amber-950 leading-tight">Need Step-by-Step Help?</h4>
+                            <p class="text-[10.5px] sm:text-[11px] font-medium text-amber-900/80 leading-tight truncate">Let us hold your hand to post your 5★ review</p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="startReviewTour(1)" class="flex-shrink-0 py-1.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-black text-xs shadow-xs transition-all flex items-center gap-1 active:scale-95 cursor-pointer">
+                        <span>Guide Me</span>
+                        <span class="finger-bounce text-sm">👉</span>
+                    </button>
+                </div>
+
                 <!-- 2-Column Uncluttered Category Grid (8 pills, 4 rows) -->
-                <div class="grid grid-cols-2 gap-2 sm:gap-2.5 mb-3.5">
+                <div id="categoryGrid" class="grid grid-cols-2 gap-2 sm:gap-2.5 mb-3.5 p-1 rounded-2xl transition-all">
                     <!-- 1. Mobiles & 2nd Hand -->
                     <button type="button" data-cat="MOBILES" class="category-chip py-2.5 px-3 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer" onclick="toggleCategoryChip(this, 'MOBILES')">
                         <span>📱</span> <span>Mobiles &amp; 2nd Hand</span> <span class="check-mark font-black text-xs">✓</span>
@@ -348,7 +388,7 @@
                         </button>
 
                         <!-- 2. Copy & Open Google Review Page Button -->
-                        <button type="button" onclick="copyAndRedirectReview()" class="flex-1 py-2 px-3 rounded-xl bg-[#131b2e] hover:bg-[#0b1220] text-white font-black text-xs shadow-md flex items-center justify-between gap-1.5 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
+                        <button id="copyGoogleBtn" type="button" onclick="copyAndRedirectReview()" class="flex-1 py-2 px-3 rounded-xl bg-[#131b2e] hover:bg-[#0b1220] text-white font-black text-xs shadow-md flex items-center justify-between gap-1.5 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
                             <div class="flex items-center gap-2 min-w-0">
                                 <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
                                 <div class="text-left leading-tight">
@@ -860,6 +900,137 @@
     <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-xs font-bold py-3 px-5 rounded-2xl shadow-xl flex items-center gap-2.5 opacity-0 pointer-events-none transition-opacity duration-200 border border-slate-700">
         <span id="toastIcon" class="text-sm">✨</span>
         <span id="toastMessage">Copied!</span>
+    </div>
+
+    <!-- 18. REVIEW TOUR BACKDROP OVERLAY -->
+    <div id="tourBackdrop" class="fixed inset-0 z-[88] hidden bg-slate-950/75 backdrop-blur-[2px] transition-opacity duration-300" onclick="skipReviewTour()"></div>
+
+    <!-- 19. REVIEW TOUR FLOATING CARD (Interactive Handholding Pop-up Tooltip) -->
+    <div id="tourCard" class="fixed z-[99] hidden max-w-sm w-[92%] left-1/2 -translate-x-1/2 bg-white rounded-3xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.38)] border-2 border-amber-400 text-slate-900 transition-all duration-300">
+        <!-- Tour Card Top Header -->
+        <div class="flex items-center justify-between mb-2 pb-1.5 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+                <span id="tourStepBadge" class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-950 text-[11px] font-black tracking-wide border border-amber-200">
+                    🤝 STEP 1 OF 3
+                </span>
+                <span class="text-amber-600 text-xs font-bold flex items-center gap-1">
+                    <span>Guided Assistant</span>
+                </span>
+            </div>
+            <button type="button" onclick="skipReviewTour()" class="text-xs text-slate-400 hover:text-slate-800 font-bold px-2 py-0.5 rounded-lg hover:bg-slate-100 transition-all cursor-pointer">
+                ✕ Skip
+            </button>
+        </div>
+
+        <!-- Pointer Hand Animation & Title -->
+        <div class="flex items-start gap-3 my-2.5">
+            <div id="tourFinger" class="text-2xl finger-bounce flex-shrink-0 select-none">
+                👇
+            </div>
+            <div class="flex-1">
+                <h3 id="tourTitle" class="text-sm sm:text-base font-black text-slate-950 leading-snug">
+                    Pick What You Got Done
+                </h3>
+                <p id="tourDesc" class="text-xs sm:text-[13px] text-slate-600 mt-1 leading-relaxed font-medium">
+                    Tap any service below (e.g. Phone Repair, Accessories). Tapping one automatically moves you to step 2!
+                </p>
+            </div>
+        </div>
+
+        <!-- Progress Dots & Next / Back Navigation -->
+        <div class="flex items-center justify-between pt-3 mt-1 border-t border-slate-100">
+            <!-- 3 Dots Indicator -->
+            <div class="flex items-center gap-1.5" id="tourDots">
+                <span class="tour-dot w-2.5 h-2.5 rounded-full bg-amber-500 transition-all" data-step="1"></span>
+                <span class="tour-dot w-2 h-2 rounded-full bg-slate-200 transition-all" data-step="2"></span>
+                <span class="tour-dot w-2 h-2 rounded-full bg-slate-200 transition-all" data-step="3"></span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2">
+                <button type="button" id="tourPrevBtn" onclick="prevTourStep()" class="hidden py-1.5 px-3 rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-950 font-bold text-xs cursor-pointer transition-all">
+                    ← Back
+                </button>
+                <button type="button" id="tourNextBtn" onclick="nextTourStep()" class="py-1.5 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-black text-xs shadow-xs cursor-pointer flex items-center gap-1 active:scale-95 transition-all">
+                    <span id="tourNextBtnText">Next Step</span>
+                    <span>➔</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 20. GOOGLE MAPS GUIDANCE / CHEAT SHEET MODAL (Final Handholding Step) -->
+    <div id="googleGuideModal" class="fixed inset-0 z-[100] hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="max-w-sm w-full bg-white rounded-3xl p-5 shadow-2xl border-2 border-amber-400 text-slate-900 relative" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button type="button" onclick="closeGoogleGuideModal()" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-xs cursor-pointer transition-all">✕</button>
+
+            <!-- Success Header -->
+            <div class="text-center mb-4">
+                <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-600 text-xl font-black mb-2 shadow-2xs">
+                    ✓
+                </div>
+                <span class="inline-block px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-black uppercase tracking-wider mb-1 border border-emerald-200">
+                    Review Copied to Clipboard!
+                </span>
+                <h3 class="text-base sm:text-lg font-black text-slate-950">
+                    Just 3 Simple Taps on Google:
+                </h3>
+                <p class="text-xs text-slate-500 mt-0.5 font-medium">Follow this 10-second guide to complete your review</p>
+            </div>
+
+            <!-- 3 Visual Cheat Sheet Cards -->
+            <div class="space-y-2.5 mb-4">
+                <!-- Step 1: 5 Stars -->
+                <div class="flex items-center gap-3 p-2.5 rounded-2xl bg-amber-50/70 border border-amber-200/80">
+                    <div class="w-7 h-7 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xs flex-shrink-0 shadow-2xs">
+                        1
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-xs font-black text-slate-900 flex items-center gap-1">
+                            <span>Tap 5 Stars</span>
+                            <span class="text-amber-500 text-sm">★★★★★</span>
+                        </div>
+                        <p class="text-[11px] text-slate-600">Give us 5 stars on the rating row</p>
+                    </div>
+                </div>
+
+                <!-- Step 2: Paste -->
+                <div class="flex items-center gap-3 p-2.5 rounded-2xl bg-amber-50/70 border border-amber-200/80">
+                    <div class="w-7 h-7 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xs flex-shrink-0 shadow-2xs">
+                        2
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-xs font-black text-slate-900">
+                            Long-Press &amp; Tap <span class="bg-amber-200/80 px-1.5 py-0.5 rounded font-black text-amber-950">Paste</span>
+                        </div>
+                        <p class="text-[11px] text-slate-600">Your tailored review is already copied!</p>
+                    </div>
+                </div>
+
+                <!-- Step 3: Post -->
+                <div class="flex items-center gap-3 p-2.5 rounded-2xl bg-amber-50/70 border border-amber-200/80">
+                    <div class="w-7 h-7 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xs flex-shrink-0 shadow-2xs">
+                        3
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-xs font-black text-slate-900">
+                            Hit <span class="bg-blue-600 text-white px-2 py-0.5 rounded font-black text-[11px]">Post</span> at Top Right
+                        </div>
+                        <p class="text-[11px] text-slate-600">And your 5-star review is officially live!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Big Final CTA Button -->
+            <button type="button" onclick="confirmOpenGoogleMaps()" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-black text-sm shadow-lg shadow-amber-400/40 transition-all flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
+                <span>Take Me to Google Maps Now</span>
+                <span class="text-base">➔</span>
+            </button>
+            <p class="text-center text-[10.5px] text-slate-400 font-semibold mt-2.5">
+                Thank you for supporting WIRELESS, Subhash Nagar! ❤️
+            </p>
+        </div>
     </div>
 
     <!-- CLIENT SCRIPT RUNTIME -->
@@ -1463,6 +1634,173 @@
             regenerateReview();
         }
 
+        /* ========================================================
+           HANDHOLDING GUIDED REVIEW TOUR SYSTEM
+           ======================================================== */
+        let currentTourStep = 0; // 0 = inactive, 1 = category, 2 = generate, 3 = copy & maps
+
+        const TOUR_STEPS = [
+            {
+                step: 1,
+                targetId: 'categoryGrid',
+                title: 'Pick What You Got Done 📱',
+                desc: 'Tap on any service below (Phone Repair, Skins, Accessories, etc.). As soon as you tap one, we will guide you to Step 2!',
+                finger: '👇',
+                badge: '🤝 STEP 1 OF 3',
+                btnText: 'Next Step'
+            },
+            {
+                step: 2,
+                targetId: 'generateBtn',
+                title: 'Generate 5★ Review ✨',
+                desc: 'Tap "Generate Review with AI" to craft a personalized, glowing 5-star draft in just 1 second!',
+                finger: '👇',
+                badge: '🤝 STEP 2 OF 3',
+                btnText: 'Next Step'
+            },
+            {
+                step: 3,
+                targetId: 'copyGoogleBtn',
+                title: 'Copy & Open Google Review ➔',
+                desc: 'Tap "Copy & Open Google" to copy your review and see our 3-step cheat sheet for pasting on Google Maps!',
+                finger: '👉',
+                badge: '🤝 STEP 3 OF 3',
+                btnText: 'Finish & Open'
+            }
+        ];
+
+        function startReviewTour(step = 1) {
+            currentTourStep = step;
+            const backdrop = document.getElementById('tourBackdrop');
+            const card = document.getElementById('tourCard');
+            if (backdrop) backdrop.classList.remove('hidden');
+            if (card) card.classList.remove('hidden');
+            renderTourStep(currentTourStep);
+        }
+
+        function clearTourHighlights() {
+            document.querySelectorAll('.tour-highlight, .tour-pulse').forEach(el => {
+                el.classList.remove('tour-highlight', 'tour-pulse');
+            });
+        }
+
+        function renderTourStep(step) {
+            if (step < 1 || step > 3) {
+                skipReviewTour();
+                return;
+            }
+            currentTourStep = step;
+            clearTourHighlights();
+
+            const data = TOUR_STEPS[step - 1];
+            const targetEl = document.getElementById(data.targetId);
+            if (targetEl) {
+                targetEl.classList.add('tour-highlight', 'tour-pulse');
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            const badge = document.getElementById('tourStepBadge');
+            const finger = document.getElementById('tourFinger');
+            const title = document.getElementById('tourTitle');
+            const desc = document.getElementById('tourDesc');
+            const nextBtnText = document.getElementById('tourNextBtnText');
+            const prevBtn = document.getElementById('tourPrevBtn');
+            
+            if (badge) badge.textContent = data.badge;
+            if (finger) finger.textContent = data.finger;
+            if (title) title.textContent = data.title;
+            if (desc) desc.textContent = data.desc;
+            if (nextBtnText) nextBtnText.textContent = data.btnText;
+
+            if (prevBtn) {
+                if (step > 1) prevBtn.classList.remove('hidden');
+                else prevBtn.classList.add('hidden');
+            }
+
+            document.querySelectorAll('.tour-dot').forEach(dot => {
+                const dStep = parseInt(dot.getAttribute('data-step') || '0', 10);
+                if (dStep === step) {
+                    dot.classList.remove('w-2', 'bg-slate-200');
+                    dot.classList.add('w-3.5', 'bg-amber-500');
+                } else {
+                    dot.classList.remove('w-3.5', 'bg-amber-500');
+                    dot.classList.add('w-2', 'bg-slate-200');
+                }
+            });
+
+            positionTourCard(targetEl);
+        }
+
+        function positionTourCard(targetEl) {
+            const card = document.getElementById('tourCard');
+            if (!card) return;
+
+            setTimeout(() => {
+                if (!targetEl) {
+                    card.style.top = 'auto';
+                    card.style.bottom = '24px';
+                    return;
+                }
+                const rect = targetEl.getBoundingClientRect();
+                const vh = window.innerHeight;
+                const finger = document.getElementById('tourFinger');
+
+                // If target is in lower half of screen, put card at top
+                if (rect.top > vh * 0.45) {
+                    card.style.bottom = 'auto';
+                    card.style.top = '16px';
+                    if (finger && currentTourStep !== 3) finger.textContent = '👇';
+                } else {
+                    card.style.top = 'auto';
+                    card.style.bottom = '24px';
+                    if (finger && currentTourStep !== 3) finger.textContent = '👆';
+                }
+            }, 260);
+        }
+
+        function nextTourStep() {
+            if (currentTourStep === 1) {
+                renderTourStep(2);
+            } else if (currentTourStep === 2) {
+                regenerateReview(true);
+                renderTourStep(3);
+            } else if (currentTourStep === 3) {
+                skipReviewTour();
+                copyAndRedirectReview();
+            }
+        }
+
+        function prevTourStep() {
+            if (currentTourStep > 1) {
+                renderTourStep(currentTourStep - 1);
+            }
+        }
+
+        function skipReviewTour() {
+            currentTourStep = 0;
+            clearTourHighlights();
+            const backdrop = document.getElementById('tourBackdrop');
+            const card = document.getElementById('tourCard');
+            if (backdrop) backdrop.classList.add('hidden');
+            if (card) card.classList.add('hidden');
+        }
+
+        function openGoogleGuideModal() {
+            const modal = document.getElementById('googleGuideModal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeGoogleGuideModal() {
+            const modal = document.getElementById('googleGuideModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function confirmOpenGoogleMaps() {
+            closeGoogleGuideModal();
+            const rUrl = STORE_CONFIG.links?.googleReviewUrl || STORE_CONFIG.links?.googleMapsUrl || '#';
+            window.open(rUrl, '_blank');
+        }
+
         function toggleCategoryChip(btn, cat) {
             if (cat === 'ALL') {
                 selectedChips.clear();
@@ -1485,6 +1823,14 @@
                 }
             }
             regenerateReview();
+
+            // Auto-advance if in Guided Tour Step 1
+            if (currentTourStep === 1) {
+                showToast('Category selected! Moving to Step 2 ✨', '👍');
+                setTimeout(() => {
+                    renderTourStep(2);
+                }, 400);
+            }
         }
 
         function setLanguage(lang) {
@@ -1624,6 +1970,14 @@
                 if (ta) ta.value = text;
                 if (display) display.textContent = text;
             }
+
+            // Auto-advance if in Guided Tour Step 2
+            if (currentTourStep === 2) {
+                showToast('Review generated! Moving to Step 3 🚀', '✨');
+                setTimeout(() => {
+                    renderTourStep(3);
+                }, 600);
+            }
         }
 
         function copyAndRedirectReview() {
@@ -1636,14 +1990,16 @@
             const isEditing = ta && !ta.classList.contains('hidden');
             const textToCopy = (isEditing && ta && ta.value) ? ta.value : (currentFullReviewText || (display ? display.textContent : ''));
 
+            // Dismiss guided tour overlay
+            skipReviewTour();
+
             navigator.clipboard.writeText(textToCopy).then(() => {
-                showToast('Review copied! Opening Google Maps...', '📋');
+                showToast('Review copied to clipboard! 🎉', '📋');
                 setTimeout(() => {
-                    const rUrl = STORE_CONFIG.links?.googleReviewUrl || STORE_CONFIG.links?.googleMapsUrl || '#';
-                    window.open(rUrl, '_blank');
-                }, 850);
+                    openGoogleGuideModal();
+                }, 300);
             }).catch(() => {
-                window.open(STORE_CONFIG.links?.googleReviewUrl || '#', '_blank');
+                openGoogleGuideModal();
             });
         }
 
