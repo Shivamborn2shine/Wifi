@@ -132,6 +132,16 @@
             animation: pulseGlowGold 1.8s infinite ease-in-out !important;
         }
 
+        @keyframes copyBtnGlow {
+            0%, 100% { box-shadow: 0 0 0 3px #F59E0B, 0 0 20px rgba(245, 158, 11, 0.7); transform: scale(1); }
+            50% { box-shadow: 0 0 0 5.5px #FBBF24, 0 0 32px rgba(245, 158, 11, 1); transform: scale(1.02); }
+        }
+        .tour-pulse-button {
+            animation: copyBtnGlow 1.2s infinite ease-in-out !important;
+            position: relative !important;
+            z-index: 96 !important;
+        }
+
         .tour-highlight {
             position: relative !important;
             z-index: 95 !important;
@@ -273,8 +283,10 @@
             <!-- 5. INTERACTIVE AI REVIEW GENERATOR SECTION (Simple & Open Golden Theme Inspired by Modern Clean UI) -->
             <div id="aiSection" class="mt-4 p-4 sm:p-5 rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm scroll-mt-4">
                 
-                <!-- "SHARE YOUR EXPERIENCE — Review Us" Header (Golden Techie Theme) -->
-                <div class="mb-4 pb-3 border-b border-slate-200/70 flex items-center justify-between">
+                <!-- 5A. REVIEW SELECTION BLOCK (Image 1: What to Review on + Choose Language) -->
+                <div id="reviewSelectionSection" class="p-2 sm:p-2.5 rounded-3xl bg-white border border-transparent transition-all">
+                    <!-- "SHARE YOUR EXPERIENCE — Review Us" Header (Golden Techie Theme) -->
+                    <div class="mb-4 pb-3 border-b border-slate-200/70 flex items-center justify-between">
                     <div class="flex items-center gap-3">
                         <!-- Warm Golden Rounded Squircle with ✦ Star -->
                         <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#FEF6D8] border border-amber-200/90 flex items-center justify-center flex-shrink-0 shadow-2xs">
@@ -306,7 +318,7 @@
                             <p class="text-[10.5px] sm:text-[11px] font-medium text-amber-900/80 leading-tight truncate">Let us hold your hand to post your 5★ review</p>
                         </div>
                     </div>
-                    <button type="button" onclick="startFullWalkthrough()" class="flex-shrink-0 py-1.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-black text-xs shadow-xs transition-all flex items-center gap-1 active:scale-95 cursor-pointer">
+                    <button type="button" onclick="goToReviewTourStep()" class="flex-shrink-0 py-1.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-black text-xs shadow-xs transition-all flex items-center gap-1 active:scale-95 cursor-pointer">
                         <span>Guide Me</span>
                         <span class="finger-bounce text-sm">👉</span>
                     </button>
@@ -376,9 +388,10 @@
                         <button type="button" class="lang-btn px-3 py-1 rounded-full transition-all text-slate-600 hover:text-slate-950 font-bold cursor-pointer" onclick="setLanguage('HINDI')">Hindi</button>
                     </div>
                 </div>
+            </div>
 
                 <!-- Primary Action: Generate Review with AI Button -->
-                <button id="generateBtn" type="button" onclick="regenerateReview(true)" class="w-full py-3.5 px-6 rounded-2xl text-slate-950 font-black text-sm sm:text-base shadow-lg shadow-amber-400/30 transition-all flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 cursor-pointer">
+                <button id="generateBtn" type="button" onclick="regenerateReview(true)" class="w-full mt-3 py-3.5 px-6 rounded-2xl text-slate-950 font-black text-sm sm:text-base shadow-lg shadow-amber-400/30 transition-all flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 cursor-pointer">
                     <span class="text-base">✦</span>
                     <span>Generate Review with AI</span>
                     <span class="text-base">➔</span>
@@ -389,8 +402,8 @@
                     <span>100% real &amp; safe</span>
                 </div>
 
-                <!-- DEDICATED REVIEW OUTPUT CARD (Matching Pink Mockup in Golden Amber Theme) -->
-                <div class="rounded-3xl bg-white border border-slate-200/90 p-4 sm:p-5 shadow-sm relative mt-2">
+                <!-- DEDICATED REVIEW OUTPUT CARD (Image 2: Review Draft + Action Buttons) -->
+                <div id="reviewOutputCard" class="rounded-3xl bg-white border border-slate-200/90 p-4 sm:p-5 shadow-sm relative mt-2 transition-all">
                     <!-- Review Card Header -->
                     <div class="flex items-center justify-between mb-1.5">
                         <div class="flex items-center gap-2">
@@ -1034,78 +1047,117 @@
         <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45 border-r border-b border-slate-100 shadow-sm pointer-events-none"></div>
     </div>
 
-    <!-- 19B. REVIEW SECTION FEATURE POPUP (Step 2 in Flow) -->
-    <div id="reviewTourFeaturePopup" class="fixed z-[99] hidden max-w-sm w-[92%] left-1/2 -translate-x-1/2 bg-white rounded-3xl p-5 shadow-[0_25px_60px_rgba(0,0,0,0.38)] border-2 border-amber-400 text-slate-900 transition-all duration-300">
+    <!-- 19B. REVIEW SELECTION GUIDE POPUP (Image 1: Choose What to Review & Language) -->
+    <div id="reviewSelectGuidePopup" class="fixed z-[99] hidden max-w-sm w-[92%] left-1/2 -translate-x-1/2 bg-white rounded-3xl p-4 sm:p-5 shadow-[0_25px_60px_rgba(0,0,0,0.38)] border-2 border-amber-400 text-slate-900 transition-all duration-300">
         <!-- Close button -->
-        <button type="button" onclick="closeAllTourPopups()" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-700 font-bold flex items-center justify-center text-xs transition-all cursor-pointer" aria-label="Close">
+        <button type="button" onclick="closeAllTourPopups()" class="absolute top-3.5 right-3.5 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-700 font-bold flex items-center justify-center text-xs transition-all cursor-pointer" aria-label="Close">
             ✕
         </button>
 
-        <!-- Top Section: Golden Star Icon + Title + Description -->
-        <div class="flex items-start gap-3.5 mb-4 pr-5">
+        <!-- Top Section: Icon + Title + Description -->
+        <div class="flex items-start gap-3 mb-3 pr-6">
             <div class="relative flex-shrink-0">
-                <span class="absolute -top-1.5 -left-1.5 text-amber-500 text-xs font-black select-none animate-pulse">✦</span>
+                <span class="absolute -top-1 -left-1 text-amber-500 text-xs font-black select-none">✦</span>
                 <span class="absolute -top-1 -right-1 text-amber-400 text-xs select-none">✨</span>
-                <span class="absolute -bottom-1 -left-1 text-amber-500 text-xs select-none">彡</span>
 
-                <div class="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-amber-400 via-yellow-400 to-amber-500 shadow-lg shadow-amber-400/30 flex items-center justify-center p-2.5 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-black/10 pointer-events-none"></div>
-                    <span class="text-3xl text-slate-950 font-black filter drop-shadow-sm select-none">✦</span>
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-400 via-yellow-400 to-amber-500 shadow-md shadow-amber-400/30 flex items-center justify-center p-2 relative overflow-hidden">
+                    <span class="text-2xl text-slate-950 font-black filter drop-shadow-sm select-none">📱</span>
                 </div>
             </div>
 
             <div class="flex-1 min-w-0">
-                <span class="block text-[11px] font-black uppercase tracking-wider text-amber-600 mb-0.5">
-                    SHARE YOUR EXPERIENCE
+                <span class="inline-block px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-black uppercase tracking-wider mb-1">
+                    Step 1 of 2 • Pick Service
                 </span>
-                <h3 class="text-xl sm:text-[22px] font-black text-[#0B1A30] leading-tight">
-                    Review Us on <br><span class="text-amber-500">Google!</span>
+                <h3 class="text-base sm:text-lg font-black text-[#0B1A30] leading-tight">
+                    Choose what to review on 📱
                 </h3>
-                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed font-medium">
-                    This section lets you generate an authentic 5-star review in seconds with AI and share it directly on Google Maps.
+                <p class="text-xs text-slate-600 mt-1 leading-snug font-medium">
+                    Tap any category pill (Phone Repair, Skins, Accessories) &amp; then choose your language below!
                 </p>
             </div>
         </div>
 
-        <!-- 4 Feature Columns -->
-        <div class="grid grid-cols-4 divide-x divide-slate-100 pt-3 border-t border-slate-100 text-center">
-            <div class="px-1 flex flex-col items-center justify-start">
-                <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-sm mb-1 shadow-2xs">
-                    ★
-                </div>
-                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">5-Star Review</span>
-            </div>
-            <div class="px-1 flex flex-col items-center justify-start">
-                <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm mb-1 shadow-2xs">
-                    ⚡
-                </div>
-                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">Instant AI Draft</span>
-            </div>
-            <div class="px-1 flex flex-col items-center justify-start">
-                <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm mb-1 shadow-2xs">
-                    🌐
-                </div>
-                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">3 Languages</span>
-            </div>
-            <div class="px-1 flex flex-col items-center justify-start">
-                <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm mb-1 shadow-2xs">
-                    📋
-                </div>
-                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">1-Click Post</span>
-            </div>
+        <!-- Bouncing Helper Notice -->
+        <div class="p-2.5 rounded-2xl bg-amber-50/90 border border-amber-200/90 flex items-center gap-2 mb-3 shadow-2xs">
+            <span class="finger-bounce text-xl flex-shrink-0 select-none">👇</span>
+            <p class="text-[11.5px] text-amber-950 font-bold leading-tight">
+                Select your service &amp; choose language below, then tap next!
+            </p>
         </div>
 
-        <!-- Action Button -->
-        <div class="mt-3.5 pt-2 flex items-center justify-between gap-2 border-t border-slate-100">
-            <span class="text-[11px] font-bold text-slate-400">Step 2 of 2</span>
-            <button type="button" onclick="startReviewStepByStep()" class="py-2 px-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-black text-xs shadow-md shadow-amber-400/25 flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
-                <span>Start Review Guide</span>
-                <span>👉</span>
+        <!-- Action Buttons -->
+        <div class="pt-2 flex items-center justify-between gap-2 border-t border-slate-100">
+            <button type="button" onclick="closeAllTourPopups()" class="text-xs font-bold text-slate-400 hover:text-slate-700 py-1.5 px-2 rounded-lg cursor-pointer">
+                Skip Guide
+            </button>
+            <button type="button" onclick="goToReviewOutputStep()" class="py-2 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-black text-xs shadow-md shadow-amber-400/25 flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
+                <span>Next: View Review Draft</span>
+                <span>➔</span>
             </button>
         </div>
 
         <!-- Downward Pointing Triangle Beak -->
-        <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45 border-r border-b border-amber-400 shadow-sm pointer-events-none"></div>
+        <div class="popup-beak-down absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45 border-r border-b border-amber-400 shadow-sm pointer-events-none"></div>
+        <!-- Upward Pointing Triangle Beak (when positioned below) -->
+        <div class="popup-beak-up hidden absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45 border-l border-t border-amber-400 shadow-sm pointer-events-none"></div>
+    </div>
+
+    <!-- 19C. REVIEW OUTPUT GUIDE POPUP (Image 2: Review Draft & Guide to Google Button) -->
+    <div id="reviewSubmitGuidePopup" class="fixed z-[99] hidden max-w-sm w-[92%] left-1/2 -translate-x-1/2 bg-white rounded-3xl p-4 sm:p-5 shadow-[0_25px_60px_rgba(0,0,0,0.38)] border-2 border-amber-400 text-slate-900 transition-all duration-300">
+        <!-- Close button -->
+        <button type="button" onclick="closeAllTourPopups()" class="absolute top-3.5 right-3.5 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-700 font-bold flex items-center justify-center text-xs transition-all cursor-pointer" aria-label="Close">
+            ✕
+        </button>
+
+        <!-- Top Section: Icon + Title + Description -->
+        <div class="flex items-start gap-3 mb-3 pr-6">
+            <div class="relative flex-shrink-0">
+                <span class="absolute -top-1 -left-1 text-amber-500 text-xs font-black select-none">✦</span>
+                <span class="absolute -top-1 -right-1 text-amber-400 text-xs select-none">★</span>
+
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-400 via-yellow-400 to-amber-500 shadow-md shadow-amber-400/30 flex items-center justify-center p-2 relative overflow-hidden">
+                    <span class="text-2xl text-slate-950 font-black filter drop-shadow-sm select-none">⭐</span>
+                </div>
+            </div>
+
+            <div class="flex-1 min-w-0">
+                <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-black uppercase tracking-wider mb-1">
+                    Step 2 of 2 • Ready to Post
+                </span>
+                <h3 class="text-base sm:text-lg font-black text-[#0B1A30] leading-tight">
+                    Your 5★ Review is Ready! ✨
+                </h3>
+                <p class="text-xs text-slate-600 mt-1 leading-snug font-medium">
+                    Review draft generated! Tap the black button below to copy &amp; post on Google Maps.
+                </p>
+            </div>
+        </div>
+
+        <!-- Bouncing Hand Guiding directly to the Copy Button -->
+        <div class="p-2.5 rounded-2xl bg-slate-900 text-white flex items-center justify-between gap-2 mb-3 shadow-md border border-slate-700">
+            <div class="flex items-center gap-2">
+                <span class="finger-bounce text-xl select-none">👉</span>
+                <span class="text-xs font-black text-amber-300">Tap "Copy &amp; Open Google" button below!</span>
+            </div>
+            <span class="text-sm select-none">👇</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="pt-2 flex items-center justify-between gap-2 border-t border-slate-100">
+            <button type="button" onclick="goToReviewTourStep()" class="text-xs font-bold text-slate-500 hover:text-slate-800 py-1.5 px-2 rounded-lg cursor-pointer">
+                ⬅ Back
+            </button>
+            <button type="button" onclick="copyAndRedirectReview()" class="py-2 px-3.5 rounded-xl bg-[#131b2e] hover:bg-[#0b1220] text-white font-black text-xs shadow-md flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
+                <span>Copy &amp; Open Google</span>
+                <span>➔</span>
+            </button>
+        </div>
+
+        <!-- Downward Pointing Triangle Beak -->
+        <div class="popup-beak-down absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45 border-r border-b border-amber-400 shadow-sm pointer-events-none"></div>
+        <!-- Upward Pointing Triangle Beak (when positioned below) -->
+        <div class="popup-beak-up hidden absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45 border-l border-t border-amber-400 shadow-sm pointer-events-none"></div>
     </div>
 
     <!-- 19. REVIEW TOUR FLOATING CARD (Interactive Handholding Pop-up Tooltip) -->
@@ -1954,59 +2006,115 @@
             if (waPopup) waPopup.classList.add('hidden');
             if (waBox) waBox.classList.remove('tour-highlight-whatsapp', 'tour-pulse-whatsapp');
 
-            // Scroll down and land on the Share Review Section
-            const aiSec = document.getElementById('aiSection');
-            const revPopup = document.getElementById('reviewTourFeaturePopup');
-            if (!aiSec) return;
+            const submitPopup = document.getElementById('reviewSubmitGuidePopup');
+            const outputCard = document.getElementById('reviewOutputCard');
+            const copyBtn = document.getElementById('copyGoogleBtn');
+            if (submitPopup) submitPopup.classList.add('hidden');
+            if (outputCard) outputCard.classList.remove('tour-highlight-review', 'tour-pulse-review');
+            if (copyBtn) copyBtn.classList.remove('tour-pulse-button');
 
-            aiSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Scroll down and land directly on Image 1: #reviewSelectionSection
+            const selSec = document.getElementById('reviewSelectionSection');
+            const selPopup = document.getElementById('reviewSelectGuidePopup');
+            const backdrop = document.getElementById('tourBackdrop');
+            if (!selSec || !backdrop) return;
+
+            backdrop.classList.remove('hidden');
+
+            // Smooth scroll centering the selection section with headroom above
+            const rect = selSec.getBoundingClientRect();
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const targetY = scrollY + rect.top - 180;
+            window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
 
             setTimeout(() => {
-                // Highlight review section with golden aura and cut out unblurred hole
-                aiSec.classList.add('tour-highlight-review', 'tour-pulse-review');
-                updateBackdropHole(aiSec);
+                // Highlight selection section with golden aura and cut out unblurred hole
+                selSec.classList.add('tour-highlight-review', 'tour-pulse-review');
+                updateBackdropHole(selSec);
 
-                // Reveal Review feature popup right above category grid or aiSection
-                if (revPopup) {
-                    revPopup.classList.remove('hidden');
-                    positionReviewFeaturePopup();
+                // Reveal Review Selection guide popup right above the selection section
+                if (selPopup) {
+                    selPopup.classList.remove('hidden');
+                    positionTourElementPopup(selSec, selPopup);
                 }
-            }, 500);
+            }, 450);
         }
 
-        function positionReviewFeaturePopup() {
-            const aiSec = document.getElementById('aiSection');
-            const revPopup = document.getElementById('reviewTourFeaturePopup');
-            if (!aiSec || !revPopup) return;
+        function goToReviewOutputStep() {
+            // Remove highlight and close selection popup
+            const selSec = document.getElementById('reviewSelectionSection');
+            const selPopup = document.getElementById('reviewSelectGuidePopup');
+            if (selSec) selSec.classList.remove('tour-highlight-review', 'tour-pulse-review');
+            if (selPopup) selPopup.classList.add('hidden');
 
-            const rect = aiSec.getBoundingClientRect();
-            const popupHeight = revPopup.offsetHeight || 260;
-            const topPos = Math.max(12, rect.top - popupHeight - 16);
-            revPopup.style.top = `${topPos}px`;
-            revPopup.style.bottom = 'auto';
+            const outputCard = document.getElementById('reviewOutputCard');
+            const submitPopup = document.getElementById('reviewSubmitGuidePopup');
+            const copyBtn = document.getElementById('copyGoogleBtn');
+            const backdrop = document.getElementById('tourBackdrop');
+            if (!outputCard || !backdrop) return;
+
+            backdrop.classList.remove('hidden');
+
+            // Ensure fresh review is ready
+            regenerateReview(true);
+
+            // Smooth scroll centering the review output card with headroom above
+            const rect = outputCard.getBoundingClientRect();
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const targetY = scrollY + rect.top - 190;
+            window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+
+            setTimeout(() => {
+                // Highlight review output card and animate the copy button
+                outputCard.classList.add('tour-highlight-review', 'tour-pulse-review');
+                if (copyBtn) copyBtn.classList.add('tour-pulse-button');
+                updateBackdropHole(outputCard);
+
+                // Reveal Review Submit guide popup right above the output card
+                if (submitPopup) {
+                    submitPopup.classList.remove('hidden');
+                    positionTourElementPopup(outputCard, submitPopup);
+                }
+            }, 450);
         }
 
-        function startReviewStepByStep() {
-            const revPopup = document.getElementById('reviewTourFeaturePopup');
-            const aiSec = document.getElementById('aiSection');
-            if (revPopup) revPopup.classList.add('hidden');
-            if (aiSec) aiSec.classList.remove('tour-highlight-review', 'tour-pulse-review');
+        function positionTourElementPopup(targetEl, popupEl) {
+            if (!targetEl || !popupEl) return;
+            const rect = targetEl.getBoundingClientRect();
+            const popupHeight = popupEl.offsetHeight || 220;
+            const beakDown = popupEl.querySelector('.popup-beak-down');
+            const beakUp = popupEl.querySelector('.popup-beak-up');
 
-            // Launch interactive 3-step review tour
-            startReviewTour(1);
+            // If there's enough space above the target element in the viewport
+            if (rect.top >= popupHeight + 14) {
+                popupEl.style.top = `${Math.max(10, rect.top - popupHeight - 14)}px`;
+                popupEl.style.bottom = 'auto';
+                if (beakDown) beakDown.classList.remove('hidden');
+                if (beakUp) beakUp.classList.add('hidden');
+            } else {
+                // Otherwise place below target element
+                popupEl.style.top = `${rect.bottom + 14}px`;
+                popupEl.style.bottom = 'auto';
+                if (beakDown) beakDown.classList.add('hidden');
+                if (beakUp) beakUp.classList.remove('hidden');
+            }
         }
 
         function closeAllTourPopups() {
             currentTourStep = 0;
             clearTourHighlights();
             updateBackdropHole(null);
+            const copyBtn = document.getElementById('copyGoogleBtn');
+            if (copyBtn) copyBtn.classList.remove('tour-pulse-button');
             const backdrop = document.getElementById('tourBackdrop');
             const waPopup = document.getElementById('whatsappTourPopup');
-            const revPopup = document.getElementById('reviewTourFeaturePopup');
+            const selPopup = document.getElementById('reviewSelectGuidePopup');
+            const submitPopup = document.getElementById('reviewSubmitGuidePopup');
             const tourCard = document.getElementById('tourCard');
             if (backdrop) backdrop.classList.add('hidden');
             if (waPopup) waPopup.classList.add('hidden');
-            if (revPopup) revPopup.classList.add('hidden');
+            if (selPopup) selPopup.classList.add('hidden');
+            if (submitPopup) submitPopup.classList.add('hidden');
             if (tourCard) tourCard.classList.add('hidden');
         }
 
@@ -2163,6 +2271,16 @@
             }
             regenerateReview();
 
+            // If selection section is currently spotlighted, refresh the hole & popup
+            const selSec = document.getElementById('reviewSelectionSection');
+            const selPopup = document.getElementById('reviewSelectGuidePopup');
+            if (currentHighlightedEl === selSec) {
+                updateBackdropHole(selSec);
+                if (selPopup && !selPopup.classList.contains('hidden')) {
+                    positionTourElementPopup(selSec, selPopup);
+                }
+            }
+
             // Auto-advance if in Guided Tour Step 1
             if (currentTourStep === 1) {
                 showToast('Category selected! Moving to Step 2 ✨', '👍');
@@ -2172,15 +2290,28 @@
             }
         }
 
-        function setLanguage(lang) {
+        function setLanguage(lang, btnEl) {
             currentLang = lang;
             document.querySelectorAll('.lang-btn').forEach(b => {
                 b.classList.remove('bg-gradient-to-r', 'from-amber-400', 'to-yellow-400', 'text-slate-950', 'font-black', 'shadow-xs');
                 b.classList.add('text-slate-600', 'font-bold');
             });
-            event.target.classList.add('bg-gradient-to-r', 'from-amber-400', 'to-yellow-400', 'text-slate-950', 'font-black', 'shadow-xs');
-            event.target.classList.remove('text-slate-600');
+            const targetBtn = btnEl || (window.event ? window.event.target : null);
+            if (targetBtn) {
+                targetBtn.classList.add('bg-gradient-to-r', 'from-amber-400', 'to-yellow-400', 'text-slate-950', 'font-black', 'shadow-xs');
+                targetBtn.classList.remove('text-slate-600');
+            }
             regenerateReview(true);
+
+            // If selection section is currently spotlighted, refresh the hole & popup
+            const selSec = document.getElementById('reviewSelectionSection');
+            const selPopup = document.getElementById('reviewSelectGuidePopup');
+            if (currentHighlightedEl === selSec) {
+                updateBackdropHole(selSec);
+                if (selPopup && !selPopup.classList.contains('hidden')) {
+                    positionTourElementPopup(selSec, selPopup);
+                }
+            }
         }
 
         let typingTimer = null;
@@ -2388,20 +2519,36 @@
             window.addEventListener('scroll', () => {
                 if (currentHighlightedEl) {
                     updateBackdropHole(currentHighlightedEl);
+                    const selPopup = document.getElementById('reviewSelectGuidePopup');
+                    const submitPopup = document.getElementById('reviewSubmitGuidePopup');
+                    const waPopup = document.getElementById('whatsappTourPopup');
+                    if (selPopup && !selPopup.classList.contains('hidden')) {
+                        positionTourElementPopup(currentHighlightedEl, selPopup);
+                    }
+                    if (submitPopup && !submitPopup.classList.contains('hidden')) {
+                        positionTourElementPopup(currentHighlightedEl, submitPopup);
+                    }
+                    if (waPopup && !waPopup.classList.contains('hidden')) {
+                        positionWhatsAppPopup();
+                    }
                 }
             }, { passive: true });
 
             window.addEventListener('resize', () => {
                 if (currentHighlightedEl) {
                     updateBackdropHole(currentHighlightedEl);
-                }
-                const waPopup = document.getElementById('whatsappTourPopup');
-                if (waPopup && !waPopup.classList.contains('hidden')) {
-                    positionWhatsAppPopup();
-                }
-                const revPopup = document.getElementById('reviewTourFeaturePopup');
-                if (revPopup && !revPopup.classList.contains('hidden')) {
-                    positionReviewFeaturePopup();
+                    const selPopup = document.getElementById('reviewSelectGuidePopup');
+                    const submitPopup = document.getElementById('reviewSubmitGuidePopup');
+                    const waPopup = document.getElementById('whatsappTourPopup');
+                    if (selPopup && !selPopup.classList.contains('hidden')) {
+                        positionTourElementPopup(currentHighlightedEl, selPopup);
+                    }
+                    if (submitPopup && !submitPopup.classList.contains('hidden')) {
+                        positionTourElementPopup(currentHighlightedEl, submitPopup);
+                    }
+                    if (waPopup && !waPopup.classList.contains('hidden')) {
+                        positionWhatsAppPopup();
+                    }
                 }
             });
 
