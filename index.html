@@ -89,7 +89,49 @@
         .modal-checkmark { opacity: 0; transform: scale(0.5); transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .modal-service-item.is-selected .modal-checkmark { opacity: 1; transform: scale(1); }
 
-        /* Guided Review Tour Spotlight & Animations */
+        /* Guided Tour Spotlight & Backdrop Deep Blur */
+        .tour-backdrop-blur {
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            background-color: rgba(15, 23, 42, 0.58) !important;
+        }
+
+        /* Guided Spotlight Highlight for WhatsApp Section */
+        .tour-highlight-whatsapp {
+            position: relative !important;
+            z-index: 92 !important;
+            background: #ffffff !important;
+            border-radius: 1.25rem !important;
+            border: 2px solid #34D399 !important;
+            box-shadow: 0 0 0 2.5px #34D399, 0 0 35px rgba(52, 211, 153, 0.8) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        @keyframes pulseGlowGreen {
+            0%, 100% { box-shadow: 0 0 0 2px #34D399, 0 0 24px rgba(52, 211, 153, 0.65); }
+            50% { box-shadow: 0 0 0 5px #10B981, 0 0 42px rgba(52, 211, 153, 0.95); }
+        }
+        .tour-pulse-whatsapp {
+            animation: pulseGlowGreen 1.8s infinite ease-in-out !important;
+        }
+
+        /* Guided Spotlight Highlight for Review Section */
+        .tour-highlight-review {
+            position: relative !important;
+            z-index: 92 !important;
+            background: #ffffff !important;
+            border-radius: 1.5rem !important;
+            border: 2px solid #F59E0B !important;
+            box-shadow: 0 0 0 3px #F59E0B, 0 0 36px rgba(245, 158, 11, 0.8) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        @keyframes pulseGlowGold {
+            0%, 100% { box-shadow: 0 0 0 2.5px #F59E0B, 0 0 24px rgba(245, 158, 11, 0.65); }
+            50% { box-shadow: 0 0 0 5.5px #FBBF24, 0 0 42px rgba(245, 158, 11, 0.95); }
+        }
+        .tour-pulse-review {
+            animation: pulseGlowGold 1.8s infinite ease-in-out !important;
+        }
+
         .tour-highlight {
             position: relative !important;
             z-index: 95 !important;
@@ -190,7 +232,7 @@
             </div>
 
             <!-- 4. INSTANT WHATSAPP PRICE / ESTIMATE INQUIRY (Focused & Sleek) -->
-            <div class="mt-3.5 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br from-emerald-50/70 via-white to-emerald-50/40 text-slate-900 border border-emerald-200/80 shadow-2xs">
+            <div id="whatsAppInquiryBox" class="mt-3.5 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br from-emerald-50/70 via-white to-emerald-50/40 text-slate-900 border border-emerald-200/80 shadow-2xs transition-all scroll-mt-28">
                 <div class="flex items-center justify-between mb-2.5 gap-1.5 sm:gap-2">
                     <div class="flex items-center gap-1.5 flex-shrink-0">
                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
@@ -264,7 +306,7 @@
                             <p class="text-[10.5px] sm:text-[11px] font-medium text-amber-900/80 leading-tight truncate">Let us hold your hand to post your 5★ review</p>
                         </div>
                     </div>
-                    <button type="button" onclick="startReviewTour(1)" class="flex-shrink-0 py-1.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-black text-xs shadow-xs transition-all flex items-center gap-1 active:scale-95 cursor-pointer">
+                    <button type="button" onclick="startFullWalkthrough()" class="flex-shrink-0 py-1.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-black text-xs shadow-xs transition-all flex items-center gap-1 active:scale-95 cursor-pointer">
                         <span>Guide Me</span>
                         <span class="finger-bounce text-sm">👉</span>
                     </button>
@@ -902,8 +944,169 @@
         <span id="toastMessage">Copied!</span>
     </div>
 
-    <!-- 18. REVIEW TOUR BACKDROP OVERLAY -->
-    <div id="tourBackdrop" class="fixed inset-0 z-[88] hidden bg-slate-950/75 backdrop-blur-[2px] transition-opacity duration-300" onclick="skipReviewTour()"></div>
+    <!-- 18. GUIDED WALKTHROUGH BACKDROP OVERLAY (Deep Blur as in user screenshot) -->
+    <div id="tourBackdrop" class="fixed inset-0 z-[88] hidden tour-backdrop-blur transition-opacity duration-300" onclick="closeAllTourPopups()"></div>
+
+    <!-- 19A. WHATSAPP GUIDED POPUP (Exact 100% replica of user attached screenshot) -->
+    <div id="whatsappTourPopup" class="fixed z-[99] hidden max-w-sm w-[92%] left-1/2 -translate-x-1/2 bg-white rounded-3xl p-5 shadow-[0_25px_60px_rgba(0,0,0,0.38)] border border-slate-100 text-slate-900 transition-all duration-300">
+        <!-- Close button (Circle X on top right) -->
+        <button type="button" onclick="goToReviewTourStep()" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-700 font-bold flex items-center justify-center text-xs transition-all cursor-pointer" aria-label="Close">
+            ✕
+        </button>
+
+        <!-- Top Section: 3D Glossy WhatsApp Icon + Sparkles + Heading + Description -->
+        <div class="flex items-start gap-3.5 mb-4 pr-5">
+            <!-- 3D Glossy WhatsApp Squircle Badge with radiating sparkles -->
+            <div class="relative flex-shrink-0">
+                <!-- Radiating Sparkle Rays -->
+                <span class="absolute -top-1.5 -left-1.5 text-emerald-500 text-xs font-black select-none animate-pulse">✦</span>
+                <span class="absolute -top-1 -right-1 text-emerald-400 text-xs select-none">✨</span>
+                <span class="absolute -bottom-1 -left-1 text-emerald-500 text-xs select-none">彡</span>
+
+                <div class="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-[#128C7E] via-[#25D366] to-[#4ADE80] shadow-lg shadow-emerald-500/25 flex items-center justify-center p-2.5 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-black/10 pointer-events-none"></div>
+                    <svg class="w-11 h-11 sm:w-12 sm:h-12 text-white fill-current filter drop-shadow-sm" viewBox="0 0 24 24">
+                        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2Z"/>
+                        <path fill="#25D366" d="M17.5 14.33C17.2 14.18 15.73 13.45 15.45 13.35C15.18 13.25 14.98 13.2 14.78 13.5C14.58 13.8 14.02 14.47 13.85 14.67C13.68 14.86 13.5 14.89 13.2 14.74C12.9 14.59 11.94 14.28 10.8 13.27C9.91 12.48 9.31 11.51 9.14 11.21C8.97 10.91 9.12 10.75 9.27 10.6C9.41 10.46 9.58 10.24 9.73 10.07C9.88 9.9 9.93 9.77 10.03 9.57C10.13 9.37 10.08 9.2 10 9.05C9.93 8.9 9.33 7.42 9.08 6.83C8.84 6.25 8.59 6.33 8.41 6.32C8.24 6.31 8.04 6.31 7.84 6.31C7.64 6.31 7.32 6.38 7.05 6.68C6.77 6.97 6 7.7 6 9.17C6 10.64 7.07 12.06 7.22 12.26C7.37 12.46 9.33 15.48 12.33 16.78C13.04 17.09 13.61 17.28 14.04 17.41C14.76 17.64 15.41 17.61 15.93 17.53C16.51 17.44 17.72 16.8 17.97 16.1C18.22 15.39 18.22 14.79 18.15 14.67C18.07 14.54 17.8 14.48 17.5 14.33Z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Texts from screenshot -->
+            <div class="flex-1 min-w-0">
+                <span class="block text-[11px] font-black uppercase tracking-wider text-slate-500 mb-0.5">
+                    NEED HELP?
+                </span>
+                <h3 class="text-xl sm:text-[22px] font-black text-[#0B1A30] leading-tight">
+                    Chat with us on <br><span class="text-[#25D366]">WhatsApp!</span>
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed font-medium">
+                    This section lets you quickly connect with the store for any query or issue related to our products and services.
+                </p>
+            </div>
+        </div>
+
+        <!-- 4 Feature Columns with Icons (Exact replica of attached screenshot) -->
+        <div class="grid grid-cols-4 divide-x divide-slate-100 pt-3 border-t border-slate-100 text-center">
+            <!-- 1. Get Instant Support -->
+            <div class="px-1 flex flex-col items-center justify-start">
+                <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm mb-1 shadow-2xs">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+                </div>
+                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">Get Instant Support</span>
+            </div>
+
+            <!-- 2. Product Guidance -->
+            <div class="px-1 flex flex-col items-center justify-start">
+                <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm mb-1 shadow-2xs">
+                    <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                </div>
+                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">Product Guidance</span>
+            </div>
+
+            <!-- 3. Repairs & Service Help -->
+            <div class="px-1 flex flex-col items-center justify-start">
+                <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm mb-1 shadow-2xs">
+                    <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">Repairs &amp; Service Help</span>
+            </div>
+
+            <!-- 4. Availability & Price Info -->
+            <div class="px-1 flex flex-col items-center justify-start">
+                <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm mb-1 shadow-2xs">
+                    <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">Availability &amp; Price Info</span>
+            </div>
+        </div>
+
+        <!-- Next Step Button (Scroll down to Share Review Section) -->
+        <div class="mt-3.5 pt-2 flex items-center justify-between gap-2 border-t border-slate-100">
+            <span class="text-[11px] font-bold text-slate-400">Step 1 of 2</span>
+            <button type="button" onclick="goToReviewTourStep()" class="py-2 px-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black text-xs shadow-md shadow-emerald-500/20 flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
+                <span>Next: Share Review Section</span>
+                <span>➔</span>
+            </button>
+        </div>
+
+        <!-- Downward Pointing Triangle Beak (Pointing directly to WhatsApp Box) -->
+        <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45 border-r border-b border-slate-100 shadow-sm pointer-events-none"></div>
+    </div>
+
+    <!-- 19B. REVIEW SECTION FEATURE POPUP (Step 2 in Flow) -->
+    <div id="reviewTourFeaturePopup" class="fixed z-[99] hidden max-w-sm w-[92%] left-1/2 -translate-x-1/2 bg-white rounded-3xl p-5 shadow-[0_25px_60px_rgba(0,0,0,0.38)] border-2 border-amber-400 text-slate-900 transition-all duration-300">
+        <!-- Close button -->
+        <button type="button" onclick="closeAllTourPopups()" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-700 font-bold flex items-center justify-center text-xs transition-all cursor-pointer" aria-label="Close">
+            ✕
+        </button>
+
+        <!-- Top Section: Golden Star Icon + Title + Description -->
+        <div class="flex items-start gap-3.5 mb-4 pr-5">
+            <div class="relative flex-shrink-0">
+                <span class="absolute -top-1.5 -left-1.5 text-amber-500 text-xs font-black select-none animate-pulse">✦</span>
+                <span class="absolute -top-1 -right-1 text-amber-400 text-xs select-none">✨</span>
+                <span class="absolute -bottom-1 -left-1 text-amber-500 text-xs select-none">彡</span>
+
+                <div class="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-amber-400 via-yellow-400 to-amber-500 shadow-lg shadow-amber-400/30 flex items-center justify-center p-2.5 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-black/10 pointer-events-none"></div>
+                    <span class="text-3xl text-slate-950 font-black filter drop-shadow-sm select-none">✦</span>
+                </div>
+            </div>
+
+            <div class="flex-1 min-w-0">
+                <span class="block text-[11px] font-black uppercase tracking-wider text-amber-600 mb-0.5">
+                    SHARE YOUR EXPERIENCE
+                </span>
+                <h3 class="text-xl sm:text-[22px] font-black text-[#0B1A30] leading-tight">
+                    Review Us on <br><span class="text-amber-500">Google!</span>
+                </h3>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed font-medium">
+                    This section lets you generate an authentic 5-star review in seconds with AI and share it directly on Google Maps.
+                </p>
+            </div>
+        </div>
+
+        <!-- 4 Feature Columns -->
+        <div class="grid grid-cols-4 divide-x divide-slate-100 pt-3 border-t border-slate-100 text-center">
+            <div class="px-1 flex flex-col items-center justify-start">
+                <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-sm mb-1 shadow-2xs">
+                    ★
+                </div>
+                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">5-Star Review</span>
+            </div>
+            <div class="px-1 flex flex-col items-center justify-start">
+                <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm mb-1 shadow-2xs">
+                    ⚡
+                </div>
+                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">Instant AI Draft</span>
+            </div>
+            <div class="px-1 flex flex-col items-center justify-start">
+                <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm mb-1 shadow-2xs">
+                    🌐
+                </div>
+                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">3 Languages</span>
+            </div>
+            <div class="px-1 flex flex-col items-center justify-start">
+                <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm mb-1 shadow-2xs">
+                    📋
+                </div>
+                <span class="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">1-Click Post</span>
+            </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="mt-3.5 pt-2 flex items-center justify-between gap-2 border-t border-slate-100">
+            <span class="text-[11px] font-bold text-slate-400">Step 2 of 2</span>
+            <button type="button" onclick="startReviewStepByStep()" class="py-2 px-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-black text-xs shadow-md shadow-amber-400/25 flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
+                <span>Start Review Guide</span>
+                <span>👉</span>
+            </button>
+        </div>
+
+        <!-- Downward Pointing Triangle Beak -->
+        <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45 border-r border-b border-amber-400 shadow-sm pointer-events-none"></div>
+    </div>
 
     <!-- 19. REVIEW TOUR FLOATING CARD (Interactive Handholding Pop-up Tooltip) -->
     <div id="tourCard" class="fixed z-[99] hidden max-w-sm w-[92%] left-1/2 -translate-x-1/2 bg-white rounded-3xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.38)] border-2 border-amber-400 text-slate-900 transition-all duration-300">
@@ -1669,6 +1872,108 @@
             }
         ];
 
+        /* ========================================================
+           FULL FEATURE WALKTHROUGH FLOW (WhatsApp -> Share Review)
+           ======================================================== */
+        function startFullWalkthrough() {
+            closeAllTourPopups();
+            const backdrop = document.getElementById('tourBackdrop');
+            const waBox = document.getElementById('whatsAppInquiryBox');
+            const waPopup = document.getElementById('whatsappTourPopup');
+            if (!backdrop || !waBox || !waPopup) return;
+
+            // 1. Blur everything with backdrop
+            backdrop.classList.remove('hidden');
+
+            // 2. Highlight WhatsApp box with glowing emerald aura
+            waBox.classList.add('tour-highlight-whatsapp', 'tour-pulse-whatsapp');
+
+            // 3. Smoothly scroll directly to land on WhatsApp box (centering towards lower-middle)
+            const rect = waBox.getBoundingClientRect();
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const targetY = scrollY + rect.top - (window.innerHeight * 0.48);
+            window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+
+            // 4. Reveal WhatsApp popup right above the box with beak pointing down
+            setTimeout(() => {
+                waPopup.classList.remove('hidden');
+                positionWhatsAppPopup();
+            }, 350);
+        }
+
+        function positionWhatsAppPopup() {
+            const waBox = document.getElementById('whatsAppInquiryBox');
+            const waPopup = document.getElementById('whatsappTourPopup');
+            if (!waBox || !waPopup) return;
+
+            const rect = waBox.getBoundingClientRect();
+            const popupHeight = waPopup.offsetHeight || 260;
+            const topPos = Math.max(12, rect.top - popupHeight - 16);
+            waPopup.style.top = `${topPos}px`;
+            waPopup.style.bottom = 'auto';
+        }
+
+        function goToReviewTourStep() {
+            // Close WhatsApp popup and clear WhatsApp highlight
+            const waPopup = document.getElementById('whatsappTourPopup');
+            const waBox = document.getElementById('whatsAppInquiryBox');
+            if (waPopup) waPopup.classList.add('hidden');
+            if (waBox) waBox.classList.remove('tour-highlight-whatsapp', 'tour-pulse-whatsapp');
+
+            // Scroll down and land on the Share Review Section
+            const aiSec = document.getElementById('aiSection');
+            const revPopup = document.getElementById('reviewTourFeaturePopup');
+            if (!aiSec) return;
+
+            aiSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            setTimeout(() => {
+                // Highlight review section with golden aura
+                aiSec.classList.add('tour-highlight-review', 'tour-pulse-review');
+
+                // Reveal Review feature popup right above category grid or aiSection
+                if (revPopup) {
+                    revPopup.classList.remove('hidden');
+                    positionReviewFeaturePopup();
+                }
+            }, 500);
+        }
+
+        function positionReviewFeaturePopup() {
+            const aiSec = document.getElementById('aiSection');
+            const revPopup = document.getElementById('reviewTourFeaturePopup');
+            if (!aiSec || !revPopup) return;
+
+            const rect = aiSec.getBoundingClientRect();
+            const popupHeight = revPopup.offsetHeight || 260;
+            const topPos = Math.max(12, rect.top - popupHeight - 16);
+            revPopup.style.top = `${topPos}px`;
+            revPopup.style.bottom = 'auto';
+        }
+
+        function startReviewStepByStep() {
+            const revPopup = document.getElementById('reviewTourFeaturePopup');
+            const aiSec = document.getElementById('aiSection');
+            if (revPopup) revPopup.classList.add('hidden');
+            if (aiSec) aiSec.classList.remove('tour-highlight-review', 'tour-pulse-review');
+
+            // Launch interactive 3-step review tour
+            startReviewTour(1);
+        }
+
+        function closeAllTourPopups() {
+            currentTourStep = 0;
+            clearTourHighlights();
+            const backdrop = document.getElementById('tourBackdrop');
+            const waPopup = document.getElementById('whatsappTourPopup');
+            const revPopup = document.getElementById('reviewTourFeaturePopup');
+            const tourCard = document.getElementById('tourCard');
+            if (backdrop) backdrop.classList.add('hidden');
+            if (waPopup) waPopup.classList.add('hidden');
+            if (revPopup) revPopup.classList.add('hidden');
+            if (tourCard) tourCard.classList.add('hidden');
+        }
+
         function startReviewTour(step = 1) {
             currentTourStep = step;
             const backdrop = document.getElementById('tourBackdrop');
@@ -1679,8 +1984,8 @@
         }
 
         function clearTourHighlights() {
-            document.querySelectorAll('.tour-highlight, .tour-pulse').forEach(el => {
-                el.classList.remove('tour-highlight', 'tour-pulse');
+            document.querySelectorAll('.tour-highlight, .tour-pulse, .tour-highlight-whatsapp, .tour-pulse-whatsapp, .tour-highlight-review, .tour-pulse-review').forEach(el => {
+                el.classList.remove('tour-highlight', 'tour-pulse', 'tour-highlight-whatsapp', 'tour-pulse-whatsapp', 'tour-highlight-review', 'tour-pulse-review');
             });
         }
 
@@ -1777,12 +2082,7 @@
         }
 
         function skipReviewTour() {
-            currentTourStep = 0;
-            clearTourHighlights();
-            const backdrop = document.getElementById('tourBackdrop');
-            const card = document.getElementById('tourCard');
-            if (backdrop) backdrop.classList.add('hidden');
-            if (card) card.classList.add('hidden');
+            closeAllTourPopups();
         }
 
         function openGoogleGuideModal() {
@@ -2044,6 +2344,23 @@
                 hasAutoTypedOnScroll = true;
                 regenerateReview(true);
             }
+
+            // Reposition active popups on window resize
+            window.addEventListener('resize', () => {
+                const waPopup = document.getElementById('whatsappTourPopup');
+                if (waPopup && !waPopup.classList.contains('hidden')) {
+                    positionWhatsAppPopup();
+                }
+                const revPopup = document.getElementById('reviewTourFeaturePopup');
+                if (revPopup && !revPopup.classList.contains('hidden')) {
+                    positionReviewFeaturePopup();
+                }
+            });
+
+            // Auto-trigger full feature walkthrough: blur everything, land on WhatsApp with popup, then scroll to review section
+            setTimeout(() => {
+                startFullWalkthrough();
+            }, 650);
         });
     </script>
 </body>
