@@ -169,7 +169,7 @@
 <body class="antialiased selection:bg-amber-400 selection:text-slate-950 pb-32" style="padding-bottom: max(7rem, calc(6rem + env(safe-area-inset-bottom)));">
 
     <!-- APP CONTAINER (Modern Light Theme) -->
-    <div class="max-w-md mx-auto relative min-h-screen bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)] overflow-hidden border-x border-slate-200/80">
+    <div id="appContainer" class="max-w-md mx-auto relative min-h-screen bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)] border-x border-slate-200/80">
 
         <!-- 1. EXACT HERO HEADER & PROFILE (From User Design Mockup) -->
         <header class="relative w-full overflow-hidden bg-white select-none">
@@ -186,7 +186,7 @@
         </header>
 
         <!-- 2. CENTRAL LUXURY LIGHT CARD -->
-        <main class="relative z-20 bg-white px-4 sm:px-6 pt-0 pb-12 text-slate-800">
+        <main class="relative bg-white px-4 sm:px-6 pt-0 pb-12 text-slate-800">
 
             <!-- WIRELESS TITLE UNDER PROFILE (Bigger & Bold) -->
             <div class="text-center pt-2 pb-0.5">
@@ -1875,6 +1875,39 @@
         /* ========================================================
            FULL FEATURE WALKTHROUGH FLOW (WhatsApp -> Share Review)
            ======================================================== */
+        let currentHighlightedEl = null;
+
+        function updateBackdropHole(targetEl) {
+            const backdrop = document.getElementById('tourBackdrop');
+            if (!backdrop) return;
+            if (!targetEl) {
+                backdrop.style.clipPath = 'none';
+                currentHighlightedEl = null;
+                return;
+            }
+            currentHighlightedEl = targetEl;
+            const r = targetEl.getBoundingClientRect();
+            const pad = 6;
+            const top = Math.max(0, Math.floor(r.top - pad));
+            const bottom = Math.min(window.innerHeight, Math.ceil(r.bottom + pad));
+            const left = Math.max(0, Math.floor(r.left - pad));
+            const right = Math.min(window.innerWidth, Math.ceil(r.right + pad));
+
+            // Donut polygon cutout hole: Inside is 100% crystal-clear & unblurred, outside is deeply blurred
+            backdrop.style.clipPath = `polygon(
+                0px 0px,
+                100vw 0px,
+                100vw 100vh,
+                0px 100vh,
+                0px 0px,
+                ${left}px ${top}px,
+                ${left}px ${bottom}px,
+                ${right}px ${bottom}px,
+                ${right}px ${top}px,
+                ${left}px ${top}px
+            )`;
+        }
+
         function startFullWalkthrough() {
             closeAllTourPopups();
             const backdrop = document.getElementById('tourBackdrop');
@@ -1894,11 +1927,12 @@
             const targetY = scrollY + rect.top - (window.innerHeight * 0.48);
             window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
 
-            // 4. Reveal WhatsApp popup right above the box with beak pointing down
+            // 4. Reveal WhatsApp popup right above the box and cut out the unblurred hole!
             setTimeout(() => {
+                updateBackdropHole(waBox);
                 waPopup.classList.remove('hidden');
                 positionWhatsAppPopup();
-            }, 350);
+            }, 380);
         }
 
         function positionWhatsAppPopup() {
@@ -1928,8 +1962,9 @@
             aiSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
             setTimeout(() => {
-                // Highlight review section with golden aura
+                // Highlight review section with golden aura and cut out unblurred hole
                 aiSec.classList.add('tour-highlight-review', 'tour-pulse-review');
+                updateBackdropHole(aiSec);
 
                 // Reveal Review feature popup right above category grid or aiSection
                 if (revPopup) {
@@ -1964,6 +1999,7 @@
         function closeAllTourPopups() {
             currentTourStep = 0;
             clearTourHighlights();
+            updateBackdropHole(null);
             const backdrop = document.getElementById('tourBackdrop');
             const waPopup = document.getElementById('whatsappTourPopup');
             const revPopup = document.getElementById('reviewTourFeaturePopup');
@@ -2002,6 +2038,9 @@
             if (targetEl) {
                 targetEl.classList.add('tour-highlight', 'tour-pulse');
                 targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => {
+                    updateBackdropHole(targetEl);
+                }, 300);
             }
 
             const badge = document.getElementById('tourStepBadge');
@@ -2345,8 +2384,17 @@
                 regenerateReview(true);
             }
 
-            // Reposition active popups on window resize
+            // Keep spotlight hole & popups synchronized on scroll and resize
+            window.addEventListener('scroll', () => {
+                if (currentHighlightedEl) {
+                    updateBackdropHole(currentHighlightedEl);
+                }
+            }, { passive: true });
+
             window.addEventListener('resize', () => {
+                if (currentHighlightedEl) {
+                    updateBackdropHole(currentHighlightedEl);
+                }
                 const waPopup = document.getElementById('whatsappTourPopup');
                 if (waPopup && !waPopup.classList.contains('hidden')) {
                     positionWhatsAppPopup();
