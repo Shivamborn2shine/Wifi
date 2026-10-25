@@ -1307,8 +1307,8 @@
             </button>
         </div>
 
-        <!-- Downward Pointing Triangle Beak (Pointing directly to WhatsApp Box) -->
-        <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45 border-r border-b border-slate-100 shadow-sm pointer-events-none"></div>
+        <!-- Upward Pointing Triangle Beak (Pointing directly up to WhatsApp Box) -->
+        <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45 border-l border-t border-slate-100 shadow-sm pointer-events-none"></div>
     </div>
 
     <!-- 19B. REVIEW SELECTION GUIDE POPUP (Image 1: Choose What to Review & Language) -->
@@ -2307,13 +2307,13 @@
             // 2. Highlight WhatsApp box with glowing emerald aura
             waBox.classList.add('tour-highlight-whatsapp', 'tour-pulse-whatsapp');
 
-            // 3. Smoothly scroll directly to land on WhatsApp box (centering towards lower-middle)
+            // 3. Smoothly scroll directly to land on WhatsApp box (positioning near upper area so plenty of room below)
             const rect = waBox.getBoundingClientRect();
             const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-            const targetY = scrollY + rect.top - (window.innerHeight * 0.48);
+            const targetY = scrollY + rect.top - 44;
             window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
 
-            // 4. Reveal WhatsApp popup right above the box and cut out the unblurred hole!
+            // 4. Reveal WhatsApp popup right BELOW the box and cut out the unblurred hole!
             setTimeout(() => {
                 updateBackdropHole(waBox);
                 waPopup.classList.remove('hidden');
@@ -2327,8 +2327,8 @@
             if (!waBox || !waPopup) return;
 
             const rect = waBox.getBoundingClientRect();
-            const popupHeight = waPopup.offsetHeight || 260;
-            const topPos = Math.max(12, rect.top - popupHeight - 16);
+            // Position popup directly BELOW the WhatsApp box with sleek gap
+            const topPos = Math.round(rect.bottom + 14);
             waPopup.style.top = `${topPos}px`;
             waPopup.style.bottom = 'auto';
         }
