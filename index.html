@@ -193,6 +193,29 @@
             animation: fingerBounce 1.1s infinite ease-in-out;
         }
 
+        /* Floating Reviews Marquee (Right to Left) */
+        @keyframes reviewsFloatMarquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        .reviews-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: reviewsFloatMarquee 34s linear infinite;
+        }
+        .reviews-marquee-track:hover,
+        .reviews-marquee-track:active {
+            animation-play-state: paused;
+        }
+        .reviews-marquee-wrapper {
+            mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+        }
+
         /* Hide Netlify branding badge */
         #nl-badge-frame,
         iframe[title="Powered by Netlify"],
@@ -522,19 +545,8 @@
             </div>
 
             <!-- 8. PROMO SHOWCASE BANNER -->
-            <div class="mt-4.5 rounded-3xl overflow-hidden relative shadow-md group border border-slate-200">
-                <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="WIRELESS — Premium Accessories, Skins &amp; Wraps Collection" class="w-full h-40 object-cover filter brightness-85 group-hover:scale-105 transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent flex flex-col justify-end p-4">
-                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-300 bg-black/60 backdrop-blur-sm px-2.5 py-0.5 rounded-full w-fit border border-amber-400/40 shadow-xs flex items-center gap-1">
-                        <span>🔥</span> <span>Trending In Store</span>
-                    </span>
-                    <h3 class="text-base sm:text-lg font-black text-white mt-1.5 drop-shadow-md">Custom 3M Skins &amp; Hydrogel Wraps</h3>
-                    <p class="text-xs text-slate-200 font-medium leading-tight mt-0.5">Precision plotted &amp; applied for any smartphone model</p>
-                    <a href="https://wa.me/919837044095?text=Hi%20WIRELESS%2C%20I%20want%20to%20know%20about%20skins%20and%20wraps%20for%20my%20phone" target="_blank" class="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 text-xs font-extrabold w-fit shadow-md shadow-amber-400/30 transition-all">
-                        <span>Inquire on WhatsApp</span>
-                        <svg class="w-3.5 h-3.5 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </a>
-                </div>
+            <div class="mt-4.5 rounded-3xl overflow-hidden shadow-md group border border-slate-200/90 hover:border-amber-400/80 transition-all cursor-pointer bg-slate-950" onclick="window.open('https://wa.me/919837044095?text=Hi%20WIRELESS%2C%20I%20want%20to%20know%20more%20about%20your%20mobiles%2C%20accessories%20and%20repair%20services', '_blank')">
+                <img src="./assets/images/wireless/wireless-smart-devices-banner.jpg" alt="WIRELESS — Smart Devices, Brighter Days. Mobiles, accessories, repairs &amp; more" class="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500 block select-none">
             </div>
     
 
@@ -545,173 +557,324 @@
                         <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Why Choose WIRELESS</h3>
                         <p class="text-xs text-slate-500 font-medium mt-0.5">Dehradun's trusted smartphone hub</p>
                     </div>
-                    <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-amber-300 bg-amber-50 text-amber-800">Verified Quality</span>
+                    <span class="inline-flex items-center gap-1 text-[10.5px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-300/80 bg-emerald-50 text-emerald-800 shadow-2xs">
+                        <svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        <span>Verified Quality</span>
+                    </span>
                 </div>
-                <div class="grid grid-cols-2 gap-2.5">
+                <div class="grid grid-cols-2 gap-2 sm:gap-2.5">
                     
-        <div class="p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400/80 shadow-2xs hover:shadow-md transition-all group">
-            <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center text-lg mb-2 shadow-2xs group-hover:scale-110 transition-transform">
-                ⚡
-            </div>
-            <h4 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-tight group-hover:text-amber-800 transition-colors">30-60 Min Express Repair</h4>
-            <p class="text-[11px] sm:text-xs text-slate-500 font-normal mt-1 leading-relaxed">Screen, battery &amp; charging port fixes while you wait</p>
-        </div>
-    
-        <div class="p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400/80 shadow-2xs hover:shadow-md transition-all group">
-            <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center text-lg mb-2 shadow-2xs group-hover:scale-110 transition-transform">
-                🛡️
-            </div>
-            <h4 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-tight group-hover:text-amber-800 transition-colors">Zero-Bubble Guarantee</h4>
-            <p class="text-[11px] sm:text-xs text-slate-500 font-normal mt-1 leading-relaxed">Precision 3M skin &amp; hydrogel screen protector application</p>
-        </div>
-    
-        <div class="p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400/80 shadow-2xs hover:shadow-md transition-all group">
-            <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center text-lg mb-2 shadow-2xs group-hover:scale-110 transition-transform">
-                🔍
-            </div>
-            <h4 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-tight group-hover:text-amber-800 transition-colors">25-Point Verified Devices</h4>
-            <p class="text-[11px] sm:text-xs text-slate-500 font-normal mt-1 leading-relaxed">Tested 2nd hand phones with camera, display &amp; battery check</p>
-        </div>
-    
-        <div class="p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400/80 shadow-2xs hover:shadow-md transition-all group">
-            <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center text-lg mb-2 shadow-2xs group-hover:scale-110 transition-transform">
-                🏷️
-            </div>
-            <h4 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-tight group-hover:text-amber-800 transition-colors">Honest Fair Pricing</h4>
-            <p class="text-[11px] sm:text-xs text-slate-500 font-normal mt-1 leading-relaxed">Direct transparent quotes with zero hidden charges</p>
-        </div>
-    
-                </div>
-            </div>
-
-            <!-- 10. STORE GALLERY -->
-            <div class="mt-6 pt-5 border-t border-slate-100">
-                <div class="flex items-center justify-between mb-3">
-                    <div>
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Store Gallery</h3>
-                        <p class="text-xs text-slate-500 font-medium mt-0.5">Inside WIRELESS &amp; accessories</p>
+                    <!-- 1. Express Repair -->
+                    <div class="p-3 sm:p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-emerald-400/80 shadow-2xs hover:shadow-xs transition-all group">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200/80 text-emerald-600 flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 group-hover:bg-emerald-100/70 transition-all">
+                            <svg class="w-4 h-4 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                        <h4 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-tight group-hover:text-emerald-900 transition-colors">30-60 Min Repair</h4>
+                        <p class="text-[11px] text-slate-500 font-normal mt-0.5 leading-snug">Quick screen &amp; battery fixes while you wait</p>
                     </div>
-                    <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-amber-300 bg-amber-50 text-amber-800">4 Photos</span>
-                </div>
-                <div class="grid grid-cols-2 gap-2.5">
-                    
-        <div class="group relative rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all cursor-pointer bg-slate-100 aspect-square border border-slate-200 hover:border-amber-400"
-            onclick="openGalleryModal('./assets/images/wireless/wireless-storefront.jpg', 'WIRELESS Storefront', 'Our Store', 'The iconic WIRELESS signage on Post Office Road, Subhash Nagar — your one-stop mobile solution.')">
-            <img src="./assets/images/wireless/wireless-storefront.jpg" alt="WIRELESS Storefront" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex flex-col justify-end p-3">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded w-fit border border-amber-400/40">Our Store</span>
-                <h4 class="text-xs sm:text-[13px] font-bold text-white leading-tight mt-1 line-clamp-1">WIRELESS Storefront</h4>
-            </div>
-        </div>
-    
 
-        <div class="group relative rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all cursor-pointer bg-slate-100 aspect-square border border-slate-200 hover:border-amber-400"
-            onclick="openGalleryModal('./assets/images/wireless/wireless-accessories-display.jpg', 'Premium Accessories Wall', 'Skins &amp; Wraps', 'Huge collection of designer skins, wraps, cases and screen protectors for all phone models.')">
-            <img src="./assets/images/wireless/wireless-accessories-display.jpg" alt="Premium Accessories Wall" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex flex-col justify-end p-3">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded w-fit border border-amber-400/40">Skins &amp; Wraps</span>
-                <h4 class="text-xs sm:text-[13px] font-bold text-white leading-tight mt-1 line-clamp-1">Premium Accessories Wall</h4>
-            </div>
-        </div>
-    
+                    <!-- 2. Zero-Bubble Fit -->
+                    <div class="p-3 sm:p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-emerald-400/80 shadow-2xs hover:shadow-xs transition-all group">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200/80 text-emerald-600 flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 group-hover:bg-emerald-100/70 transition-all">
+                            <svg class="w-4 h-4 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <h4 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-tight group-hover:text-emerald-900 transition-colors">Zero-Bubble Fit</h4>
+                        <p class="text-[11px] text-slate-500 font-normal mt-0.5 leading-snug">Precision 3M skins &amp; hydrogel films</p>
+                    </div>
 
-        <div class="group relative rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all cursor-pointer bg-slate-100 aspect-square border border-slate-200 hover:border-amber-400"
-            onclick="openGalleryModal('./assets/images/wireless/wireless-interior-night.jpg', 'Inside WIRELESS', 'Store Interior', 'Well-organized interior with wide range of mobiles, accessories and expert service counters.')">
-            <img src="./assets/images/wireless/wireless-interior-night.jpg" alt="Inside WIRELESS" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex flex-col justify-end p-3">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded w-fit border border-amber-400/40">Store Interior</span>
-                <h4 class="text-xs sm:text-[13px] font-bold text-white leading-tight mt-1 line-clamp-1">Inside WIRELESS</h4>
-            </div>
-        </div>
-    
+                    <!-- 3. Verified Devices -->
+                    <div class="p-3 sm:p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-emerald-400/80 shadow-2xs hover:shadow-xs transition-all group">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200/80 text-emerald-600 flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 group-hover:bg-emerald-100/70 transition-all">
+                            <svg class="w-4 h-4 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                        </div>
+                        <h4 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-tight group-hover:text-emerald-900 transition-colors">Verified Devices</h4>
+                        <p class="text-[11px] text-slate-500 font-normal mt-0.5 leading-snug">25-point tested pre-owned phones</p>
+                    </div>
 
-        <div class="group relative rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all cursor-pointer bg-slate-100 aspect-square border border-slate-200 hover:border-amber-400"
-            onclick="openGalleryModal('./assets/images/wireless/wireless-grand-opening.jpg', 'Grand Opening Celebration', 'Inauguration', 'WIRELESS grand opening with festive decorations — a celebration of our commitment to quality service.')">
-            <img src="./assets/images/wireless/wireless-grand-opening.jpg" alt="Grand Opening Celebration" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex flex-col justify-end p-3">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded w-fit border border-amber-400/40">Inauguration</span>
-                <h4 class="text-xs sm:text-[13px] font-bold text-white leading-tight mt-1 line-clamp-1">Grand Opening Celebration</h4>
-            </div>
-        </div>
-    
+                    <!-- 4. Fair Pricing -->
+                    <div class="p-3 sm:p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-emerald-400/80 shadow-2xs hover:shadow-xs transition-all group">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200/80 text-emerald-600 flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 group-hover:bg-emerald-100/70 transition-all">
+                            <svg class="w-4 h-4 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+                        </div>
+                        <h4 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-tight group-hover:text-emerald-900 transition-colors">Honest Fair Pricing</h4>
+                        <p class="text-[11px] text-slate-500 font-normal mt-0.5 leading-snug">Direct quotes with zero hidden charges</p>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- 11. VERIFIED CUSTOMER TESTIMONIALS -->
+            <!-- 10. STORE GALLERY (Reconstructed Dynamic Slider & Flow) -->
             <div class="mt-6 pt-5 border-t border-slate-100">
+                <div class="p-4 sm:p-5 rounded-3xl bg-white border border-slate-200/90 shadow-sm relative overflow-hidden">
+                    <!-- Gallery Header -->
+                    <div class="flex items-center justify-between mb-3.5">
+                        <div>
+                            <h3 class="text-sm font-black uppercase tracking-wider text-slate-800">Store Gallery</h3>
+                            <p class="text-xs text-slate-500 font-medium mt-0.5">Inside WIRELESS &amp; accessories</p>
+                        </div>
+                        <span id="galleryCountBadge" class="text-[11px] font-bold px-3 py-1 rounded-full border border-amber-300 bg-amber-50/80 text-amber-800 shadow-2xs">
+                            5 Photos
+                        </span>
+                    </div>
+
+                    <!-- Horizontal Carousel Slider Track -->
+                    <div class="relative group/slider my-1">
+                        <div id="galleryCarouselTrack" class="flex gap-3 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-1 px-0.5">
+                            <!-- Cards dynamically rendered from STORE_GALLERY -->
+                        </div>
+
+                        <!-- Right Chevron Navigation Button -->
+                        <button type="button" id="galleryNextBtn" onclick="scrollGalleryTrack(1)" class="w-9 h-9 rounded-full bg-white text-slate-800 shadow-md border border-slate-200/90 flex items-center justify-center font-black text-sm cursor-pointer hover:bg-slate-50 active:scale-90 transition-all absolute right-1 top-1/2 -translate-y-1/2 z-10 hover:shadow-lg" aria-label="Next Photo">
+                            <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+
+                    <!-- Carousel Dots Indicator -->
+                    <div id="galleryDots" class="flex items-center justify-center gap-1.5 mt-2.5 mb-3">
+                        <!-- Dots dynamically rendered -->
+                    </div>
+
+                    <!-- View All {N} Photos Button -->
+                    <button type="button" onclick="openFullGalleryModal()" class="w-full py-3 px-4 rounded-2xl bg-[#FFFDF5] hover:bg-[#FFF9E6] border-2 border-amber-300/90 hover:border-amber-400 text-amber-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-2xs transition-all active:scale-[0.99] cursor-pointer">
+                        <svg class="w-4 h-4 text-amber-700 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                        <span id="galleryViewAllBtnText">View All 5 Photos</span>
+                        <span class="text-sm font-black">➔</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 11. LOCATION & HOURS (MAPS SECTION - Under Store Gallery) -->
+            <div class="mt-6 pt-5 border-t border-slate-100">
+                <div class="flex items-center justify-between mb-2.5">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Visit &amp; Connect</h3>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Subhash Nagar, Dehradun</span>
+                </div>
+                <div class="space-y-2 text-xs sm:text-[13px]">
+                    <div class="flex items-start gap-2.5 p-3 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
+                        <span class="text-amber-500 mt-0.5 text-base">🕒</span>
+                        <div>
+                            <span class="font-bold text-slate-900">Open Now • Closes 9:00 PM</span>
+                            <p class="text-xs text-slate-500 mt-0.5 font-normal">Monday - Sunday: 10:00 AM - 9:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2.5 p-3 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
+                        <span class="text-rose-500 mt-0.5 text-base">📍</span>
+                        <div>
+                            <span class="font-bold text-slate-900">Post Office Rd, Subhash Nagar, Dehradun</span>
+                            <p class="text-xs text-slate-500 mt-0.5 leading-relaxed font-normal">Post Office Rd, Subhash Nagar, Dehradun, Bharu Wala Grant, Uttarakhand 248002</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 rounded-2xl overflow-hidden border border-slate-200/90 h-44 shadow-sm">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.0!2d77.9959916!3d30.2705399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b9bd1c976e3%3A0xb7592782f92e75dd!2sWIRELESS!5e0!3m2!1sen!2sin!4v1697900000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+
+                <a href="https://www.google.com/maps?cid=13211634425347864029" target="_blank" class="w-full mt-3 py-3 px-4 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md">
+                    <span>Open in Google Maps</span>
+                    <svg class="w-3.5 h-3.5 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+            </div>
+
+            <!-- 12. VERIFIED CUSTOMER REVIEWS (Floating Right to Left Row) -->
+            <div class="mt-6 pt-5 border-t border-slate-100 overflow-hidden">
                 <div class="flex items-center justify-between mb-3">
                     <div>
                         <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">What Customers Say</h3>
-                        <p class="text-xs text-slate-500 font-medium mt-0.5">Real reviews from Google Maps</p>
+                        <p class="text-xs text-slate-500 font-medium mt-0.5">Real verified reviews from Google Maps</p>
                     </div>
-                    <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-800">5.0 ★ Rating</span>
+                    <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-800 shadow-2xs">5.0 ★ Rating</span>
                 </div>
-                <div class="space-y-3">
-                    
-        <div class="p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-300 shadow-2xs hover:shadow-xs transition-all">
-            <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
-                        R
+
+                <!-- Floating Reviews Ticker Track -->
+                <div class="reviews-marquee-wrapper overflow-hidden py-1 relative">
+                    <div class="reviews-marquee-track flex gap-3.5">
+                        <!-- Set 1 -->
+                        <div class="w-[280px] sm:w-[310px] flex-shrink-0 p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
+                                            R
+                                        </div>
+                                        <div>
+                                            <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Rahul Sharma</h5>
+                                            <span class="text-[11px] font-medium text-slate-500">Subhash Nagar</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-amber-400 text-xs">★★★★★</div>
+                                </div>
+                                <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Got my iPhone display replaced in just 45 minutes at WIRELESS. Original display quality, touch response is super smooth, and the cost was very reasonable!"</p>
+                            </div>
+                            <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
+                                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Verified Local Guide</span>
+                            </div>
+                        </div>
+
+                        <div class="w-[280px] sm:w-[310px] flex-shrink-0 p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
+                                            A
+                                        </div>
+                                        <div>
+                                            <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Amit Negi</h5>
+                                            <span class="text-[11px] font-medium text-slate-500">Dehradun</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-amber-400 text-xs">★★★★★</div>
+                                </div>
+                                <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Flawless carbon-fiber skin application on my OnePlus. Zero air bubbles and perfect camera cutout. Massive collection of covers and tempered glass!"</p>
+                            </div>
+                            <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
+                                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Verified Customer</span>
+                            </div>
+                        </div>
+
+                        <div class="w-[280px] sm:w-[310px] flex-shrink-0 p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
+                                            P
+                                        </div>
+                                        <div>
+                                            <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Priya Verma</h5>
+                                            <span class="text-[11px] font-medium text-slate-500">Dehradun</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-amber-400 text-xs">★★★★★</div>
+                                </div>
+                                <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Bought a verified 2nd hand Samsung phone here. Mint condition, 95% battery health, and honest guidance by the staff. Truly trustworthy shop!"</p>
+                            </div>
+                            <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
+                                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Verified Customer</span>
+                            </div>
+                        </div>
+
+                        <div class="w-[280px] sm:w-[310px] flex-shrink-0 p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
+                                            R
+                                        </div>
+                                        <div>
+                                            <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Rohan Rawat</h5>
+                                            <span class="text-[11px] font-medium text-slate-500">Dehradun</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-amber-400 text-xs">★★★★★</div>
+                                </div>
+                                <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Best phone accessories and skins collection in Subhash Nagar. Genuine fast chargers, drop-proof cases, and extremely polite behavior!"</p>
+                            </div>
+                            <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
+                                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Verified Customer</span>
+                            </div>
+                        </div>
+
+                        <!-- Set 2 (Identical for seamless continuous infinite floating loop) -->
+                        <div class="w-[280px] sm:w-[310px] flex-shrink-0 p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between" aria-hidden="true">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
+                                            R
+                                        </div>
+                                        <div>
+                                            <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Rahul Sharma</h5>
+                                            <span class="text-[11px] font-medium text-slate-500">Subhash Nagar</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-amber-400 text-xs">★★★★★</div>
+                                </div>
+                                <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Got my iPhone display replaced in just 45 minutes at WIRELESS. Original display quality, touch response is super smooth, and the cost was very reasonable!"</p>
+                            </div>
+                            <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
+                                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Verified Local Guide</span>
+                            </div>
+                        </div>
+
+                        <div class="w-[280px] sm:w-[310px] flex-shrink-0 p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between" aria-hidden="true">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
+                                            A
+                                        </div>
+                                        <div>
+                                            <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Amit Negi</h5>
+                                            <span class="text-[11px] font-medium text-slate-500">Dehradun</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-amber-400 text-xs">★★★★★</div>
+                                </div>
+                                <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Flawless carbon-fiber skin application on my OnePlus. Zero air bubbles and perfect camera cutout. Massive collection of covers and tempered glass!"</p>
+                            </div>
+                            <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
+                                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Verified Customer</span>
+                            </div>
+                        </div>
+
+                        <div class="w-[280px] sm:w-[310px] flex-shrink-0 p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between" aria-hidden="true">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
+                                            P
+                                        </div>
+                                        <div>
+                                            <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Priya Verma</h5>
+                                            <span class="text-[11px] font-medium text-slate-500">Dehradun</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-amber-400 text-xs">★★★★★</div>
+                                </div>
+                                <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Bought a verified 2nd hand Samsung phone here. Mint condition, 95% battery health, and honest guidance by the staff. Truly trustworthy shop!"</p>
+                            </div>
+                            <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
+                                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Verified Customer</span>
+                            </div>
+                        </div>
+
+                        <div class="w-[280px] sm:w-[310px] flex-shrink-0 p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between" aria-hidden="true">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
+                                            R
+                                        </div>
+                                        <div>
+                                            <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Rohan Rawat</h5>
+                                            <span class="text-[11px] font-medium text-slate-500">Dehradun</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-amber-400 text-xs">★★★★★</div>
+                                </div>
+                                <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Best phone accessories and skins collection in Subhash Nagar. Genuine fast chargers, drop-proof cases, and extremely polite behavior!"</p>
+                            </div>
+                            <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
+                                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span>Verified Customer</span>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Rahul Sharma</h5>
-                        <span class="text-[11px] font-medium text-slate-500">Subhash Nagar, Dehradun</span>
-                    </div>
-                </div>
-                <div class="flex text-amber-400 text-xs">★★★★★</div>
-            </div>
-            <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Got my iPhone display replaced in just 45 minutes at WIRELESS. Original display quality, touch response is super smooth, and the cost was very reasonable!"</p>
-            <div class="mt-2.5 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
-                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                <span>Verified Local Guide</span>
-            </div>
-        </div>
-    
-        <div class="p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-300 shadow-2xs hover:shadow-xs transition-all">
-            <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
-                        A
-                    </div>
-                    <div>
-                        <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Amit Negi</h5>
-                        <span class="text-[11px] font-medium text-slate-500">Dehradun</span>
-                    </div>
-                </div>
-                <div class="flex text-amber-400 text-xs">★★★★★</div>
-            </div>
-            <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Flawless carbon-fiber skin application on my OnePlus. Zero air bubbles and perfect camera cutout. Massive collection of covers and tempered glass!"</p>
-            <div class="mt-2.5 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
-                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                <span>Verified Customer</span>
-            </div>
-        </div>
-    
-        <div class="p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-300 shadow-2xs hover:shadow-xs transition-all">
-            <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-xs">
-                        P
-                    </div>
-                    <div>
-                        <h5 class="text-xs sm:text-[13px] font-bold text-slate-900 leading-none">Priya Verma</h5>
-                        <span class="text-[11px] font-medium text-slate-500">Dehradun</span>
-                    </div>
-                </div>
-                <div class="flex text-amber-400 text-xs">★★★★★</div>
-            </div>
-            <p class="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed italic">"Bought a verified 2nd hand Samsung phone here. Mint condition, 95% battery health, and honest guidance by the staff. Truly trustworthy shop!"</p>
-            <div class="mt-2.5 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700">
-                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                <span>Verified Customer</span>
-            </div>
-        </div>
-    
                 </div>
             </div>
 
-            <!-- 12. FAQ ACCORDION -->
+            <!-- 13. FAQ ACCORDION (Shifted to Bottom) -->
             <div class="mt-6 pt-5 border-t border-slate-100">
                 <div class="flex items-center justify-between mb-3">
                     <div>
@@ -762,36 +925,6 @@
         </div>
     
                 </div>
-            </div>
-
-            <!-- 13. LOCATION & HOURS -->
-            <div class="mt-6 pt-5 border-t border-slate-100">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">Visit &amp; Connect</h3>
-                <div class="space-y-2 text-xs sm:text-[13px]">
-                    <div class="flex items-start gap-2.5 p-3 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
-                        <span class="text-amber-500 mt-0.5 text-base">🕒</span>
-                        <div>
-                            <span class="font-bold text-slate-900">Open Now • Closes 9:00 PM</span>
-                            <p class="text-xs text-slate-500 mt-0.5 font-normal">Monday - Sunday: 10:00 AM - 9:00 PM</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-2.5 p-3 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
-                        <span class="text-rose-500 mt-0.5 text-base">📍</span>
-                        <div>
-                            <span class="font-bold text-slate-900">Post Office Rd, Subhash Nagar, Dehradun</span>
-                            <p class="text-xs text-slate-500 mt-0.5 leading-relaxed font-normal">Post Office Rd, Subhash Nagar, Dehradun, Bharu Wala Grant, Uttarakhand 248002</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-3 rounded-2xl overflow-hidden border border-slate-200/90 h-44 shadow-sm">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.0!2d77.9959916!3d30.2705399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b9bd1c976e3%3A0xb7592782f92e75dd!2sWIRELESS!5e0!3m2!1sen!2sin!4v1697900000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-
-                <a href="https://www.google.com/maps?cid=13211634425347864029" target="_blank" class="w-full mt-3 py-3 px-4 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md">
-                    <span>Open in Google Maps</span>
-                    <svg class="w-3.5 h-3.5 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                </a>
             </div>
 
             <!-- FOOTER -->
@@ -951,16 +1084,50 @@
         </div>
     </div>
 
-    <!-- 16. GALLERY LIGHTBOX MODAL -->
-    <div id="galleryModal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4" onclick="closeGalleryModal()">
-        <div class="max-w-sm w-full bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200" onclick="event.stopPropagation()">
-            <div class="relative aspect-square bg-slate-100">
-                <img id="galleryModalImg" src="" alt="" class="w-full h-full object-cover">
-                <button type="button" onclick="closeGalleryModal()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center text-sm font-bold">✕</button>
+    <!-- 16A. FULL STORE GALLERY MODAL (Exact Matching Flow from User Attachment) -->
+    <div id="fullGalleryModal" class="fixed inset-0 z-[105] hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 overflow-y-auto" onclick="closeFullGalleryModal()">
+        <div class="max-w-md w-full bg-[#111622] rounded-[36px] overflow-hidden shadow-2xl border border-slate-800 text-white flex flex-col max-h-[92vh] my-auto" onclick="event.stopPropagation()">
+            <!-- Top App Bar -->
+            <div class="p-4 flex items-center justify-between border-b border-slate-800/80 bg-[#111622]/95 sticky top-0 z-20 backdrop-blur-sm">
+                <!-- Close Button (Left) -->
+                <button type="button" onclick="closeFullGalleryModal()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm font-bold transition-all cursor-pointer" aria-label="Close">
+                    ✕
+                </button>
+                <!-- Center Header -->
+                <div class="text-center">
+                    <h3 class="text-sm sm:text-base font-black text-white tracking-tight">Store Gallery</h3>
+                    <p id="fullGallerySubtitle" class="text-[11px] text-slate-400 font-medium">5 Photos • WIRELESS</p>
+                </div>
+                <!-- Right Empty Spacer for symmetry -->
+                <div class="w-9"></div>
+            </div>
+
+            <!-- 2-Column Responsive Grid -->
+            <div id="fullGalleryGrid" class="grid grid-cols-2 gap-3 p-4 overflow-y-auto flex-1">
+                <!-- Injected dynamically from STORE_GALLERY -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 16B. HIGH-RES SINGLE PHOTO LIGHTBOX MODAL -->
+    <div id="galleryModal" class="fixed inset-0 z-[110] hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-4" onclick="closeGalleryModal()">
+        <div class="max-w-md w-full bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200" onclick="event.stopPropagation()">
+            <div class="relative aspect-[4/3] sm:aspect-square bg-slate-950 flex items-center justify-center">
+                <img id="galleryModalImg" src="" alt="" class="w-full h-full object-contain">
+                <!-- Top Actions Bar -->
+                <div class="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none">
+                    <span id="galleryModalCounter" class="px-2.5 py-1 rounded-full bg-black/60 text-white text-[11px] font-bold backdrop-blur-sm border border-white/10 pointer-events-auto shadow-xs">
+                        1 of 4
+                    </span>
+                    <button type="button" onclick="closeGalleryModal()" class="w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center text-sm font-bold transition-all pointer-events-auto cursor-pointer">✕</button>
+                </div>
+                <!-- Prev / Next Navigation Arrows -->
+                <button type="button" onclick="prevLightboxPhoto()" class="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-base font-bold transition-all cursor-pointer">‹</button>
+                <button type="button" onclick="nextLightboxPhoto()" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-base font-bold transition-all cursor-pointer">›</button>
             </div>
             <div class="p-4">
-                <span id="galleryModalBadge" class="text-[10px] font-black uppercase tracking-wider text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200"></span>
-                <h4 id="galleryModalTitle" class="text-sm font-bold text-slate-900 mt-1.5"></h4>
+                <span id="galleryModalBadge" class="text-[10px] font-black uppercase tracking-wider text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200"></span>
+                <h4 id="galleryModalTitle" class="text-sm sm:text-base font-bold text-slate-900 mt-1.5"></h4>
                 <p id="galleryModalDesc" class="text-xs text-slate-600 mt-1 leading-relaxed"></p>
             </div>
         </div>
@@ -1326,67 +1493,10 @@
                 </div>
             </div>
 
-            <!-- Big Final CTA Button: "Make Your Review Count" -->
-            <div class="relative w-full mt-3 group">
-                <!-- Pink Sparkle Accents on Top-Right -->
-                <svg class="absolute -top-2.5 -right-1 sm:-top-3 sm:-right-1.5 w-6 sm:w-7 h-6 sm:h-7 text-[#FF3E9E] pointer-events-none drop-shadow-xs z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                    <line x1="6" y1="18" x2="2" y2="22" />
-                    <line x1="12" y1="13" x2="19" y2="6" />
-                    <line x1="14" y1="19" x2="22" y2="18" />
-                </svg>
-
-                <button type="button" onclick="confirmOpenGoogleMaps()" class="w-full relative py-2 sm:py-2.5 px-3 sm:px-4 rounded-full bg-gradient-to-r from-[#8026F7] via-[#9E39F6] to-[#E93B9D] hover:from-[#751ee8] hover:to-[#df2e91] text-white shadow-[0_12px_32px_-4px_rgba(157,68,248,0.55)] hover:shadow-[0_16px_36px_-2px_rgba(157,68,248,0.7)] border border-white/25 transition-all duration-200 flex items-center justify-between gap-2.5 sm:gap-3 hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
-                    <!-- Left Section: Burst Sparkles + White Google G Circle + Text -->
-                    <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
-                        <!-- Google Logo in White Circle with Left Sparkles -->
-                        <div class="relative flex-shrink-0">
-                            <!-- Radiant White Sparkles on Left -->
-                            <svg class="absolute -left-2.5 sm:-left-3 top-1/2 -translate-y-1/2 w-4 sm:w-5 h-8 sm:h-9 text-white/90 pointer-events-none drop-shadow-xs" viewBox="0 0 16 28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                                <line x1="13" y1="5" x2="3" y2="2" />
-                                <line x1="12" y1="14" x2="2" y2="14" />
-                                <line x1="13" y1="23" x2="3" y2="26" />
-                            </svg>
-                            <!-- Circle Badge -->
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white flex items-center justify-center shadow-md shadow-purple-950/20">
-                                <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24">
-                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <!-- Button Text -->
-                        <div class="text-left min-w-0">
-                            <h4 class="text-white font-black text-[12px] sm:text-[14px] md:text-[15px] tracking-tight leading-tight drop-shadow-xs whitespace-nowrap">
-                                Make Your Review Count
-                            </h4>
-                            <p class="text-white/85 text-[9.5px] sm:text-[11px] md:text-[12px] font-medium leading-snug tracking-tight whitespace-nowrap">
-                                Open Google and share your experience
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Right Section: Arrow + "1 Last Step" Frosted Badge -->
-                    <div class="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
-                        <!-- Arrow Icon -->
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                            <path d="M5 12h14M13 5l7 7-7 7"/>
-                        </svg>
-
-                        <!-- "1 Last Step" Pill -->
-                        <div class="bg-white/20 backdrop-blur-md border border-white/25 rounded-full py-1 sm:py-1.5 px-2.5 sm:px-3.5 flex items-center gap-1.5 shadow-xs">
-                            <span class="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#6D28D9] text-white font-black text-[9.5px] sm:text-[11px] flex items-center justify-center shadow-xs flex-shrink-0">
-                                1
-                            </span>
-                            <span class="text-white font-black text-[10.5px] sm:text-xs tracking-tight whitespace-nowrap">
-                                Last Step
-                            </span>
-                        </div>
-                    </div>
-                </button>
-            </div>
+            <!-- Big Final CTA Button: Exactly as Attached -->
+            <button type="button" onclick="confirmOpenGoogleMaps()" class="w-full mt-2.5 block transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer focus:outline-none drop-shadow-[0_12px_28px_rgba(217,70,239,0.45)]">
+                <img src="./assets/images/wireless/google-review-cta-btn.png" alt="Make Your Review Count - Last Step" class="w-full h-auto object-contain block mx-auto select-none pointer-events-none">
+            </button>
             <p class="text-center text-[10.5px] sm:text-[11px] text-slate-500 font-semibold mt-2.5">
                 Thank you for supporting WIRELESS, Subhash Nagar! ❤️
             </p>
@@ -2578,20 +2688,205 @@
             });
         }
 
-        function openGalleryModal(img, title, badge, desc) {
-            document.getElementById('galleryModalImg').src = img;
-            document.getElementById('galleryModalTitle').textContent = title;
-            document.getElementById('galleryModalBadge').textContent = badge;
-            document.getElementById('galleryModalDesc').textContent = desc;
-            document.getElementById('galleryModal').classList.remove('hidden');
+        // ==========================================
+        // DYNAMIC STORE GALLERY CONFIGURATION & RUNTIME
+        // (Easily add or modify photos here in the future!)
+        // ==========================================
+        const STORE_GALLERY = [
+            {
+                id: 1,
+                title: "Storefront",
+                tag: "OUR STORE",
+                desc: "Iconic illuminated WIRELESS storefront on Post Office Road, Subhash Nagar — your one-stop mobile solution.",
+                image: "./assets/images/gallery/store-front-night.jpg"
+            },
+            {
+                id: 2,
+                title: "Phones & Audio",
+                tag: "APPLE & ANDROID",
+                desc: "Official showcase of iPhones, OnePlus & Samsung models on display alongside premium audio accessories.",
+                image: "./assets/images/gallery/brand-phones-display.jpg"
+            },
+            {
+                id: 3,
+                title: "3M Skins & Wraps",
+                tag: "SKINS & WRAPS",
+                desc: "Massive collection of designer vinyl rolls and embossed hydrogel wraps for all smartphone models.",
+                image: "./assets/images/gallery/custom-skins-rolls.jpg"
+            },
+            {
+                id: 4,
+                title: "Designer Covers",
+                tag: "ACCESSORIES",
+                desc: "Extensive showcase of embossed protective skins, luxury cases, and precision camera glass protectors.",
+                image: "./assets/images/gallery/cases-skins-board.jpg"
+            },
+            {
+                id: 5,
+                title: "Service & Lamination",
+                tag: "STORE INTERIOR",
+                desc: "Precision hydrogel plotting machine, quick service desk, and instant gadget customization station.",
+                image: "./assets/images/gallery/service-counter-interior.jpg"
+            }
+        ];
+
+        let currentLightboxIndex = 0;
+
+        function renderStoreGallery() {
+            const track = document.getElementById('galleryCarouselTrack');
+            const dots = document.getElementById('galleryDots');
+            const countBadge = document.getElementById('galleryCountBadge');
+            const viewAllBtnText = document.getElementById('galleryViewAllBtnText');
+
+            if (countBadge) countBadge.textContent = `${STORE_GALLERY.length} Photos`;
+            if (viewAllBtnText) viewAllBtnText.textContent = `View All ${STORE_GALLERY.length} Photos`;
+
+            if (track) {
+                track.innerHTML = STORE_GALLERY.map((item, idx) => `
+                    <div onclick="openPhotoLightbox(${idx})" class="gallery-card w-[140px] sm:w-[155px] flex-shrink-0 aspect-[4/5] rounded-2xl overflow-hidden relative shadow-sm border ${idx === 0 ? 'border-2 border-amber-400 ring-2 ring-amber-400/20 shadow-md' : 'border border-slate-200/90'} snap-start cursor-pointer group bg-slate-900 transition-all hover:scale-[1.02]">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-2.5 sm:p-3 flex flex-col justify-end">
+                            <span class="text-[8.5px] sm:text-[9px] font-black uppercase tracking-wider text-amber-400 bg-black/75 px-2 py-0.5 rounded-md border border-amber-400/60 w-fit mb-1 shadow-2xs">
+                                ${item.tag}
+                            </span>
+                            <h4 class="text-xs sm:text-[13px] font-bold text-white leading-tight drop-shadow-xs line-clamp-1">
+                                ${item.title}
+                            </h4>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            if (dots) {
+                dots.innerHTML = STORE_GALLERY.map((_, idx) => `
+                    <button type="button" onclick="scrollGalleryToIndex(${idx})" class="gallery-dot transition-all duration-300 ${idx === 0 ? 'w-5 h-1.5 rounded-full bg-amber-400' : 'w-1.5 h-1.5 rounded-full bg-slate-300 hover:bg-slate-400'}" aria-label="Go to slide ${idx + 1}"></button>
+                `).join('');
+            }
+
+            renderFullGalleryModal();
+        }
+
+        function renderFullGalleryModal() {
+            const grid = document.getElementById('fullGalleryGrid');
+            const subtitle = document.getElementById('fullGallerySubtitle');
+            if (subtitle) subtitle.textContent = `${STORE_GALLERY.length} Photos • WIRELESS`;
+
+            if (grid) {
+                grid.innerHTML = STORE_GALLERY.map((item, idx) => `
+                    <div onclick="openPhotoLightbox(${idx})" class="group relative rounded-2xl overflow-hidden aspect-[4/5] bg-slate-900 border border-slate-800/80 shadow-md cursor-pointer hover:border-amber-400/80 transition-all">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent p-3 flex items-end justify-between pointer-events-none">
+                            <h4 class="text-xs sm:text-[13px] font-bold text-white drop-shadow-md leading-tight line-clamp-1">${item.title}</h4>
+                            <span class="px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 text-[10px] font-black text-white/90 shadow-2xs flex-shrink-0">${idx + 1}/${STORE_GALLERY.length}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function scrollGalleryTrack(direction) {
+            const track = document.getElementById('galleryCarouselTrack');
+            if (!track) return;
+            const scrollAmount = 160;
+            track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        function scrollGalleryToIndex(index) {
+            const track = document.getElementById('galleryCarouselTrack');
+            if (!track) return;
+            const cards = track.querySelectorAll('.gallery-card');
+            if (cards[index]) {
+                cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            }
+            updateActiveGalleryDot(index);
+        }
+
+        function updateActiveGalleryDot(activeIdx) {
+            const dots = document.querySelectorAll('.gallery-dot');
+            dots.forEach((dot, idx) => {
+                if (idx === activeIdx) {
+                    dot.className = 'gallery-dot transition-all duration-300 w-5 h-1.5 rounded-full bg-amber-400';
+                } else {
+                    dot.className = 'gallery-dot transition-all duration-300 w-1.5 h-1.5 rounded-full bg-slate-300 hover:bg-slate-400';
+                }
+            });
+        }
+
+        function openFullGalleryModal() {
+            const modal = document.getElementById('fullGalleryModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeFullGalleryModal() {
+            const modal = document.getElementById('fullGalleryModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function openPhotoLightbox(index) {
+            currentLightboxIndex = index;
+            const item = STORE_GALLERY[index];
+            if (!item) return;
+
+            document.getElementById('galleryModalImg').src = item.image;
+            document.getElementById('galleryModalTitle').textContent = item.title;
+            document.getElementById('galleryModalBadge').textContent = item.tag;
+            document.getElementById('galleryModalDesc').textContent = item.desc;
+            const counter = document.getElementById('galleryModalCounter');
+            if (counter) counter.textContent = `${index + 1} of ${STORE_GALLERY.length}`;
+
+            const modal = document.getElementById('galleryModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
         }
 
         function closeGalleryModal() {
-            document.getElementById('galleryModal').classList.add('hidden');
+            const modal = document.getElementById('galleryModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function prevLightboxPhoto() {
+            if (currentLightboxIndex > 0) {
+                openPhotoLightbox(currentLightboxIndex - 1);
+            } else {
+                openPhotoLightbox(STORE_GALLERY.length - 1);
+            }
+        }
+
+        function nextLightboxPhoto() {
+            if (currentLightboxIndex < STORE_GALLERY.length - 1) {
+                openPhotoLightbox(currentLightboxIndex + 1);
+            } else {
+                openPhotoLightbox(0);
+            }
         }
 
         // Init on load with IntersectionObserver for review typing animation
         window.addEventListener('DOMContentLoaded', () => {
+            // Initialize dynamic store gallery
+            renderStoreGallery();
+            const galleryTrack = document.getElementById('galleryCarouselTrack');
+            if (galleryTrack) {
+                galleryTrack.addEventListener('scroll', () => {
+                    const scrollLeft = galleryTrack.scrollLeft;
+                    const cardWidth = 155 + 12;
+                    const activeIdx = Math.round(scrollLeft / cardWidth);
+                    updateActiveGalleryDot(Math.min(activeIdx, STORE_GALLERY.length - 1));
+                }, { passive: true });
+            }
+
             const ta = document.getElementById('aiReviewOutput');
             if (ta) {
                 ta.addEventListener('input', () => {
