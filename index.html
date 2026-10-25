@@ -2019,10 +2019,10 @@
 
             backdrop.classList.remove('hidden');
 
-            // Smooth scroll centering the selection section with headroom above
+            // Smooth scroll centering the selection section with headroom above (matching user screenshot)
             const rect = selSec.getBoundingClientRect();
             const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-            const targetY = scrollY + rect.top - 180;
+            const targetY = scrollY + rect.top - 36;
             window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
 
             setTimeout(() => {
@@ -2059,7 +2059,7 @@
             // Smooth scroll centering the review output card with headroom above
             const rect = outputCard.getBoundingClientRect();
             const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-            const targetY = scrollY + rect.top - 190;
+            const targetY = scrollY + rect.top - 80;
             window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
 
             setTimeout(() => {
