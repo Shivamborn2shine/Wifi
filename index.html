@@ -216,6 +216,82 @@
             -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
         }
 
+        /* Hero Google Review Badge Pop-in & Pulse */
+        @keyframes heroBadgePopIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.2);
+            }
+            60% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.12);
+            }
+            80% {
+                transform: translate(-50%, -50%) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        @keyframes heroBadgeGlowPulse {
+            0%, 100% {
+                filter: drop-shadow(0 8px 22px rgba(245, 158, 11, 0.45));
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 14px 34px rgba(245, 158, 11, 0.85));
+                transform: translate(-50%, -50%) scale(1.03);
+            }
+        }
+        @keyframes heroBadgeFloatPulse {
+            0%, 100% {
+                filter: drop-shadow(0 8px 22px rgba(245, 158, 11, 0.75));
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 14px 32px rgba(245, 158, 11, 0.95));
+                transform: translateX(-50%) scale(1.04);
+            }
+        }
+        .hero-badge-hidden {
+            opacity: 0 !important;
+            transform: translate(-50%, -50%) scale(0.2) !important;
+            pointer-events: none !important;
+        }
+        .hero-badge-animate {
+            animation: heroBadgePopIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+            pointer-events: auto !important;
+        }
+        .hero-badge-idle-glow {
+            animation: heroBadgeGlowPulse 2.4s ease-in-out infinite !important;
+        }
+        .hero-badge-floating {
+            position: fixed !important;
+            top: auto !important;
+            bottom: max(4.85rem, calc(4.6rem + env(safe-area-inset-bottom, 0px))) !important;
+            left: 50% !important;
+            width: 142px !important;
+            max-width: 44vw !important;
+            z-index: 45 !important;
+            animation: heroBadgeFloatPulse 2.2s ease-in-out infinite !important;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), bottom 0.3s ease, opacity 0.3s ease !important;
+            cursor: pointer !important;
+            pointer-events: auto !important;
+        }
+        .hero-badge-floating:hover {
+            animation-play-state: paused !important;
+            transform: translateX(-50%) scale(1.08) !important;
+        }
+        .hero-badge-floating:active {
+            transform: translateX(-50%) scale(0.94) !important;
+        }
+        .hero-badge-dismissed {
+            display: none !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
         /* Hide Netlify branding badge */
         #nl-badge-frame,
         iframe[title="Powered by Netlify"],
@@ -232,14 +308,16 @@
     <div id="appContainer" class="max-w-md mx-auto relative min-h-screen bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)] border-x border-slate-200/80">
 
         <!-- 1. EXACT HERO HEADER & PROFILE (From User Design Mockup) -->
-        <header class="relative w-full overflow-hidden bg-white select-none">
+        <header class="relative w-full overflow-visible bg-white select-none">
             <img src="./assets/images/wireless/exact-top-ui.png?v=2" alt="WIRELESS — Mobiles, Repairs &amp; Accessories" class="w-full h-auto block">
             
             <!-- Clickable Phone Call Overlay over the 9837044095 pill -->
             <a href="tel:919837044095" class="absolute top-[1.3%] right-[15%] w-[23%] h-[7%] rounded-full cursor-pointer z-20" title="Call WIRELESS at 9837044095" aria-label="Call 9837044095"></a>
 
-            <!-- Clickable Profile Avatar Overlay to open service selector -->
-            <button type="button" onclick="openWelcomeModal()" class="absolute top-[62%] left-[36%] w-[28%] h-[30%] rounded-full cursor-pointer z-20" title="Select Service" aria-label="Select Service"></button>
+            <!-- Google Review Hero Floating Badge Button (Exact User Mockup Reference) -->
+            <button id="heroGoogleReviewBtn" type="button" onclick="startGuidedReviewFromHero()" class="hero-badge-hidden absolute top-[78%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[46%] max-w-[205px] z-30 cursor-pointer focus:outline-none transition-transform duration-300 hover:scale-105 active:scale-95 group" title="Give Review on Google" aria-label="Give Review on Google">
+                <img src="./assets/images/wireless/google-review-badge.png" alt="Give Review on Google" class="w-full h-auto block select-none">
+            </button>
 
             <!-- Accessible hidden H1 for SEO and screen readers -->
             <h1 class="sr-only">WIRELESS — Mobiles, Repairs &amp; Accessories</h1>
@@ -1145,7 +1223,7 @@
     <!-- 19A. WHATSAPP GUIDED POPUP (Exact 100% replica of user attached screenshot) -->
     <div id="whatsappTourPopup" class="fixed z-[99] hidden max-w-sm w-[92%] left-1/2 -translate-x-1/2 bg-white rounded-3xl p-5 shadow-[0_25px_60px_rgba(0,0,0,0.38)] border border-slate-100 text-slate-900 transition-all duration-300">
         <!-- Close button (Circle X on top right) -->
-        <button type="button" onclick="goToReviewTourStep()" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-700 font-bold flex items-center justify-center text-xs transition-all cursor-pointer" aria-label="Close">
+        <button type="button" onclick="closeAllTourPopups()" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-slate-700 font-bold flex items-center justify-center text-xs transition-all cursor-pointer" aria-label="Close">
             ✕
         </button>
 
@@ -1239,7 +1317,7 @@
         <!-- Top Mini Step Indicator -->
         <div class="flex items-center gap-2 mb-2 pr-6">
             <span class="inline-block px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-black uppercase tracking-wider">
-                Step 2 of 3 • Review Setup
+                Step 1 of 2 • Review Setup
             </span>
         </div>
 
@@ -1287,7 +1365,7 @@
         <div class="flex items-start justify-between gap-3 pr-8">
             <div class="flex-1 min-w-0">
                 <span class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-black uppercase tracking-wider mb-1.5">
-                    Step 3 of 3 • Ready to Post
+                    Step 2 of 2 • Ready to Post
                 </span>
                 <h3 class="text-base sm:text-lg font-black text-[#0B1A30] leading-tight">
                     Your Review Is Ready! ✨
@@ -2150,6 +2228,49 @@
            FULL FEATURE WALKTHROUGH FLOW (WhatsApp -> Share Review)
            ======================================================== */
         let currentHighlightedEl = null;
+        let isHeroReviewBtnTapped = false;
+        let hasTriggeredWhatsAppScrollGuide = false;
+
+        function updateHeroReviewButtonFloating() {
+            if (isHeroReviewBtnTapped) return;
+            const heroBtn = document.getElementById('heroGoogleReviewBtn');
+            if (!heroBtn || heroBtn.classList.contains('hero-badge-hidden')) return;
+
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            // Float just above the bottom of the screen once scrolled past header (> 150px)
+            if (scrollY > 150) {
+                if (!heroBtn.classList.contains('hero-badge-floating')) {
+                    heroBtn.classList.add('hero-badge-floating');
+                }
+            } else {
+                if (heroBtn.classList.contains('hero-badge-floating')) {
+                    heroBtn.classList.remove('hero-badge-floating');
+                }
+            }
+        }
+
+        function checkWhatsAppScrollTrigger() {
+            if (hasTriggeredWhatsAppScrollGuide || isHeroReviewBtnTapped) return;
+            const waBox = document.getElementById('whatsAppInquiryBox');
+            if (!waBox) return;
+
+            // Do not interrupt if any review tour modal is already active
+            const selPopup = document.getElementById('reviewSelectGuidePopup');
+            const submitPopup = document.getElementById('reviewSubmitGuidePopup');
+            const waPopup = document.getElementById('whatsappTourPopup');
+            if ((selPopup && !selPopup.classList.contains('hidden')) ||
+                (submitPopup && !submitPopup.classList.contains('hidden')) ||
+                (waPopup && !waPopup.classList.contains('hidden'))) {
+                return;
+            }
+
+            const rect = waBox.getBoundingClientRect();
+            // Trigger when user scrolls past that WhatsApp section (top is scrolled above top and bottom enters upper half of viewport)
+            if (rect.top <= 20 && rect.bottom < window.innerHeight * 0.5) {
+                hasTriggeredWhatsAppScrollGuide = true;
+                startFullWalkthrough();
+            }
+        }
 
         function updateBackdropHole(targetEl) {
             const backdrop = document.getElementById('tourBackdrop');
@@ -2221,7 +2342,26 @@
             waPopup.style.bottom = 'auto';
         }
 
+        function startGuidedReviewFromHero() {
+            // Tapping the hero button stops it from following and starts the review guide directly at Step 1: Review Setup
+            isHeroReviewBtnTapped = true;
+            const heroBtn = document.getElementById('heroGoogleReviewBtn');
+            if (heroBtn) {
+                heroBtn.classList.remove('hero-badge-floating');
+                heroBtn.classList.add('hero-badge-dismissed');
+            }
+            goToReviewTourStep();
+        }
+
         function goToReviewTourStep() {
+            // Dismiss floating review button if active
+            isHeroReviewBtnTapped = true;
+            const heroBtn = document.getElementById('heroGoogleReviewBtn');
+            if (heroBtn) {
+                heroBtn.classList.remove('hero-badge-floating');
+                heroBtn.classList.add('hero-badge-dismissed');
+            }
+
             // Close WhatsApp popup and clear WhatsApp highlight
             const waPopup = document.getElementById('whatsappTourPopup');
             const waBox = document.getElementById('whatsAppInquiryBox');
@@ -2924,6 +3064,9 @@
 
             // Keep spotlight hole & popups synchronized on scroll and resize
             window.addEventListener('scroll', () => {
+                updateHeroReviewButtonFloating();
+                checkWhatsAppScrollTrigger();
+
                 if (currentHighlightedEl) {
                     updateBackdropHole(currentHighlightedEl);
                     const selPopup = document.getElementById('reviewSelectGuidePopup');
@@ -2959,10 +3102,18 @@
                 }
             });
 
-            // Auto-trigger full feature walkthrough: blur everything, land on WhatsApp with popup, then scroll to review section
+            // Pop up the golden Google Review button with spring bounce animation after 1.2s
             setTimeout(() => {
-                startFullWalkthrough();
-            }, 650);
+                const heroBtn = document.getElementById('heroGoogleReviewBtn');
+                if (heroBtn) {
+                    heroBtn.classList.remove('hero-badge-hidden');
+                    heroBtn.classList.add('hero-badge-animate');
+                    setTimeout(() => {
+                        heroBtn.classList.add('hero-badge-idle-glow');
+                        updateHeroReviewButtonFloating();
+                    }, 850);
+                }
+            }, 1200);
         });
     </script>
 </body>
