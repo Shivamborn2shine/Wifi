@@ -70,7 +70,14 @@
             border-color: #F59E0B !important;
             font-weight: 800 !important;
             box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3) !important;
-            transform: scale(1.02);
+            transform: scale(1.01);
+        }
+        .category-chip .check-mark {
+            display: none;
+        }
+        .category-chip.chip-active .check-mark {
+            display: inline;
+            margin-left: 3px;
         }
 
         .modal-circle { border: 2.5px solid transparent; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -182,123 +189,164 @@
                 </div>
             </div>
 
-            <!-- 5. INTERACTIVE AI REVIEW GENERATOR SECTION (Unified with AI Review Header) -->
-            <div id="aiSection" class="mt-4 p-4 sm:p-5 rounded-3xl bg-slate-50/90 border border-slate-200/90 shadow-sm scroll-mt-4">
+            <!-- 5. INTERACTIVE AI REVIEW GENERATOR SECTION (Simple & Open Golden Theme Inspired by Modern Clean UI) -->
+            <div id="aiSection" class="mt-4 p-4 sm:p-5 rounded-3xl bg-slate-50/80 border border-slate-200/90 shadow-sm scroll-mt-4">
                 
-                <!-- 5. "SHARE YOUR EXPERIENCE — Review Us" Header (Techie Golden Theme) -->
-                <div class="mb-4 pb-3 border-b border-slate-200/70 flex items-center gap-3.5">
-                    <!-- Warm Golden Rounded Square with Amber Star -->
-                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#FEF6D8] border border-amber-200/90 flex items-center justify-center flex-shrink-0 shadow-2xs">
-                        <svg class="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 1.5C12 7.298 7.298 12 1.5 12c5.798 0 10.5 4.702 10.5 10.5 0-5.798 4.702-10.5 10.5-10.5-5.798 0-10.5-4.702-10.5-10.5z"/>
-                        </svg>
+                <!-- "SHARE YOUR EXPERIENCE — Review Us" Header (Golden Techie Theme) -->
+                <div class="mb-4 pb-3 border-b border-slate-200/70 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <!-- Warm Golden Rounded Squircle with ✦ Star -->
+                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#FEF6D8] border border-amber-200/90 flex items-center justify-center flex-shrink-0 shadow-2xs">
+                            <span class="text-amber-500 text-lg font-black">✦</span>
+                        </div>
+
+                        <!-- Title with Techie Icon & Subtitle -->
+                        <div>
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <h2 class="text-base sm:text-lg font-black text-[#0B1A30] tracking-tight uppercase leading-none">
+                                    SHARE YOUR EXPERIENCE
+                                </h2>
+                                <span class="text-amber-500 text-base" title="Tech &amp; AI Powered">⚙️</span>
+                            </div>
+                            <p class="text-xs sm:text-[13px] font-semibold text-[#4B5E78] mt-1">Review Us</p>
+                        </div>
                     </div>
 
-                    <!-- Title with Techie Microchip Icon & Subtitle -->
-                    <div>
-                        <div class="flex items-center gap-1.5 flex-wrap">
-                            <h2 class="text-base sm:text-lg font-black text-[#0B1A30] tracking-tight uppercase leading-none">
-                                SHARE YOUR EXPERIENCE
-                            </h2>
-                            <!-- Techie AI Microchip / Circuit Processor Icon -->
-                            <svg class="w-5 h-5 text-amber-500 -mt-0.5 inline-block flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" title="Tech & AI Powered">
-                                <rect x="5" y="5" width="14" height="14" rx="3" class="fill-amber-400/15"/>
-                                <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" fill-opacity="0.3"/>
-                                <path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>
-                            </svg>
-                        </div>
-                        <p class="text-xs sm:text-[13px] font-semibold text-[#4B5E78] mt-1">Review Us</p>
-                    </div>
+                    <!-- Subtle Sparkle Accent on Right (Matching pink UI) -->
+                    <span class="text-amber-400 text-base select-none">✨</span>
                 </div>
 
-                <div class="flex items-center justify-between mb-2.5">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
-                        <span>Select Service Category</span>
-                    </span>
-                    <button type="button" onclick="openWelcomeModal()" class="text-xs font-bold text-amber-700 hover:text-amber-800 flex items-center gap-1">
-                        <span>Change Service</span> ➔
+                <!-- 2-Column Uncluttered Category Grid (8 pills, 4 rows) -->
+                <div class="grid grid-cols-2 gap-2 sm:gap-2.5 mb-3.5">
+                    <!-- 1. Mobiles & 2nd Hand -->
+                    <button type="button" data-cat="MOBILES" class="category-chip py-2.5 px-3 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer" onclick="toggleCategoryChip(this, 'MOBILES')">
+                        <span>📱</span> <span>Mobiles &amp; 2nd Hand</span> <span class="check-mark font-black text-xs">✓</span>
+                    </button>
+
+                    <!-- 2. Phone Repair -->
+                    <button type="button" data-cat="REPAIR" class="category-chip py-2.5 px-3 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer" onclick="toggleCategoryChip(this, 'REPAIR')">
+                        <span>🔧</span> <span>Phone Repair</span> <span class="check-mark font-black text-xs">✓</span>
+                    </button>
+
+                    <!-- 3. Lamination & Skins -->
+                    <button type="button" data-cat="LAMINATION" class="category-chip py-2.5 px-3 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer" onclick="toggleCategoryChip(this, 'LAMINATION')">
+                        <span>🛡️</span> <span>Lamination &amp; Skins</span> <span class="check-mark font-black text-xs">✓</span>
+                    </button>
+
+                    <!-- 4. Accessories -->
+                    <button type="button" data-cat="ACCESSORIES" class="category-chip py-2.5 px-3 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer" onclick="toggleCategoryChip(this, 'ACCESSORIES')">
+                        <span>🎧</span> <span>Accessories</span> <span class="check-mark font-black text-xs">✓</span>
+                    </button>
+
+                    <!-- 5. Friendly Staff -->
+                    <button type="button" data-cat="SERVICE" class="category-chip py-2.5 px-3 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer" onclick="toggleCategoryChip(this, 'SERVICE')">
+                        <span>🤝</span> <span>Friendly Staff</span> <span class="check-mark font-black text-xs">✓</span>
+                    </button>
+
+                    <!-- 6. Value for Money -->
+                    <button type="button" data-cat="VALUE" class="category-chip py-2.5 px-3 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer" onclick="toggleCategoryChip(this, 'VALUE')">
+                        <span>💸</span> <span>Value for Money</span> <span class="check-mark font-black text-xs">✓</span>
+                    </button>
+
+                    <!-- 7. Quick Turnaround -->
+                    <button type="button" data-cat="QUICK" class="category-chip py-2.5 px-3 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer" onclick="toggleCategoryChip(this, 'QUICK')">
+                        <span>⚡</span> <span>Quick Turnaround</span> <span class="check-mark font-black text-xs">✓</span>
+                    </button>
+
+                    <!-- 8. Overall Experience (Active default) -->
+                    <button type="button" data-cat="ALL" class="category-chip py-2.5 px-3 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer chip-active" onclick="toggleCategoryChip(this, 'ALL')">
+                        <span>★</span> <span>Overall Experience</span> <span class="check-mark font-black text-xs">✓</span>
                     </button>
                 </div>
 
-                <!-- Category Chips -->
-                <div class="flex flex-wrap gap-1.5 mb-3">
-                    
-        <button type="button" data-cat="ALL" class="category-chip px-3.5 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all chip-active" onclick="toggleCategoryChip(this, 'ALL')">
-            Overall Experience ✨
-        </button>
-    
-
-        <button type="button" data-cat="REPAIR" class="category-chip px-3.5 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all" onclick="toggleCategoryChip(this, 'REPAIR')">
-            Phone Repair 🔧
-        </button>
-    
-
-        <button type="button" data-cat="LAMINATION" class="category-chip px-3.5 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all" onclick="toggleCategoryChip(this, 'LAMINATION')">
-            Lamination &amp; Skins 🛡️
-        </button>
-    
-
-        <button type="button" data-cat="MOBILES" class="category-chip px-3.5 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all" onclick="toggleCategoryChip(this, 'MOBILES')">
-            Mobiles &amp; 2nd Hand 📱
-        </button>
-    
-
-        <button type="button" data-cat="ACCESSORIES" class="category-chip px-3.5 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all" onclick="toggleCategoryChip(this, 'ACCESSORIES')">
-            Accessories 🎧
-        </button>
-    
-
-        <button type="button" data-cat="SERVICE" class="category-chip px-3.5 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all" onclick="toggleCategoryChip(this, 'SERVICE')">
-            Staff &amp; Service 🤝
-        </button>
-    
-
-        <button type="button" data-cat="VALUE" class="category-chip px-3.5 py-2 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:text-slate-950 hover:border-amber-400 shadow-2xs transition-all" onclick="toggleCategoryChip(this, 'VALUE')">
-            Value for Money 💸
-        </button>
-    
-                </div>
-
-                <!-- Selected Service Summary -->
+                <!-- Selected Service Summary (if selected via modal) -->
                 <div id="selectedMenuSummary" class="hidden text-xs font-bold text-amber-900 bg-amber-100/70 border border-amber-300 rounded-xl p-2.5 mb-3 flex items-center justify-between">
                     <span>Service Selected: <span id="selectedMenuSummaryText" class="font-black text-amber-950"></span></span>
                     <button type="button" onclick="openWelcomeModal()" class="text-[11px] text-amber-800 underline hover:text-slate-950">Edit</button>
                 </div>
 
-                <!-- Review Language -->
-                <div class="flex items-center justify-between mb-2.5">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-600">Review Language</span>
-                    <div class="inline-flex p-1 rounded-xl bg-slate-200/80 border border-slate-300/70 text-xs font-bold">
-                        <button type="button" class="lang-btn px-3 py-1 rounded-lg transition-all bg-white text-slate-950 font-black shadow-sm" onclick="setLanguage('ENGLISH')">English</button>
-                        <button type="button" class="lang-btn px-3 py-1 rounded-lg transition-all text-slate-600 hover:text-slate-950" onclick="setLanguage('HINGLISH')">Hinglish</button>
-                        <button type="button" class="lang-btn px-3 py-1 rounded-lg transition-all text-slate-600 hover:text-slate-950" onclick="setLanguage('HINDI')">हिंदी</button>
+                <!-- Choose Language Row -->
+                <div class="flex items-center justify-between mb-3.5 px-1">
+                    <div class="flex items-center gap-2 text-xs sm:text-[13px] font-bold text-slate-700">
+                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                        <span>Choose Language</span>
+                    </div>
+                    <div class="inline-flex p-1 rounded-full bg-slate-200/80 border border-slate-300/60 text-xs font-bold">
+                        <button type="button" class="lang-btn px-3 py-1 rounded-full transition-all bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 font-black shadow-xs cursor-pointer" onclick="setLanguage('ENGLISH')">English</button>
+                        <button type="button" class="lang-btn px-3 py-1 rounded-full transition-all text-slate-600 hover:text-slate-950 font-bold cursor-pointer" onclick="setLanguage('HINGLISH')">Hinglish</button>
+                        <button type="button" class="lang-btn px-3 py-1 rounded-full transition-all text-slate-600 hover:text-slate-950 font-bold cursor-pointer" onclick="setLanguage('HINDI')">Hindi</button>
                     </div>
                 </div>
 
-                <!-- Textarea with Live AI Typing Header -->
-                <div class="flex items-center justify-between mb-1.5 px-0.5">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                        <span class="text-amber-500">✍️</span> Review Draft
-                    </span>
-                    <span id="aiTypingStatus" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200/80 px-2.5 py-0.5 rounded-full transition-all">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span> AI is typing...
-                    </span>
-                </div>
-
-                <!-- Textarea -->
-                <div class="relative">
-                    <textarea id="aiReviewOutput" rows="4" placeholder="✨ AI is generating your personalized 5-star review..." class="w-full text-[13px] font-normal text-slate-800 bg-white border-2 border-slate-200 rounded-2xl p-3 leading-relaxed focus:bg-white focus:outline-none focus:ring-4 focus:ring-amber-200/50 focus:border-amber-500 transition-all resize-none shadow-2xs" style="font-size: 13.5px; line-height: 1.55;"></textarea>
-                    <button id="regenerateBtn" type="button" onclick="regenerateReview(true)" class="absolute bottom-3 right-3 p-2 rounded-xl bg-slate-100/90 border border-slate-300 shadow-2xs hover:bg-slate-200 text-slate-700 hover:text-slate-950 transition-all duration-300" title="Generate another review draft">
-                        <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                    </button>
-                </div>
-
-                <!-- Primary CTA: Copy & Redirect -->
-                <button type="button" onclick="copyAndRedirectReview()" class="w-full mt-3.5 py-3.5 px-5 rounded-2xl text-slate-950 font-black text-sm shadow-lg shadow-amber-300/40 transition-all flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 neon-glow-btn cursor-pointer">
-                    <span>Copy Review &amp; Open Google Maps</span>
-                    <svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                <!-- Primary Action: Generate Review with AI Button -->
+                <button id="generateBtn" type="button" onclick="regenerateReview(true)" class="w-full py-3.5 px-6 rounded-2xl text-slate-950 font-black text-sm sm:text-base shadow-lg shadow-amber-400/30 transition-all flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 cursor-pointer">
+                    <span class="text-base">✦</span>
+                    <span>Generate Review with AI</span>
+                    <span class="text-base">➔</span>
                 </button>
+                <div class="text-center text-[11px] sm:text-xs text-slate-500 font-semibold mt-2 mb-3.5 flex items-center justify-center gap-2">
+                    <span>Takes a few seconds</span>
+                    <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                    <span>100% real &amp; safe</span>
+                </div>
+
+                <!-- DEDICATED REVIEW OUTPUT CARD (Matching Pink Mockup in Golden Amber Theme) -->
+                <div class="rounded-3xl bg-white border border-slate-200/90 p-4 sm:p-5 shadow-sm relative mt-2">
+                    <!-- Review Card Header -->
+                    <div class="flex items-center justify-between mb-1.5">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 rounded-xl bg-amber-100/90 border border-amber-200 flex items-center justify-center text-amber-600 text-xs font-black shadow-2xs">
+                                ✦
+                            </div>
+                            <span class="text-sm font-black text-slate-900 tracking-tight">Your AI Generated Review</span>
+                        </div>
+                        <div class="px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-black flex items-center gap-1 shadow-2xs">
+                            <span class="text-amber-500">★</span> <span>5.0</span>
+                        </div>
+                    </div>
+
+                    <!-- Centered Gold Stars with Radiant Bursts -->
+                    <div class="flex items-center justify-center gap-2.5 py-2">
+                        <span class="text-amber-300 text-xs font-bold tracking-widest select-none">彡</span>
+                        <div class="flex items-center gap-1 text-amber-400 text-base sm:text-lg select-none">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <span class="text-amber-300 text-xs font-bold tracking-widest select-none">ミ</span>
+                    </div>
+
+                    <!-- Clean Formatted Review Text (Default Display) -->
+                    <div id="aiReviewDisplay" class="text-slate-700 text-[13.5px] sm:text-sm leading-relaxed text-center font-medium px-2 py-2 min-h-[64px] flex items-center justify-center transition-all">
+                        Had an amazing experience at WIRELESS in Subhash Nagar! Outstanding service, genuine products, and very fair pricing. Highly recommended for any mobile phone needs!
+                    </div>
+
+                    <!-- Hidden Textarea for In-Place Editing -->
+                    <textarea id="aiReviewOutput" rows="4" class="hidden w-full text-[13.5px] sm:text-sm font-medium text-slate-800 bg-amber-50/40 border-2 border-amber-300 rounded-2xl p-3 leading-relaxed focus:bg-white focus:outline-none focus:ring-4 focus:ring-amber-200/50 focus:border-amber-500 transition-all resize-none shadow-inner my-2"></textarea>
+
+                    <!-- Bottom Action Buttons: Edit Review + Copy & Open Google Review Page -->
+                    <div class="flex items-stretch gap-2 mt-3 pt-1">
+                        <!-- 1. Edit Review Button -->
+                        <button id="editReviewBtn" type="button" onclick="toggleEditReview()" class="py-2.5 px-3.5 rounded-xl border border-amber-300 hover:border-amber-400 bg-white hover:bg-amber-50 text-amber-900 font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow-2xs flex-shrink-0 cursor-pointer">
+                            <svg class="w-3.5 h-3.5 text-amber-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                            <span id="editReviewBtnText">Edit Review</span>
+                        </button>
+
+                        <!-- 2. Copy & Open Google Review Page Button -->
+                        <button type="button" onclick="copyAndRedirectReview()" class="flex-1 py-2 px-3 rounded-xl bg-[#131b2e] hover:bg-[#0b1220] text-white font-black text-xs shadow-md flex items-center justify-between gap-1.5 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                                <div class="text-left leading-tight">
+                                    <span class="block text-[11px] sm:text-xs font-black whitespace-nowrap">Copy &amp; Open Google</span>
+                                    <span class="block text-[10px] text-slate-300 font-semibold whitespace-nowrap">Review Page</span>
+                                </div>
+                            </div>
+                            <svg class="w-3.5 h-3.5 stroke-[2.5] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                    </div>
+                </div>
+
             </div>
 
             <!-- UNIFIED 4 CORE OFFERINGS STRIP (Shifted under Copy Review CTA) -->
@@ -1255,6 +1303,23 @@
           "पैसा वसूल सेवा! न कोई छिपा हुआ शुल्क और न कोई अधिक बिल। हर रुपये की पूरी कीमत मिलती है।",
           "उचित मूल्य में बेहतरीन काम और ओरिजिनल पार्ट्स। देहरादून में सबसे किफायती मोबाइल स्टोर।"
         ]
+      },
+      "QUICK": {
+        "ENGLISH": [
+          "Super fast repair service at WIRELESS! Got my phone screen fixed in just 30 minutes. Quick, efficient, and hassle-free!",
+          "Amazingly fast turnaround! Fixed my charging port issue on the spot with genuine parts. Highly impressed!",
+          "No long waiting times at WIRELESS. Quick diagnostics and rapid service with top notch quality."
+        ],
+        "HINGLISH": [
+          "Super fast service! 30 minutes ke andar screen replacement ho gaya. Quick aur ekdum professional kaam!",
+          "Bohot jaldi phone repair karke de diya. On the spot problem solve ho gayi, 5 star quick service!",
+          "Fastest repair service in Subhash Nagar. Bina kisi delay ke top quality kaam."
+        ],
+        "HINDI": [
+          "WIRELESS में बहुत ही तेज़ और कुशल रिपेयरिंग सेवा मिली! मात्र 30 मिनट में स्क्रीन बदल दी गई।",
+          "तुरंत और भरोसेमंद सेवा। फोन की समस्या को देखते ही तुरंत ठीक कर दिया गया। बहुत ही शानदार स्पीड!",
+          "सुभाष नगर में सबसे तेज़ मोबाइल रिपेयरिंग। बिना किसी इंतज़ार के तुरंत काम पूरा हुआ।"
+        ]
       }
     },
     "reviews": {
@@ -1411,12 +1476,12 @@
         function setLanguage(lang) {
             currentLang = lang;
             document.querySelectorAll('.lang-btn').forEach(b => {
-                b.classList.remove('bg-white', 'text-slate-950', 'font-black', 'shadow-sm');
-                b.classList.add('text-slate-600');
+                b.classList.remove('bg-gradient-to-r', 'from-amber-400', 'to-yellow-400', 'text-slate-950', 'font-black', 'shadow-xs');
+                b.classList.add('text-slate-600', 'font-bold');
             });
-            event.target.classList.add('bg-white', 'text-slate-950', 'font-black', 'shadow-sm');
+            event.target.classList.add('bg-gradient-to-r', 'from-amber-400', 'to-yellow-400', 'text-slate-950', 'font-black', 'shadow-xs');
             event.target.classList.remove('text-slate-600');
-            regenerateReview();
+            regenerateReview(true);
         }
 
         let typingTimer = null;
@@ -1424,59 +1489,75 @@
         let hasAutoTypedOnScroll = false;
         let reviewIndex = 0;
 
+        function toggleEditReview() {
+            const display = document.getElementById('aiReviewDisplay');
+            const ta = document.getElementById('aiReviewOutput');
+            const btnText = document.getElementById('editReviewBtnText');
+            if (!display || !ta) return;
+
+            const isEditing = !ta.classList.contains('hidden');
+            if (isEditing) {
+                // Done editing: save text
+                currentFullReviewText = ta.value.trim() || currentFullReviewText;
+                display.textContent = currentFullReviewText;
+                ta.classList.add('hidden');
+                display.classList.remove('hidden');
+                if (btnText) btnText.textContent = 'Edit Review';
+                showToast('Review draft saved! ✨', '📝');
+            } else {
+                // Switch to edit mode
+                ta.value = currentFullReviewText || display.textContent;
+                display.classList.add('hidden');
+                ta.classList.remove('hidden');
+                ta.focus();
+                if (btnText) btnText.textContent = 'Done Editing';
+            }
+        }
+
         function typeReviewText(text) {
             currentFullReviewText = text;
+            const display = document.getElementById('aiReviewDisplay');
             const ta = document.getElementById('aiReviewOutput');
-            const status = document.getElementById('aiTypingStatus');
-            const refreshBtn = document.getElementById('regenerateBtn');
-            if (!ta) return;
+            const editBtnText = document.getElementById('editReviewBtnText');
+            if (!display && !ta) return;
 
             if (typingTimer) {
                 clearTimeout(typingTimer);
                 typingTimer = null;
             }
 
-            if (refreshBtn) {
-                const svg = refreshBtn.querySelector('svg');
-                if (svg) svg.classList.add('animate-spin');
+            if (ta) {
+                ta.classList.add('hidden');
+                ta.value = text;
             }
-
-            if (status) {
-                status.classList.remove('text-emerald-700', 'bg-emerald-50', 'border-emerald-200');
-                status.classList.add('text-amber-700', 'bg-amber-50', 'border-amber-200');
-                status.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span> AI is typing...';
+            if (display) {
+                display.classList.remove('hidden');
             }
-
-            ta.classList.add('border-amber-400', 'ring-2', 'ring-amber-200/60');
-            ta.value = '';
+            if (editBtnText) {
+                editBtnText.textContent = 'Edit Review';
+            }
 
             let i = 0;
             function typeNext() {
                 if (i < text.length) {
                     const step = (text[i] === ' ' || text[i] === '.' || text[i] === '!' || text[i] === ',') ? 1 : 2;
                     i = Math.min(i + step, text.length);
-                    ta.value = text.slice(0, i);
-                    ta.scrollTop = ta.scrollHeight;
+                    const partial = text.slice(0, i);
+                    if (display) {
+                        display.innerHTML = partial + '<span class="inline-block w-1.5 h-3.5 ml-1 bg-amber-500 animate-ping align-middle"></span>';
+                    }
+                    if (ta) ta.value = partial;
 
-                    let delay = 16;
+                    let delay = 14;
                     const char = text[i - 1];
-                    if (char === '.' || char === '!') delay = 45;
-                    else if (char === ',') delay = 30;
+                    if (char === '.' || char === '!') delay = 40;
+                    else if (char === ',') delay = 25;
 
                     typingTimer = setTimeout(typeNext, delay);
                 } else {
                     typingTimer = null;
-                    ta.value = text;
-                    ta.classList.remove('border-amber-400', 'ring-2', 'ring-amber-200/60');
-                    if (refreshBtn) {
-                        const svg = refreshBtn.querySelector('svg');
-                        if (svg) svg.classList.remove('animate-spin');
-                    }
-                    if (status) {
-                        status.classList.remove('text-amber-700', 'bg-amber-50', 'border-amber-200');
-                        status.classList.add('text-emerald-700', 'bg-emerald-50', 'border-emerald-200');
-                        status.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Ready to copy';
-                    }
+                    if (display) display.textContent = text;
+                    if (ta) ta.value = text;
                 }
             }
 
@@ -1525,7 +1606,9 @@
             } else {
                 currentFullReviewText = text;
                 const ta = document.getElementById('aiReviewOutput');
+                const display = document.getElementById('aiReviewDisplay');
                 if (ta) ta.value = text;
+                if (display) display.textContent = text;
             }
         }
 
@@ -1535,28 +1618,16 @@
                 typingTimer = null;
             }
             const ta = document.getElementById('aiReviewOutput');
-            const status = document.getElementById('aiTypingStatus');
-            const refreshBtn = document.getElementById('regenerateBtn');
-            if (refreshBtn) {
-                const svg = refreshBtn.querySelector('svg');
-                if (svg) svg.classList.remove('animate-spin');
-            }
-            if (status) {
-                status.classList.remove('text-amber-700', 'bg-amber-50', 'border-amber-200');
-                status.classList.add('text-emerald-700', 'bg-emerald-50', 'border-emerald-200');
-                status.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Ready to copy';
-            }
-            if (ta && currentFullReviewText) {
-                ta.value = currentFullReviewText;
-                ta.classList.remove('border-amber-400', 'ring-2', 'ring-amber-200/60');
-            }
-            const textToCopy = (ta && ta.value) ? ta.value : currentFullReviewText;
+            const display = document.getElementById('aiReviewDisplay');
+            const isEditing = ta && !ta.classList.contains('hidden');
+            const textToCopy = (isEditing && ta && ta.value) ? ta.value : (currentFullReviewText || (display ? display.textContent : ''));
+
             navigator.clipboard.writeText(textToCopy).then(() => {
                 showToast('Review copied! Opening Google Maps...', '📋');
                 setTimeout(() => {
                     const rUrl = STORE_CONFIG.links?.googleReviewUrl || STORE_CONFIG.links?.googleMapsUrl || '#';
                     window.open(rUrl, '_blank');
-                }, 900);
+                }, 850);
             }).catch(() => {
                 window.open(STORE_CONFIG.links?.googleReviewUrl || '#', '_blank');
             });
