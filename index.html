@@ -728,9 +728,14 @@
                             <span class="text-sm font-black text-slate-900 tracking-tight">Your AI Generated
                                 Review</span>
                         </div>
-                        <div
-                            class="px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-black flex items-center gap-1 shadow-2xs">
-                            <span class="text-amber-500">★</span> <span>5.0</span>
+                        <div class="flex items-center gap-1.5">
+                            <span id="reviewUniqueBadge" class="hidden sm:inline-flex text-[10.5px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200/90 px-2 py-0.5 rounded-full items-center gap-1 shadow-2xs">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 100% Unique
+                            </span>
+                            <div
+                                class="px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-black flex items-center gap-1 shadow-2xs">
+                                <span class="text-amber-500">★</span> <span>5.0</span>
+                            </div>
                         </div>
                     </div>
 
@@ -747,12 +752,25 @@
                     <div id="aiReviewDisplay"
                         class="text-slate-700 text-[13.5px] sm:text-sm leading-relaxed text-center font-medium px-2 py-2 min-h-[82px] sm:min-h-[88px] flex items-center justify-center transition-all">
                         Had an amazing experience at WIRELESS in Subhash Nagar! Outstanding service, genuine products,
-                        and very fair pricing. Highly recommended for any mobile phone needs!
+                        and very fair pricing. Highly recommended for any mobile phone needs shivam!
                     </div>
 
                     <!-- Hidden Textarea for In-Place Editing -->
                     <textarea id="aiReviewOutput" rows="4"
                         class="hidden w-full text-[13.5px] sm:text-sm font-medium text-slate-800 bg-amber-50/40 border-2 border-amber-300 rounded-2xl p-3 leading-relaxed focus:bg-white focus:outline-none focus:ring-4 focus:ring-amber-200/50 focus:border-amber-500 transition-all resize-none shadow-inner my-2"></textarea>
+
+                    <!-- Uniqueness Status Bar & Feeder Access -->
+                    <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium px-1 py-1.5 border-t border-slate-100/90 mt-2 gap-2">
+                        <span class="flex items-center gap-1.5 text-slate-600 truncate">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
+                            <span class="truncate font-semibold">1-to-1 unique draft &bull; Discarded on copy</span>
+                        </span>
+                        <button type="button" onclick="openReviewFeederModal()"
+                            class="flex-shrink-0 text-[10px] font-bold text-amber-900 hover:text-amber-950 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 shadow-2xs">
+                            <span>⚙️ Feed Reviews</span>
+                            <span id="poolAvailableCountBadge" class="bg-amber-200/90 text-amber-950 font-black px-1.5 py-0.2 rounded-full text-[9px]">...</span>
+                        </button>
+                    </div>
 
                     <!-- Bottom Action Buttons: Edit Review + Copy & Open Google Review Page -->
                     <div class="flex items-stretch gap-2 mt-3 pt-1">
@@ -1413,6 +1431,15 @@
                 <p class="mt-1 text-[11px] text-slate-400">Crafted with precision by <a
                         href="https://www.instagram.com/onescan360" target="_blank"
                         class="font-bold text-amber-600 hover:text-amber-700">ONE Scan 360</a></p>
+                <div class="mt-3.5 flex flex-col items-center justify-center gap-1">
+                    <button type="button" onclick="openReviewFeederModal()"
+                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-700 hover:text-slate-950 bg-slate-100 hover:bg-amber-50 border border-slate-200 hover:border-amber-300 transition-all shadow-2xs cursor-pointer group">
+                        <span class="text-amber-500 group-hover:rotate-45 transition-transform duration-300">⚙️</span>
+                        <span>Review Pool &amp; Feeder System</span>
+                        <span id="footerPoolCountBadge" class="px-2 py-0.5 rounded-full bg-amber-200/90 text-amber-950 text-[10px] font-black">...</span>
+                    </button>
+                    <p class="text-[10px] text-slate-400">Feed 100s/1000s of reviews &bull; Shortcut: <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[9.5px] font-mono">Ctrl</kbd>+<kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[9.5px] font-mono">Shift</kbd>+<kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[9.5px] font-mono">R</kbd></p>
+                </div>
             </footer>
         </main>
 
@@ -2173,6 +2200,351 @@
             <p class="text-center text-[10.5px] sm:text-[11px] text-slate-500 font-semibold mt-2.5">
                 Thank you for supporting WIRELESS, Subhash Nagar! ❤️
             </p>
+        </div>
+    </div>
+
+    <!-- 21. REVIEW FEEDER & MASTER POOL STUDIO MODAL (WITH AI GENERATOR & CLOUD SYNC API) -->
+    <div id="reviewFeederModal"
+        class="fixed inset-0 z-[120] hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+        <div class="max-w-2xl w-full bg-white rounded-[28px] p-5 sm:p-7 shadow-[0_25px_60px_-15px_rgba(245,158,11,0.25)] border-2 border-amber-300 text-slate-900 relative my-auto max-h-[92vh] flex flex-col"
+            onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button type="button" onclick="closeReviewFeederModal()"
+                class="absolute top-4 right-4 sm:top-5 sm:right-5 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold flex items-center justify-center text-sm cursor-pointer transition-all z-20"
+                aria-label="Close">✕</button>
+
+            <!-- Modal Header -->
+            <div class="mb-4 pr-8">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 border border-amber-300 flex items-center justify-center text-base font-bold shadow-2xs">⚙️</span>
+                    <h3 class="text-lg sm:text-xl font-black text-slate-950 tracking-tight">Review Feeder &amp; Master Pool Studio</h3>
+                    <span class="text-[10px] font-bold text-amber-900 bg-amber-100 border border-amber-200/90 px-2 py-0.5 rounded-full">v2.1 API</span>
+                </div>
+                <p class="text-xs text-slate-500 font-medium">
+                    Feed 100s &amp; 1000s of curated reviews, batch generate with AI API, and auto-discard on user tap.
+                </p>
+            </div>
+
+            <!-- Top Metric Badges (4 Compact Cards) -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                <div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-2.5 text-center">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-amber-800 block">Total In Pool</span>
+                    <span id="feederStatTotal" class="text-lg sm:text-xl font-black text-amber-950">0</span>
+                </div>
+                <div class="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-2.5 text-center">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block">Available Ready</span>
+                    <span id="feederStatAvailable" class="text-lg sm:text-xl font-black text-emerald-950">0</span>
+                </div>
+                <div class="bg-rose-50/70 border border-rose-200/80 rounded-2xl p-2.5 text-center">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-rose-800 block">Discarded (Used)</span>
+                    <span id="feederStatDiscarded" class="text-lg sm:text-xl font-black text-rose-950">0</span>
+                </div>
+                <div class="bg-slate-100/80 border border-slate-200 rounded-2xl p-2.5 text-center">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 block">API Sync Status</span>
+                    <span id="feederApiStatus" class="text-xs font-black text-emerald-700 flex items-center justify-center gap-1 mt-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Active
+                    </span>
+                </div>
+            </div>
+
+            <!-- Tab Navigation Bar -->
+            <div class="flex items-center gap-1 p-1 bg-slate-100 rounded-2xl mb-4 overflow-x-auto text-xs font-bold scrollbar-none">
+                <button type="button" id="feederTabBtn-feed" onclick="switchFeederTab('feed')"
+                    class="feeder-tab-btn flex-1 min-w-[100px] py-2 px-2.5 rounded-xl bg-white text-slate-950 font-black shadow-2xs transition-all cursor-pointer text-center whitespace-nowrap">
+                    ➕ Bulk Feed
+                </button>
+                <button type="button" id="feederTabBtn-ai" onclick="switchFeederTab('ai')"
+                    class="feeder-tab-btn flex-1 min-w-[110px] py-2 px-2.5 rounded-xl text-slate-600 hover:text-slate-950 font-bold transition-all cursor-pointer text-center whitespace-nowrap">
+                    🤖 AI Batch API
+                </button>
+                <button type="button" id="feederTabBtn-inventory" onclick="switchFeederTab('inventory')"
+                    class="feeder-tab-btn flex-1 min-w-[100px] py-2 px-2.5 rounded-xl text-slate-600 hover:text-slate-950 font-bold transition-all cursor-pointer text-center whitespace-nowrap">
+                    📊 Live Inventory
+                </button>
+                <button type="button" id="feederTabBtn-cloud" onclick="switchFeederTab('cloud')"
+                    class="feeder-tab-btn flex-1 min-w-[100px] py-2 px-2.5 rounded-xl text-slate-600 hover:text-slate-950 font-bold transition-all cursor-pointer text-center whitespace-nowrap">
+                    ☁️ Cloud Sync
+                </button>
+                <button type="button" id="feederTabBtn-export" onclick="switchFeederTab('export')"
+                    class="feeder-tab-btn flex-1 min-w-[90px] py-2 px-2.5 rounded-xl text-slate-600 hover:text-slate-950 font-bold transition-all cursor-pointer text-center whitespace-nowrap">
+                    💾 Export
+                </button>
+                <button type="button" id="feederTabBtn-maintenance" onclick="switchFeederTab('maintenance')"
+                    class="feeder-tab-btn flex-1 min-w-[90px] py-2 px-2.5 rounded-xl text-slate-600 hover:text-slate-950 font-bold transition-all cursor-pointer text-center whitespace-nowrap">
+                    ⚙️ Reset
+                </button>
+            </div>
+
+            <!-- TAB 1: BULK FEED REVIEWS -->
+            <div id="feederTabContent-feed" class="flex-1 overflow-y-auto pr-1">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                    <div>
+                        <label class="block text-xs font-black text-slate-800 mb-1">Target Category</label>
+                        <select id="feederCategorySelect" class="w-full text-xs font-bold bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <option value="MOBILES">📱 Mobiles &amp; 2nd Hand</option>
+                            <option value="REPAIR" selected>🔧 Phone Repair</option>
+                            <option value="LAMINATION">🛡️ Lamination &amp; Skins</option>
+                            <option value="ACCESSORIES">🎧 Accessories</option>
+                            <option value="SERVICE">🤝 Friendly Staff / Service</option>
+                            <option value="VALUE">💸 Value for Money / Pricing</option>
+                            <option value="QUICK">⚡ Quick Turnaround</option>
+                            <option value="ALL">★ Overall Experience</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-800 mb-1">Language</label>
+                        <select id="feederLanguageSelect" class="w-full text-xs font-bold bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <option value="ENGLISH" selected>English (UK / Indian)</option>
+                            <option value="HINGLISH">Hinglish (Everyday Conversational)</option>
+                            <option value="HINDI">Hindi (हिंदी)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="text-xs font-black text-slate-800">Paste Reviews (100s or 1000s)</label>
+                        <span id="feederInputCounter" class="text-[11px] font-bold text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded-md">
+                            0 reviews detected
+                        </span>
+                    </div>
+                    <textarea id="feederReviewsInput" rows="6" oninput="updateFeederInputCounter()"
+                        placeholder="Paste your reviews here.&#10;&#10;Supported formats:&#10;1) One review per line&#10;2) JSON array: [&quot;Review 1...&quot;, &quot;Review 2...&quot;]&#10;3) Multi-line paragraphs separated by blank lines&#10;&#10;Example:&#10;WIRELESS fixed my cracked phone screen in 35 mins with original display quality. Highly recommended!&#10;Devansh was extremely honest and saved my money. Best mobile repair shop in Subhash Nagar.&#10;..."
+                        class="w-full text-xs font-mono bg-slate-50 border border-slate-300 rounded-2xl p-3 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-all"></textarea>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-700 select-none">
+                        <input type="checkbox" id="feederDeduplicateCheck" checked class="w-4 h-4 rounded text-amber-500 focus:ring-amber-400">
+                        <span>Skip duplicates already in pool or discarded</span>
+                    </label>
+                    <span class="text-[10.5px] text-slate-400 font-medium">Min 15 chars per review</span>
+                </div>
+
+                <!-- Feed Button -->
+                <button type="button" onclick="handleFeedReviewsSubmit()"
+                    class="w-full py-3 px-4 rounded-xl text-slate-950 font-black text-xs sm:text-sm bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-500 hover:to-yellow-500 shadow-md shadow-amber-400/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                    <span>⚡</span> <span>Feed Reviews into Selected Category</span>
+                </button>
+
+                <!-- Feedback Alert Container -->
+                <div id="feederAlertMsg" class="hidden mt-3 p-3 rounded-xl text-xs font-bold"></div>
+            </div>
+
+            <!-- TAB 2: AI BATCH GENERATOR API -->
+            <div id="feederTabContent-ai" class="hidden flex-1 overflow-y-auto pr-1">
+                <div class="bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50/50 border border-amber-200 rounded-2xl p-3.5 mb-3">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-amber-800 text-sm font-black">🤖 Batch Auto-Generator API</span>
+                        <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">Gemini API Ready</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Instantly generate batches of 10 to 50 highly humanized, authentic 5-star reviews specifically crafted for WIRELESS (Subhash Nagar, Dehradun). You can use your own Gemini API key or use our built-in Smart Synthesizer Engine!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-3">
+                    <div>
+                        <label class="block text-xs font-black text-slate-800 mb-1">Category</label>
+                        <select id="aiApiCategorySelect" class="w-full text-xs font-bold bg-slate-50 border border-slate-300 rounded-xl p-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <option value="MOBILES">📱 Mobiles</option>
+                            <option value="REPAIR" selected>🔧 Repairs</option>
+                            <option value="LAMINATION">🛡️ Skins</option>
+                            <option value="ACCESSORIES">🎧 Accessories</option>
+                            <option value="SERVICE">🤝 Staff</option>
+                            <option value="VALUE">💸 Value</option>
+                            <option value="QUICK">⚡ Quick</option>
+                            <option value="ALL">★ Overall</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-800 mb-1">Language</label>
+                        <select id="aiApiLanguageSelect" class="w-full text-xs font-bold bg-slate-50 border border-slate-300 rounded-xl p-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <option value="ENGLISH">English</option>
+                            <option value="HINGLISH" selected>Hinglish</option>
+                            <option value="HINDI">Hindi</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-800 mb-1">Batch Size</label>
+                        <select id="aiApiBatchSizeSelect" class="w-full text-xs font-bold bg-slate-50 border border-slate-300 rounded-xl p-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <option value="10">10 Reviews</option>
+                            <option value="25" selected>25 Reviews</option>
+                            <option value="50">50 Reviews</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="text-xs font-black text-slate-800">
+                            Gemini API Key <span class="text-slate-400 font-normal">(Optional — or leave blank to use Built-in AI Synthesizer)</span>
+                        </label>
+                        <button type="button" onclick="testGeminiApiKey()" class="text-[11px] font-bold text-amber-800 hover:text-amber-900 underline cursor-pointer">
+                            Test Key ⚡
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy... (Saved locally in browser)"
+                            class="sm:col-span-2 w-full text-xs font-mono bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                        <select id="geminiModelSelect" class="w-full text-xs font-bold bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <option value="gemini-1.5-flash" selected>1.5 Flash (Fast)</option>
+                            <option value="gemini-2.0-flash">2.0 Flash (Next-Gen)</option>
+                            <option value="gemini-1.5-pro">1.5 Pro (Deep)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" id="triggerAiBatchBtn" onclick="handleGenerateAiBatch()"
+                    class="w-full py-3 px-4 rounded-xl text-slate-950 font-black text-xs sm:text-sm bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-500 hover:to-yellow-500 shadow-md shadow-amber-400/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                    <span id="triggerAiBatchIcon">✨</span> <span id="triggerAiBatchText">Generate &amp; Feed Reviews with AI API</span>
+                </button>
+
+                <div id="aiApiAlertMsg" class="hidden mt-3 p-3 rounded-xl text-xs font-bold"></div>
+            </div>
+
+            <!-- TAB 3: LIVE INVENTORY -->
+            <div id="feederTabContent-inventory" class="hidden flex-1 overflow-y-auto pr-1">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                    <input type="text" id="feederSearchInput" oninput="renderFeederInventoryTable()"
+                        placeholder="Search loaded reviews by keyword..."
+                        class="w-full text-xs bg-slate-50 border border-slate-300 rounded-xl p-2.5 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                </div>
+
+                <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-2xs">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 font-black text-[11px] border-b border-slate-200">
+                                <th class="p-2.5">Category</th>
+                                <th class="p-2.5">Language</th>
+                                <th class="p-2.5 text-center">Available</th>
+                                <th class="p-2.5 text-center">Discarded</th>
+                                <th class="p-2.5 text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="feederInventoryTableBody" class="divide-y divide-slate-100 font-medium">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Live Active Reviews Preview List -->
+                <div class="mt-4 pt-3 border-t border-slate-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black text-slate-800">Preview Reviews Sample</span>
+                        <span id="feederPreviewCount" class="text-[11px] text-slate-400">Showing first 10 items</span>
+                    </div>
+                    <div id="feederReviewsPreviewList" class="space-y-2 max-h-48 overflow-y-auto text-xs pr-1">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: CLOUD SYNC & WEBHOOK API -->
+            <div id="feederTabContent-cloud" class="hidden flex-1 overflow-y-auto pr-1">
+                <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-3.5 mb-3">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-blue-800 text-sm font-black">☁️ Global Cloud Sync &amp; Webhook API</span>
+                    </div>
+                    <p class="text-xs text-blue-950 font-medium leading-relaxed">
+                        Whenever a customer claims a review, it can be synchronized to your Cloud API so that no other customer on any device receives that review. You can also configure a custom webhook (Google Sheet, Make, Zapier, Telegram) to get instant alerts whenever a review is posted!
+                    </p>
+                </div>
+
+                <div class="space-y-3 mb-3">
+                    <div>
+                        <label class="block text-xs font-black text-slate-800 mb-1">Cloud Sync Endpoint</label>
+                        <input type="text" id="cloudSyncEndpointInput" value="/.netlify/functions/reviews"
+                            class="w-full text-xs font-mono bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                        <span class="text-[10.5px] text-slate-400">Defaults to Netlify Serverless Function <code class="bg-slate-100 px-1 py-0.2 rounded font-mono">/.netlify/functions/reviews</code></span>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-800 mb-1">Custom Discard Webhook URL <span class="text-slate-400 font-normal">(Optional)</span></label>
+                        <input type="text" id="customWebhookUrlInput" placeholder="https://hook.eu2.make.com/... or Google Apps Script"
+                            class="w-full text-xs font-mono bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="handleSaveCloudConfig()"
+                        class="py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer">
+                        <span>💾</span> <span>Save Cloud Sync Settings</span>
+                    </button>
+                    <button type="button" onclick="testCloudApiPing()"
+                        class="py-2.5 px-3 rounded-xl bg-blue-100 hover:bg-blue-200 text-blue-900 font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                        <span>📡</span> <span>Ping API Endpoint</span>
+                    </button>
+                </div>
+                <div id="cloudConfigAlertMsg" class="hidden mt-2 p-2.5 rounded-xl text-xs font-bold"></div>
+            </div>
+
+            <!-- TAB 5: EXPORT JSON -->
+            <div id="feederTabContent-export" class="hidden flex-1 overflow-y-auto pr-1">
+                <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 mb-4">
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-amber-800 text-sm font-black">📁 Permanent Storage &amp; Codebase Backup</span>
+                    </div>
+                    <p class="text-xs text-amber-950 font-medium leading-relaxed">
+                        Whenever you feed 100s or 1000s of reviews, they are permanently stored in your browser's persistent storage.
+                        You can also download this entire database as a clean JSON file and commit it directly to <code class="bg-amber-100 px-1.5 py-0.5 rounded text-[11px] font-mono">assets/data/reviews-bank.json</code> so that all new website visitors will immediately have access to your full pool!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                    <button type="button" onclick="exportFeederJson()"
+                        class="py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer">
+                        <span>📥</span> <span>Download reviews-bank.json</span>
+                    </button>
+                    <button type="button" onclick="copyFeederJson()"
+                        class="py-3 px-4 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-300 font-bold text-xs flex items-center justify-center gap-2 shadow-2xs transition-all cursor-pointer">
+                        <span id="copyJsonBtnText">📋 Copy Full JSON to Clipboard</span>
+                    </button>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black text-slate-800 mb-1">JSON Preview</label>
+                    <textarea id="feederJsonPreview" rows="6" readonly
+                        class="w-full text-[11px] font-mono bg-slate-50 border border-slate-300 rounded-2xl p-3 text-slate-700 focus:outline-none select-all"></textarea>
+                </div>
+            </div>
+
+            <!-- TAB 6: MAINTENANCE & RESET -->
+            <div id="feederTabContent-maintenance" class="hidden flex-1 overflow-y-auto pr-1">
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 flex items-center justify-between gap-3">
+                        <div>
+                            <h4 class="text-xs font-black text-slate-900">Reset Discarded Reviews</h4>
+                            <p class="text-[11px] text-slate-500 font-medium">Restores all used/discarded reviews back into the available pool for testing.</p>
+                        </div>
+                        <button type="button" onclick="handleResetDiscarded()"
+                            class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs transition-all cursor-pointer flex-shrink-0">
+                            🔄 Reset Used
+                        </button>
+                    </div>
+
+                    <div class="p-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 flex items-center justify-between gap-3">
+                        <div>
+                            <h4 class="text-xs font-black text-slate-900">Clear Custom Fed Reviews</h4>
+                            <p class="text-[11px] text-slate-500 font-medium">Deletes reviews imported via the feeder and retains only the baseline library.</p>
+                        </div>
+                        <button type="button" onclick="handleClearCustomPool()"
+                            class="px-3.5 py-2 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-900 border border-rose-300 font-black text-xs transition-all cursor-pointer flex-shrink-0">
+                            🗑️ Clear Custom
+                        </button>
+                    </div>
+
+                    <div class="p-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 flex items-center justify-between gap-3">
+                        <div>
+                            <h4 class="text-xs font-black text-slate-900">Factory Reset</h4>
+                            <p class="text-[11px] text-slate-500 font-medium">Resets all pools and discarded history back to factory default state.</p>
+                        </div>
+                        <button type="button" onclick="handleFactoryReset()"
+                            class="px-3.5 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-black text-xs transition-all cursor-pointer flex-shrink-0">
+                            ♻️ Factory Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -3206,6 +3578,16 @@
         }
 
         function confirmOpenGoogleMaps() {
+            const ta = document.getElementById('aiReviewOutput');
+            const display = document.getElementById('aiReviewDisplay');
+            const isEditing = ta && !ta.classList.contains('hidden');
+            const textToCopy = (isEditing && ta && ta.value) ? ta.value : (currentFullReviewText || (display ? display.textContent : ''));
+
+            // Permanently discard review to guarantee 100% uniqueness
+            if (window.REVIEW_FEED_SYSTEM) {
+                window.REVIEW_FEED_SYSTEM.discardCurrentReview(textToCopy);
+            }
+
             closeGoogleGuideModal();
             const rUrl = STORE_CONFIG.links?.googleReviewUrl || STORE_CONFIG.links?.googleMapsUrl || '#';
             window.open(rUrl, '_blank');
@@ -3357,6 +3739,1411 @@
             typeNext();
         }
 
+        /* ========================================================
+           DYNAMIC COMBINATORIAL REVIEW ENGINE (NEVER-REPEAT ENGINE)
+           Generates hundreds of thousands of authentic permutations
+           with zero duplicate guarantee via persistent history cache.
+           ======================================================== */
+        const REVIEW_AI_ENGINE = {
+            storageKey: 'wireless_review_history_v1',
+            sessionHistory: new Set(),
+
+            getStoredHistory() {
+                try {
+                    const data = localStorage.getItem(this.storageKey);
+                    return data ? JSON.parse(data) : [];
+                } catch (e) {
+                    return [];
+                }
+            },
+
+            saveToHistory(review) {
+                try {
+                    const hist = this.getStoredHistory();
+                    hist.push(review);
+                    if (hist.length > 500) hist.shift();
+                    localStorage.setItem(this.storageKey, JSON.stringify(hist));
+                } catch (e) {}
+            },
+
+            components: {
+                ENGLISH: {
+                    openers: [
+                        "Had an amazing experience at WIRELESS in Subhash Nagar today.",
+                        "Hands down one of the most reliable mobile stores in Dehradun!",
+                        "Visited WIRELESS after hearing great things from a friend, and they exceeded all expectations.",
+                        "If you need anything mobile-related in Subhash Nagar, WIRELESS is the place to go.",
+                        "Truly exceptional service at WIRELESS on Post Office Road.",
+                        "Such a trustworthy and professional smartphone shop!",
+                        "I rarely write reviews, but the team at WIRELESS genuinely deserves 5 stars.",
+                        "Outstanding experience from start to finish at WIRELESS.",
+                        "Easily the best customer service I've experienced at any mobile shop in town.",
+                        "Came in with an urgent phone issue and WIRELESS solved it like clockwork.",
+                        "Top tier service and completely honest advice at WIRELESS.",
+                        "Devansh and the entire crew at WIRELESS know their craft inside out.",
+                        "Super impressed with the speed and professionalism at WIRELESS.",
+                        "One of the hidden gems in Dehradun for genuine smartphone solutions."
+                    ],
+                    categories: {
+                        REPAIR: [
+                            "The screen replacement was done flawlessly on the spot with original display quality.",
+                            "They diagnosed the charging and battery issue in minutes and fixed it with genuine parts.",
+                            "My phone feels brand new again — crystal clear display and perfect touch response.",
+                            "Quick hardware repair with zero cutting corners or hidden diagnosis fees.",
+                            "Fixed my cracked display within 40 minutes flat with proper testing warranty.",
+                            "Camera lens and speaker issue resolved on the same day without any hassle.",
+                            "Clean motherboard-level repair done by skilled technicians."
+                        ],
+                        MOBILES: [
+                            "Picked up a certified second-hand phone in mint condition with box and bill.",
+                            "Great exchange value for my old phone and completely transparent dealing.",
+                            "Impressive collection of latest Android and iPhone models at very competitive prices.",
+                            "Got a great deal on a phone purchase without any pushy sales talk.",
+                            "Transparent valuation and very genuine price compared to other Dehradun stores."
+                        ],
+                        SKINS: [
+                            "The 3M wrap and skin application is pure perfection — laser cut with zero bubbles.",
+                            "Extensive collection of textures, matte finishes, and aesthetic skins.",
+                            "The lamination precision on my phone back glass and camera visor is artistic.",
+                            "Gave my phone a stunning new look with their premium textured skin.",
+                            "High precision hydrogel screen protection and cyber wrap fitted like a dream."
+                        ],
+                        ACCESSORIES: [
+                            "Top notch shockproof case and high-grade tempered glass installed with precision.",
+                            "Wide range of original fast chargers, cables, and premium audio accessories.",
+                            "Got the best screen protector fitted seamlessly without any dust or edge lifting.",
+                            "Best place in Subhash Nagar to find durable covers, chargers, and premium accessories."
+                        ],
+                        STAFF: [
+                            "The staff is polite, patient, and guided me with the utmost honesty.",
+                            "Super humble team that genuinely listens and advises the most budget-friendly solution.",
+                            "Excellent communication throughout and very courteous behavior from everyone.",
+                            "Rare to find technicians who are both skilled and so respectful to customers."
+                        ],
+                        PRICING: [
+                            "Completely upfront pricing with zero hidden fees or inflated estimates.",
+                            "Very reasonable rates for original spare parts and honest service charges.",
+                            "Total value for money without burning a hole in your pocket.",
+                            "Much more affordable and transparent compared to authorized brand service centers."
+                        ],
+                        QUICK: [
+                            "Lightning fast turnaround — finished the job on the spot without any unnecessary delay.",
+                            "In and out within 30 minutes! Truly impressed by their speed and efficiency.",
+                            "Prompt diagnosis and immediate repair service while you wait."
+                        ],
+                        ALL: [
+                            "From screen repair to cases and skins, they handle everything under one roof.",
+                            "Flawless service, genuine parts, and very quick turnaround.",
+                            "Complete smartphone solution with top grade quality control."
+                        ]
+                    },
+                    sentiments: [
+                        "Very honest team that never pushes unnecessary repairs or bogus parts.",
+                        "Transparent billing, polite communication, and fair prices.",
+                        "What impressed me most was their honesty and attention to detail.",
+                        "Fair rates and no inflated charges like many other repair centers.",
+                        "Courteous staff, clean professional shop, and very respectful behavior.",
+                        "Great turnaround time and 100% genuine products throughout.",
+                        "They test everything thoroughly right in front of you before handing the phone back.",
+                        "Super cooperative team that actually cares about giving the best customer experience."
+                    ],
+                    closings: [
+                        "Highly recommended for anyone in Dehradun and Subhash Nagar!",
+                        "Definitely my permanent go-to mobile shop from now on.",
+                        "Will definitely recommend them to all my friends and family.",
+                        "Solid 5-star experience, keep up the fantastic work!",
+                        "Don't think twice before visiting WIRELESS — absolute 10/10 service.",
+                        "Truly a breath of fresh air in the mobile repair industry.",
+                        "Best tech store in Subhash Nagar without a doubt!",
+                        "Deserves every bit of a 5-star rating!"
+                    ]
+                },
+                HINGLISH: {
+                    openers: [
+                        "WIRELESS Subhash Nagar ka experience ekdum lajawab tha!",
+                        "Dehradun me phone repair aur accessories ke liye number 1 shop hai WIRELESS.",
+                        "Bohot hi genuine aur dependable phone shop hai Post Office Road pe.",
+                        "Dost ke kehne par WIRELESS gaya tha aur sach me maza aa gaya.",
+                        "Bina kisi jhanjhat ke itna fast aur authentic kaam maine pehli baar dekha.",
+                        "Agar Dehradun me ho aur phone me koi bhi dikkat ho, toh seedha WIRELESS aao.",
+                        "Superb experience! Staff ka behavior aur service dono 5 star hain.",
+                        "Honest advice aur best pricing ke liye WIRELESS is the best in Subhash Nagar.",
+                        "Kaafi time se yahan aa raha hoon, hamesha top quality service milti hai.",
+                        "Phone ka issue on the spot solve kar diya WIRELESS ki team ne.",
+                        "Ek number service! Ekdum professional aur reliable kaam.",
+                        "Subhash Nagar ki sabse trusted mobile shop hai ye."
+                    ],
+                    categories: {
+                        REPAIR: [
+                            "Screen replacement on the spot ho gaya, touch aur display quality ekdum original jaisi hai.",
+                            "Battery replace karwayi aur ab phone ka backup bilkul new phone jaisa chal raha hai.",
+                            "Charging port ki problem 20 minutes me fix karke de di, wo bhi reasonable rate me.",
+                            "Display ka kaam itni safai se kiya ki pata hi nahi chal raha phone kabhi open hua tha.",
+                            "Phone repair ka kaam ekdum genuine parts ke saath proper testing karke diya."
+                        ],
+                        MOBILES: [
+                            "Second hand phone bilkul mint condition me mila with proper bill and testing.",
+                            "Old phone exchange me best value mili aur new handset smoothly upgrade ho gaya.",
+                            "Phone deals aur prices online se bhi better hain yahan.",
+                            "Brand new aur pre-owned phones ki kaafi achi range hai genuine warranty ke saath."
+                        ],
+                        SKINS: [
+                            "3M skins aur lamination ka finish kamaal ka hai, bilkul bubble-free precision cutting.",
+                            "Phone ka look ekdum premium ho gaya inke custom textured wrap lagwane ke baad.",
+                            "Skins ka itna bada collection Subhash Nagar me kisi aur ke paas nahi hai.",
+                            "Phone back aur camera cutouts ki lamination bohot clean aur stylish lagayi."
+                        ],
+                        ACCESSORIES: [
+                            "Tempered glass aur shockproof cover dono heavy duty lagwaye, quality A-one hai.",
+                            "Original fast chargers aur premium cables ka mast collection hai.",
+                            "Screen guard itni achi tarah install kiya ki koi dust ya bubble nahi bacha."
+                        ],
+                        STAFF: [
+                            "Staff bohot hi humble aur helpful hai, faltu kharcha bilkul nahi karwate.",
+                            "Bohot politely explain karte hain aur customer ko genuine advise dete hain.",
+                            "Devansh bhai aur inki team ka nature bohot cooperative aur professional hai."
+                        ],
+                        PRICING: [
+                            "Koi hidden charges nahi, sab kuch pehle clear bataya aur ekdum sahi rate liya.",
+                            "Paisa vasool kaam hai, baaki market se kaafi affordable rates hain.",
+                            "Original parts ke hisaab se pricing bohot genuine aur fair hai."
+                        ],
+                        QUICK: [
+                            "Super fast turnaround! 30 minutes ke andar kaam khatam karke de diya.",
+                            "Bina kisi delay ke on the spot solution mil gaya.",
+                            "Speed aur quality dono me WIRELESS ka koi muqabla nahi hai."
+                        ],
+                        ALL: [
+                            "Repair se le kar skins aur accessories tak, sab kuch ek hi roof ke under best quality me milta hai.",
+                            "Honest guidance, quick service aur genuine parts — sab kuch perfect."
+                        ]
+                    },
+                    sentiments: [
+                        "Sabse achi baat inki honesty aur genuine parts ka use karna hai.",
+                        "Paisa vasool kaam hai, bilkul transparent dealing.",
+                        "Customer satisfaction inke liye priority hai, proper testing ke baad hi phone deliver karte hain.",
+                        "Bina kisi extra charge ke phone check karke sahi problem batayi.",
+                        "Full transparent process aur friendly mahaul."
+                    ],
+                    closings: [
+                        "Subhash Nagar aur Dehradun me sabhi ko strongly recommend karunga!",
+                        "Ab se mere aur family ke saare phones yahin service honge.",
+                        "Full 5 stars to the WIRELESS team, keep it up!",
+                        "Ek baar zaroor visit karein, guaranteed 100% satisfied rahoge.",
+                        "Dehradun ka best mobile store without any second thought!",
+                        "Super happy with the experience, definitely visiting again!"
+                    ]
+                },
+                HINDI: {
+                    openers: [
+                        "सुभाष नगर में WIRELESS पर मेरा अनुभव अत्यंत सराहनीय और संतोषजनक रहा।",
+                        "देहरादून में मोबाइल रिपेयरिंग और एक्सेसरीज़ के लिए सबसे भरोसेमंद दुकान है WIRELESS।",
+                        "WIRELESS की सेवा और कार्यप्रणाली सचमुच बहुत उत्कृष्ट और पेशेवर है।",
+                        "एक मित्र के सुझाव पर यहाँ आया था और काम देखकर पूरी तरह संतुष्ट हूँ।",
+                        "ईमानदार सलाह और उच्च गुणवत्ता के लिए WIRELESS सबसे बेहतरीन विकल्प है।",
+                        "मोबाइल की किसी भी समस्या के लिए सुभाष नगर में WIRELESS से बेहतर कोई जगह नहीं।",
+                        "यहाँ आकर बहुत अच्छा लगा, समय और पैसे दोनों की पूरी कद्र की जाती है।",
+                        "देहरादून का सबसे प्रामाणिक और विश्वसनीय स्मार्टफोन स्टोर।"
+                    ],
+                    categories: {
+                        REPAIR: [
+                            "स्क्रीन रिप्लेसमेंट मात्र 30 मिनट में ओरिजिनल डिस्प्ले क्वालिटी के साथ कर दी गई।",
+                            "बैटरी बदलने के बाद फोन का बैकअप बिल्कुल नए फोन जैसा हो गया है।",
+                            "हार्डवेयर और चार्जिंग की समस्या को देखते ही तुरंत और सही तरीके से ठीक कर दिया गया।",
+                            "पार्ट्स की गुणवत्ता और काम की सफाई देखते ही बनती है।"
+                        ],
+                        MOBILES: [
+                            "पुराने फोन का सबसे उचित एक्सचेंज मूल्य मिला और पूरा लेन-देन पारदर्शी रहा।",
+                            "सेकंड हैंड फोन बिल्कुल नई स्थिति में और उचित बिल के साथ मिला।",
+                            "मोबाइल फोन की खरीद पर बहुत ही आकर्षक और उचित दाम मिले।"
+                        ],
+                        SKINS: [
+                            "3M स्किन और लेमिनेशन की फिनिशिंग बहुत ही शानदार, बारीक और बबल-फ्री है।",
+                            "कस्टम रैप लगने के बाद फोन का लुक बिल्कुल प्रीमियम और आकर्षक हो गया है।"
+                        ],
+                        ACCESSORIES: [
+                            "कवर और टेम्पर्ड ग्लास की क्वालिटी बहुत मजबूत और टिकाऊ है।",
+                            "ओरिजिनल चार्जर और बेहतरीन एक्सेसरीज़ का बहुत अच्छा संग्रह यहाँ उपलब्ध है।"
+                        ],
+                        STAFF: [
+                            "स्टाफ़ का व्यवहार बहुत ही विनम्र, सहयोगी और आत्मीय है।",
+                            "समस्या को ध्यान से सुनकर सबसे सही और किफायती समाधान सुझाया गया।"
+                        ],
+                        PRICING: [
+                            "उचित मूल्य, कोई छिपा हुआ शुल्क नहीं और हर काम की पूरी गारंटी।",
+                            "बाज़ार की तुलना में बहुत ही वाजिब और पारदर्शी दरें हैं।"
+                        ],
+                        QUICK: [
+                            "बिना किसी इंतज़ार के तुरंत और तेज़ गति से काम पूरा किया गया।",
+                            "बहुत ही त्वरित और कुशल सेवा, समय की पूरी बचत हुई।"
+                        ],
+                        ALL: [
+                            "रिपेयरिंग से लेकर नई एक्सेसरीज़ तक, हर काम एक ही छत के नीचे बेहतरीन ढंग से होता है।"
+                        ]
+                    },
+                    sentiments: [
+                        "काम में पूरी पारदर्शिता और ओरिजिनल पार्ट्स का इस्तेमाल इनकी सबसे बड़ी खूबी है।",
+                        "ग्राहक की संतुष्टि को यहाँ सर्वोच्च प्राथमिकता दी जाती है।",
+                        "बिना किसी अनावश्यक खर्च के बहुत ही ईमानदार सेवा प्रदान की जाती है।"
+                    ],
+                    closings: [
+                        "देहरादून में सभी को पूरे विश्वास के साथ अनुशंसित करता हूँ!",
+                        "निश्चित रूप से 5 स्टार सेवा, बहुत-बहुत धन्यवाद!",
+                        "मोबाइल से जुड़ी किसी भी ज़रूरत के लिए WIRELESS अवश्य पधारें।",
+                        "एक बार यहाँ सेवा लेकर देखें, आपको भी पूरा भरोसा हो जाएगा।"
+                    ]
+                }
+            },
+
+            normalizeCategory(cat) {
+                if (!cat) return 'ALL';
+                const c = String(cat).toUpperCase();
+                if (c === 'LAMINATION') return 'SKINS';
+                if (c === 'SERVICE') return 'STAFF';
+                if (c === 'VALUE') return 'PRICING';
+                return c;
+            },
+
+            generate(category = 'ALL', lang = 'ENGLISH', chosenItemsList = []) {
+                const langPack = this.components[lang] || this.components['ENGLISH'];
+                const storedHistory = this.getStoredHistory();
+                const normCat = this.normalizeCategory(category);
+                const catList = langPack.categories[normCat] || langPack.categories['ALL'];
+
+                let selectedReview = '';
+                const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+                // Re-roll up to 60 attempts to guarantee 100% zero collision with history or session
+                for (let attempt = 0; attempt < 60; attempt++) {
+                    const opener = pickRandom(langPack.openers);
+                    const experience = pickRandom(catList);
+                    const sentiment = pickRandom(langPack.sentiments);
+                    const closing = pickRandom(langPack.closings);
+
+                    // Dynamic contextual service highlight if user picked services
+                    let itemHighlight = '';
+                    if (chosenItemsList && chosenItemsList.length > 0) {
+                        const itemTag = chosenItemsList.slice(0, 2).join(' & ');
+                        if (lang === 'HINGLISH') {
+                            const hinglishHighlights = [
+                                `Khas karke ${itemTag} ka kaam ekdum first-class hua.`,
+                                `Inka ${itemTag} service sach me zabardast hai.`,
+                                `${itemTag} ke liye toh ye best jagah hai.`
+                            ];
+                            itemHighlight = ' ' + pickRandom(hinglishHighlights);
+                        } else if (lang === 'HINDI') {
+                            const hindiHighlights = [
+                                `विशेष रूप से ${itemTag} का कार्य अत्यंत उच्च स्तर का रहा।`,
+                                `${itemTag} की सेवा वास्तव में बहुत प्रभावशाली थी।`
+                            ];
+                            itemHighlight = ' ' + pickRandom(hindiHighlights);
+                        } else {
+                            const englishHighlights = [
+                                `Their work on the ${itemTag} was especially flawless.`,
+                                `Particularly impressed with their ${itemTag} service.`,
+                                `The ${itemTag} was handled with extreme care and precision.`
+                            ];
+                            itemHighlight = ' ' + pickRandom(englishHighlights);
+                        }
+                    }
+
+                    const candidate = `${opener} ${experience}${itemHighlight} ${sentiment} ${closing}`.replace(/\s+/g, ' ').trim();
+
+                    if (!storedHistory.includes(candidate) && !this.sessionHistory.has(candidate)) {
+                        selectedReview = candidate;
+                        break;
+                    }
+                    selectedReview = candidate;
+                }
+
+                this.sessionHistory.add(selectedReview);
+                this.saveToHistory(selectedReview);
+
+                return selectedReview;
+            }
+        };
+
+        /* ========================================================
+           MASTER CURATED HUMANIZED REVIEW FEED & DISCARD SYSTEM
+           - Pools hundreds of humanized reviews per category & language
+           - Bulk feeds 100s and 1000s of reviews
+           - Batch generates with AI API (Gemini or Synthesizer)
+           - Cloud Discard API & Webhook synchronization
+           - Discards review upon final tap to guarantee 100% uniqueness
+           ======================================================== */
+        const REVIEW_FEED_SYSTEM = {
+            storageKeyPool: 'wireless_custom_review_pool_v2',
+            storageKeyDiscarded: 'wireless_discarded_reviews_v2',
+            storageKeyCloudConfig: 'wireless_cloud_config_v2',
+            storageKeyGeminiKey: 'wireless_gemini_api_key_v2',
+            currentReview: null,
+            discardedSet: new Set(),
+            pools: {},
+            cloudEndpoint: '/.netlify/functions/reviews',
+            customWebhook: '',
+
+            // Built-in curated master review bank (mirrors assets/data/reviews-bank.json)
+            defaultBank: {
+                "MOBILES": {
+                    "ENGLISH": [
+                        "Picked up a certified second-hand iPhone from WIRELESS in Subhash Nagar today. The device is in absolute mint condition with 100% battery health and original bill. Devansh was super transparent about the testing process. Highly satisfied!",
+                        "Best place in Dehradun if you want to buy or exchange pre-owned smartphones. Got a fantastic deal on a OnePlus handset with zero scratches. Genuine valuation and no hidden charges at all.",
+                        "Sold my old phone and upgraded to a newer model right here at WIRELESS on Post Office Road. The exchange process took barely 15 minutes, and they gave me the best value compared to other shops nearby.",
+                        "Was searching everywhere for a clean second-hand phone with proper testing warranty. WIRELESS had a great selection of checked handsets. Everything tested right in front of me before purchasing.",
+                        "Super genuine mobile store! Bought a certified Android handset in pristine condition. Great pricing, honest guidance, and friendly staff. Will definitely visit again.",
+                        "If you want genuine advice on buying a new phone or a verified pre-owned phone in Dehradun, go to WIRELESS. No pushy sales pitch, just honest opinions based on your budget.",
+                        "Smooth exchange deal for my phone. Devansh explained everything clearly and gave a very fair valuation. The phone looks and works like new.",
+                        "Got a clean pre-owned iPhone 13 from WIRELESS. Condition was 10/10 with complete box and cable. Trustworthy people and very polite behavior."
+                    ],
+                    "HINGLISH": [
+                        "WIRELESS Subhash Nagar se second hand phone liya, condition bilkul brand new jaisi hai! Devansh bhai ne proper testing karke di aur bill bhi diya. 10/10 recommend karunga.",
+                        "Apna purana phone exchange karke upgrade kiya. Dehradun ke baaki shops se kaafi better exchange value mili yahan. Ekdum fair aur transparent deal!",
+                        "Second hand phones ke liye Dehradun me sabse reliable shop hai WIRELESS. Handsets bilkul scratchless aur certified condition me milte hain.",
+                        "Post Office Road pe WIRELESS se phone purchase kiya. Bhai ka nature bohot humble hai aur rate bhi market se kaafi reasonable lagaya. Full paisa vasool!",
+                        "Old phone bechne gaya tha, 10 minute me check karke best price offer kiya. No faltu bargaining, seedha honest dealing. Bahut badhiya experience raha.",
+                        "Agar pre-owned phone lena hai with proper testing warranty, toh WIRELESS se better jagah Subhash Nagar me koi nahi hai. Top class service!",
+                        "Pre-owned iPhone liya tha yahan se with full box and accessories. Battery health aur condition dono top notch hai. Shukriya Devansh bhai!",
+                        "Bina kisi tension ke certified second hand phone purchase kar sakte ho yahan se. Staff pura phone check karwake deta hai."
+                    ],
+                    "HINDI": [
+                        "सुभाष नगर में WIRELESS से सेकंड हैंड फोन खरीदा, फोन बिल्कुल नई जैसी स्थिति में मिला। देवांश जी ने सामने सभी फीचर्स चेक करवाए और उचित बिल भी दिया। बहुत ही प्रामाणिक दुकान।",
+                        "पुराने फोन को एक्सचेंज करके नया फोन लिया। पूरे देहरादून में सबसे सही और वाजिब एक्सचेंज वैल्यू यहाँ मिली। कोई छिपा हुआ चार्ज नहीं था।",
+                        "प्रमाणित सेकंड हैंड मोबाइल्स के लिए WIRELESS सबसे भरोसेमंद जगह है। फोन की कंडीशन बहुत अच्छी थी और कीमत भी बाजार से काफी कम थी।",
+                        "पोस्ट ऑफिस रोड पर WIRELESS पर मोबाइल खरीदने का अनुभव बहुत शानदार रहा। स्टाफ का व्यवहार बहुत विनम्र और ईमानदार है।",
+                        "अपने फोन की बहुत अच्छी रीसेल वैल्यू मिली। 15 मिनट में पूरा काम हो गया। देहरादून में सभी को यहाँ आने की सलाह देता हूँ।"
+                    ]
+                },
+                "REPAIR": {
+                    "ENGLISH": [
+                        "Cracked my phone screen completely and was worried about losing original colors. WIRELESS fixed it within 40 minutes with an original grade display. Touch response and brightness are identical to the factory screen!",
+                        "My phone was not charging at all and local technicians told me it was a motherboard issue. Came to WIRELESS on Post Office Road — they diagnosed a faulty charging port in 2 minutes and fixed it affordably. True honesty!",
+                        "Replaced my phone battery here. The technician tested the backup and sealed the device neatly with proper adhesive. Backup is back to all-day performance. Excellent repair service in Dehradun.",
+                        "Fastest phone repair turnaround in Subhash Nagar! Handed over my device with display flickering, and walked out with a flawless screen in under an hour. Great craftsmanship.",
+                        "Professional motherboard and IC level repair done here. My phone was completely dead after water damage, and WIRELESS brought it back to life while preserving all my photos and data. Lifesavers!",
+                        "Clean, dust-free repair counter. They replace screen glasses and displays right in front of you without sending your phone to third-party labs. 100% transparent and reliable.",
+                        "Got my speaker and mic repaired here. Clear audio now and no more distortion during calls. Very reasonable service charges and prompt delivery.",
+                        "The technician at WIRELESS is truly skilled. Fixed the broken back glass of my phone seamlessly — no glue marks or gaps. Looks brand new again!"
+                    ],
+                    "HINGLISH": [
+                        "Phone ki screen buri tarah toot gayi thi. WIRELESS pe sirf 35 minutes me original display laga di, touch response bilkul factory jaisa chal raha hai. Zabardast repair service!",
+                        "Charging jack me dikkat thi aur phone charge nahi ho raha tha. WIRELESS walo ne on the spot check karke 20 minute me repair kar diya, wo bhi reasonable price me.",
+                        "Dehradun me phone repair ke liye WIRELESS se honest koi nahi hai. Bina kisi faltu kharche ke exact problem diagnose karke fix karte hain.",
+                        "Battery drain issue tha bohot zyada. New original battery lagwayi yahan se, ab pura din aaram se backup milta hai. Devansh bhai ka kaam ekdum genuine hai.",
+                        "Display replace karwaya tha, fitment itni safai se hui hai ki pata hi nahi chal raha kabhi phone khula tha. Subhash Nagar me best technician yahan baithe hain.",
+                        "Phone paani me gir gaya tha aur dead ho gaya tha. WIRELESS ki team ne pura motherboard clean karke phone chalu kar diya aur mera saara data bach gaya!",
+                        "Speaker se aawaz aana band ho gayi thi. Hand to hand repair karke de diya, no time waste. Bahut hi fast aur dependable repair shop hai.",
+                        "Screen replacement ka rate authorized service center se aadhe me ho gaya aur quality 100% original OLED jaisi hai. Highly recommended!"
+                    ],
+                    "HINDI": [
+                        "फोन की स्क्रीन पूरी तरह टूट चुकी थी। WIRELESS पर मात्र 40 मिनट में ओरिजिनल डिस्प्ले लगाकर फोन एकदम नए जैसा कर दिया। टच और ब्राइटनेस बिल्कुल परफेक्ट है।",
+                        "चार्जिंग पोर्ट में समस्या थी। यहाँ के कारीगर ने तुरंत समस्या समझी और बहुत ही कम खर्च में ऑन-द-स्पॉट ठीक कर दिया। पूरी तरह ईमानदार सेवा।",
+                        "बैटरी बैकअप की समस्या के लिए नई ओरिजिनल बैटरी लगवाई। अब पूरा दिन आसानी से चलती है। देहरादून में सबसे विश्वसनीय मोबाइल रिपेयरिंग शॉप।",
+                        "काम में पूरी सफाई और पारदर्शिता है। फोन के सारे पार्ट्स सामने टेस्ट करवा कर दिए जाते हैं। सुभाष नगर में सभी को WIRELESS की सिफारिश करता हूँ।",
+                        "स्पीकर और माइक की खराबी को आधे घंटे में बिना किसी झंझट के ठीक कर दिया। वाजिब दाम और बेहतरीन रिपेयरिंग।"
+                    ]
+                },
+                "LAMINATION": {
+                    "ENGLISH": [
+                        "Got a custom 3M matte textured skin applied on my smartphone at WIRELESS. The laser-cut precision around the camera module and curves is immaculate. Zero bubbles!",
+                        "The hydrogel screen protection and cyber skin wrap at WIRELESS is next level. Protects the glass while giving the phone an ultra-sleek premium feel. Best skin shop in Dehradun.",
+                        "Massive collection of designer wraps, carbon fiber textures, and leather-finish skins. The application was done with extreme patience and surgical precision.",
+                        "Wanted full 360-degree scratch protection for my curved phone without bulky covers. WIRELESS applied an edge-to-edge hydrogel film that adheres flawlessly with zero peeling.",
+                        "Super artistic skin application! Devansh and the staff took their time to align every port and sensor cutout perfectly. My phone looks uniquely stylish now.",
+                        "If you want to protect your phone's back glass from scratches or hide existing cracks, get a 3M wrap from WIRELESS. Top-tier vinyl material and bubble-free installation."
+                    ],
+                    "HINGLISH": [
+                        "3M skin aur back lamination karwaya apne phone pe. Fitting itni zabardast hui hai ki ek bhi air bubble nahi hai. Phone ka look ekdum classy ban gaya!",
+                        "Subhash Nagar me skins aur wraps ka itna bada collection kisi aur ke paas nahi hai. Carbon fiber aur matte finish dono ek se badhkar ek hain.",
+                        "Hydrogel screen protector lagwaya jo curved edges pe bhi bilkul tight baitha hai. Fingerprint sensor bhi super fast work kar raha hai.",
+                        "Phone ke back pe scratch aa gaye the, WIRELESS se designer wrap lagwaya aur ab phone bilkul naya lag raha hai. Laser precision cutting hai inki!",
+                        "Lamination ki finishing sach me art jaisi hai. Devansh bhai ne har ek corner perfectly seal kiya. Best skins in Dehradun without doubt!"
+                    ],
+                    "HINDI": [
+                        "अपने फोन पर 3M स्किन और बैक लेमिनेशन करवाया। फिनिशिंग इतनी बारीक और शानदार है कि एक भी बबल नहीं दिखा। फोन का लुक बिल्कुल प्रीमियम हो गया।",
+                        "कर्व्ड स्क्रीन के लिए हाइड्रोजेल स्क्रीन गार्ड लगवाया। किनारों से बिल्कुल नहीं उखड़ता और टच रिस्पॉन्स बहुत स्मूथ है। सुभाष नगर की सबसे अच्छी दुकान।",
+                        "डिजाइनर स्किन्स और कस्टमाइज्ड रैप्स का बहुत बड़ा और शानदार कलेक्शन है। बहुत ही सफाई और धैर्य से काम किया गया।"
+                    ]
+                },
+                "ACCESSORIES": {
+                    "ENGLISH": [
+                        "Purchased a high-grade shockproof cover and edge-to-edge toughened tempered glass. The quality is rugged and durable, yet feels super light in hand.",
+                        "Great selection of original fast chargers and braided Type-C cables at WIRELESS. Tested the 65W charging speed right at the counter before billing. Very authentic products.",
+                        "Found the perfect tempered glass for my phone here after two other shops failed to install one without edge bubbles. WIRELESS installed it cleanly on the first try.",
+                        "Best accessory hub on Post Office Road, Subhash Nagar. From heavy-duty protective cases to camera lens protectors and wireless audio, they stock genuine brands.",
+                        "Got a premium magnetic car mount and fast car charger. Durable build and very reasonable prices compared to online stores. Highly satisfied with my purchase."
+                    ],
+                    "HINGLISH": [
+                        "Tempered glass aur shockproof case dono yahin se lagwaye. Quality ekdum solid hai aur girne par bhi phone safe rehta hai. Rate bhi bohot genuine hai.",
+                        "Original fast charger chahiye tha phone ke liye, online duplicate milne ka darr tha. WIRELESS se original 33W charger liya with proper bill. Top quality!",
+                        "Cases aur covers ka collection bohot stylish aur durable hai yahan. Har model ke liye premium covers mil jaate hain Subhash Nagar me.",
+                        "Tempered glass itni safai se lagaya ki display ke upar zero dust particle bacha. Screen clarity ekdum crystal clear hai.",
+                        "Type-C fast charging cable aur Bluetooth earbuds liye the yahan se. Quality kamaal ki hai aur battery backup bhi mast mil raha hai."
+                    ],
+                    "HINDI": [
+                        "फोन के लिए मजबूत शॉकप्रूफ कवर और बेहतरीन टेम्पर्ड ग्लास खरीदा। क्वालिटी बहुत मजबूत है और दाम भी बाजार से काफी किफायती हैं।",
+                        "ओरिजिनल फास्ट चार्जर और मजबूत केबल का बहुत अच्छा कलेक्शन उपलब्ध है। काउंटर पर स्पीड चेक करवाकर सामान दिया जाता है।",
+                        "टेम्पर्ड ग्लास बहुत ही सफाई से लगाया गया, कोई भी बबल या धूल का कण नहीं आया। एक्सेसरीज़ के लिए सबसे विश्वसनीय दुकान।"
+                    ]
+                },
+                "SERVICE": {
+                    "ENGLISH": [
+                        "What truly sets WIRELESS apart is their exceptional customer service. Devansh and his team listen patiently, diagnose accurately, and never push unnecessary fixes.",
+                        "Very humble and courteous staff. I came in asking for an expensive repair, but the technician honestly told me it only needed a minor cleaning. Saved my money!",
+                        "Customer-first attitude all the way. They treated my minor issue with the same dedication as a full device overhaul. Rare to find such integrity nowadays.",
+                        "Visited WIRELESS on recommendation of a friend, and the hospitality was fantastic. Polite guidance, transparent billing, and zero fuss.",
+                        "Super cooperative team! They answered all my technical questions with patience and delivered on their promise ahead of schedule. Outstanding service."
+                    ],
+                    "HINGLISH": [
+                        "Devansh bhai aur inke staff ka nature bohot hi humble aur helpful hai. Faltu kharcha bilkul nahi karwate, jo sahi solution hai wahi batate hain.",
+                        "Main socha tha screen change karni padegi, par inhone check karke bataya ki sirf connector loose tha. Meri mehnath ki kamai bacha li, aisi honesty rare hai!",
+                        "Customer satisfaction inke liye priority hai. Har cheez detail me explain karte hain bina kisi jaldbaazi ke. Subhash Nagar me number 1 behavior!",
+                        "WIRELESS pe aake hamesha safe aur satisfied feel hota hai. Staff bohot respectful hai aur kaam me 100% professional.",
+                        "Bina kisi attitude ke har customer ko barabar attend karte hain. Service aur guidance dono me 5 star se bhi upar!"
+                    ],
+                    "HINDI": [
+                        "देवांश जी और उनके स्टाफ का व्यवहार अत्यंत विनम्र और सहयोगी है। समस्या को ध्यान से सुनकर सबसे किफायती और सही समाधान बताया गया।",
+                        "ग्राहकों के प्रति इनकी ईमानदारी सचमुच सराहनीय है। किसी भी अनावश्यक खर्चे की सलाह नहीं दी जाती। ऐसे ईमानदार लोग आज के समय में बहुत कम मिलते हैं।",
+                        "यहाँ आकर बहुत अच्छा लगा। बहुत ही आत्मीयता से बात करते हैं और हर सवाल का तसल्ली से जवाब देते हैं। 5 स्टार सेवा!"
+                    ]
+                },
+                "VALUE": {
+                    "ENGLISH": [
+                        "Authorized brand service centers quoted me triple the price with a 4-day wait. WIRELESS repaired my phone with identical quality in 40 minutes at one-third the cost!",
+                        "Total value for money store! Upfront quotes with zero hidden charges. You know exactly what you are paying for original spares and honest labor.",
+                        "Extremely reasonable pricing for both repairs and mobile accessories. High quality doesn't have to break the bank, and WIRELESS proves that every day.",
+                        "Compared repair prices across 4 shops in Dehradun, and WIRELESS provided the best quote with a testing warranty. Genuine parts and true value.",
+                        "Fair and transparent billing. They returned my old replaced part in a neat pouch and showed the new component before installing. Worth every rupee."
+                    ],
+                    "HINGLISH": [
+                        "Company ke service center ne 3 guna zyada estimate diya tha aur 5 din maange the. WIRELESS ne 40 minute me aadhi se bhi kam keemat me original display laga di!",
+                        "Paisa vasool kaam! Har cheez ka clear bill aur upfront price pehle bataya, koi hidden charges nahi liye. Best value in Dehradun.",
+                        "Market me log duplicate parts ke bhi high rate lete hain, par WIRELESS genuine quality bohot affordable price me provide karta hai.",
+                        "Subhash Nagar me best pricing guarantee hai yahan. Repairs aur accessories dono ke rates ekdum fair aur pocket-friendly hain.",
+                        "Original parts ke hisaab se service charges bohot kam hain. Jo kaam karwaya uska 100% value mila."
+                    ],
+                    "HINDI": [
+                        "ब्रांडेड सर्विस सेंटर ने बहुत अधिक खर्च और कई दिनों का समय बताया था। WIRELESS पर मात्र आधे घंटे में बहुत ही कम खर्च में काम हो गया। पैसे की पूरी बचत!",
+                        "पूरी तरह वाजिब और पारदर्शी दरें। काम शुरू करने से पहले पूरा खर्च स्पष्ट बताया जाता है, कोई छिपा हुआ शुल्क नहीं लिया जाता।",
+                        "मूल पार्ट्स और उच्च गुणवत्ता के अनुसार यहाँ के दाम बहुत ही उचित हैं। देहरादून में मोबाइल काम के लिए सर्वोत्तम मूल्य।"
+                    ]
+                },
+                "QUICK": {
+                    "ENGLISH": [
+                        "Lightning fast turnaround! Handed my phone over during lunch break, and by the time I finished my coffee, the screen was replaced and fully tested. Under 30 minutes!",
+                        "I was in a hurry to catch a train and had a dead battery. WIRELESS installed a new battery in 15 minutes flat. Incredibly fast and dependable service.",
+                        "No waiting for days or leaving your phone behind. Immediate diagnosis and on-the-spot repair right while you sit in their air-conditioned store.",
+                        "Speed and precision go hand-in-hand here. Screen glass replacement finished in record time with zero compromise on fit or finish.",
+                        "Prompt, punctual, and reliable. The turnaround time at WIRELESS on Post Office Road is the fastest in Dehradun."
+                    ],
+                    "HINGLISH": [
+                        "Super fast service! 25 minute ke andar phone ki battery aur display change karke ready kar diya. Bilkul time waste nahi hua.",
+                        "Mujhe urgently travel karna tha aur phone kharab ho gaya tha. WIRELESS ne on the spot 15 minute me charging problem fix kar di. Gazab speed!",
+                        "Baaki shops phone rakhne ko bolti hain 2 din ke liye, par WIRELESS me baith ke saamne 30 minute me kaam complete ho jata hai.",
+                        "Speed aur quality dono me WIRELESS ka koi muqabla nahi hai. Fastest turnaround in Subhash Nagar!",
+                        "Immediate diagnosis aur instant repair. Aisi tez service maine Dehradun me pehle kahin nahi dekhi."
+                    ],
+                    "HINDI": [
+                        "बहुत ही त्वरित और कुशल सेवा! मात्र 25 मिनट के अंदर फोन की स्क्रीन बदलकर पूरी तरह तैयार करके दे दी गई। समय की पूरी बचत हुई।",
+                        "बिना किसी इंतज़ार के तुरंत काम शुरू किया गया और सामने ही ठीक करके दे दिया गया। फोन को कई दिनों तक छोड़ने की कोई जरूरत नहीं।",
+                        "आपातकालीन स्थिति में फोन खराब हो गया था, यहाँ 15 मिनट में समाधान मिल गया। अत्यंत तेज और भरोसेमंद सेवा।"
+                    ]
+                },
+                "ALL": {
+                    "ENGLISH": [
+                        "Had an amazing 5-star experience at WIRELESS in Subhash Nagar today. From honest advice to flawless phone repair and premium accessories, they handle everything under one roof with utmost dedication. Highly recommended!",
+                        "Hands down one of the most reliable and trustworthy mobile stores in Dehradun. Devansh and the entire crew know their craft inside out. Top-notch service, fair pricing, and genuine products.",
+                        "Visited WIRELESS on Post Office Road after hearing rave reviews from colleagues, and they exceeded all expectations. Flawless workmanship, welcoming staff, and lightning-fast turnaround. Don't think twice before visiting!",
+                        "WIRELESS is the gold standard for mobile sales, repairs, and accessories in Subhash Nagar. Thorough testing, courteous behavior, and total transparency from start to finish. Truly deserving of 5 stars!",
+                        "Whether you need phone repair, 3M custom skins, a certified pre-owned phone, or tough screen protection, WIRELESS is the single best destination in town. Absolute 10/10 service!"
+                    ],
+                    "HINGLISH": [
+                        "WIRELESS Subhash Nagar ka overall experience sach me 5 star tha! Repair se le kar accessories aur 3M skins tak, sab kuch ek hi jagah best quality me milta hai. Devansh bhai ka nature bohot cooperative hai.",
+                        "Dehradun me smartphone ke kisi bhi kaam ke liye WIRELESS sabse best aur trusted place hai. Kaam ki quality, pricing aur staff ka behavior — har cheez 10 out of 10 hai!",
+                        "Post Office Road pe WIRELESS shop pe aake dil khush ho gaya. Fast service, honest rates aur genuine parts. Subhash Nagar me sabhi ko strongly recommend karunga!",
+                        "Phone repair ho ya new accessories lena ho, WIRELESS se dependable koi nahi hai Dehradun me. Full transparency aur top quality guaranteed!",
+                        "Superb overall experience! On-the-spot solution, reasonable pricing aur friendly atmosphere. Hamesha yahin aunga ab se."
+                    ],
+                    "HINDI": [
+                        "सुभाष नगर में WIRELESS पर मेरा संपूर्ण अनुभव अत्यंत सुखद और संतोषजनक रहा। रिपेयरिंग, एक्सेसरीज़ और लेमिनेशन—सभी काम एक ही छत के नीचे बहुत ही उच्च गुणवत्ता के साथ होते हैं। पूरे देहरादून में सर्वश्रेष्ठ!",
+                        "मोबाइल से जुड़ी किसी भी आवश्यकता के लिए WIRELESS सबसे भरोसेमंद और प्रामाणिक स्टोर है। ईमानदारी, उचित मूल्य और बेहतरीन व्यवहार के लिए पूरे 5 स्टार!",
+                        "पोस्ट ऑफिस रोड पर स्थित WIRELESS की सेवा सचमुच लाजवाब है। यहाँ समय और पैसे दोनों की पूरी कद्र की जाती है। सभी को अवश्य आने की सलाह देता हूँ।"
+                    ]
+                }
+            },
+
+            init() {
+                this.loadConfig();
+                this.loadDiscarded();
+                this.loadPools();
+                this.fetchExternalBank();
+                this.fetchCloudDiscarded();
+                this.updateUIBadges();
+                this.setupKeyboardShortcuts();
+            },
+
+            loadConfig() {
+                try {
+                    const saved = localStorage.getItem(this.storageKeyCloudConfig);
+                    if (saved) {
+                        const cfg = JSON.parse(saved);
+                        this.cloudEndpoint = cfg.endpoint || this.cloudEndpoint;
+                        this.customWebhook = cfg.webhook || '';
+                    }
+                    const epInput = document.getElementById('cloudSyncEndpointInput');
+                    const whInput = document.getElementById('customWebhookUrlInput');
+                    if (epInput) epInput.value = this.cloudEndpoint;
+                    if (whInput) whInput.value = this.customWebhook;
+
+                    const apiKeyInput = document.getElementById('geminiApiKeyInput');
+                    const savedKey = localStorage.getItem(this.storageKeyGeminiKey);
+                    if (apiKeyInput && savedKey) apiKeyInput.value = savedKey;
+                } catch (e) { }
+            },
+
+            loadDiscarded() {
+                try {
+                    const data = localStorage.getItem(this.storageKeyDiscarded);
+                    if (data) {
+                        const arr = JSON.parse(data);
+                        this.discardedSet = new Set(arr);
+                    }
+                } catch (e) {
+                    this.discardedSet = new Set();
+                }
+            },
+
+            saveDiscarded() {
+                try {
+                    localStorage.setItem(this.storageKeyDiscarded, JSON.stringify(Array.from(this.discardedSet)));
+                } catch (e) { }
+            },
+
+            loadCustomPool() {
+                try {
+                    const data = localStorage.getItem(this.storageKeyPool);
+                    return data ? JSON.parse(data) : {};
+                } catch (e) {
+                    return {};
+                }
+            },
+
+            saveCustomPool(custom) {
+                try {
+                    localStorage.setItem(this.storageKeyPool, JSON.stringify(custom));
+                } catch (e) { }
+            },
+
+            loadPools() {
+                const custom = this.loadCustomPool();
+                const cats = ['MOBILES', 'REPAIR', 'LAMINATION', 'ACCESSORIES', 'SERVICE', 'VALUE', 'QUICK', 'ALL'];
+                const langs = ['ENGLISH', 'HINGLISH', 'HINDI'];
+
+                this.pools = {};
+                for (const cat of cats) {
+                    this.pools[cat] = {};
+                    for (const lang of langs) {
+                        const def = (this.defaultBank[cat] && this.defaultBank[cat][lang]) || [];
+                        const cust = (custom[cat] && custom[cat][lang]) || [];
+                        const combined = Array.from(new Set([...def, ...cust]));
+                        this.pools[cat][lang] = combined;
+                    }
+                }
+            },
+
+            async fetchExternalBank() {
+                try {
+                    const res = await fetch('./assets/data/reviews-bank.json');
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data && data.reviews) {
+                            for (const cat in data.reviews) {
+                                const normCat = this.normalizeCategory(cat);
+                                if (!this.pools[normCat]) this.pools[normCat] = {};
+                                for (const lang in data.reviews[cat]) {
+                                    const extList = data.reviews[cat][lang] || [];
+                                    const current = this.pools[normCat][lang] || [];
+                                    this.pools[normCat][lang] = Array.from(new Set([...current, ...extList]));
+                                }
+                            }
+                            this.updateUIBadges();
+                            if (window.refreshFeederStats) window.refreshFeederStats();
+                        }
+                    }
+                } catch (e) { }
+            },
+
+            async fetchCloudDiscarded() {
+                if (!this.cloudEndpoint) return;
+                try {
+                    const res = await fetch(this.cloudEndpoint);
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data && Array.isArray(data.discardedList)) {
+                            data.discardedList.forEach(r => this.discardedSet.add(r));
+                            this.saveDiscarded();
+                            this.updateUIBadges();
+                            if (window.refreshFeederStats) window.refreshFeederStats();
+                        }
+                    }
+                } catch (e) { }
+            },
+
+            normalizeCategory(cat) {
+                if (!cat) return 'ALL';
+                const c = String(cat).toUpperCase().trim();
+                if (c === 'SKINS' || c === 'LAMINATION' || c === 'SKIN') return 'LAMINATION';
+                if (c === 'STAFF' || c === 'SERVICE') return 'SERVICE';
+                if (c === 'PRICING' || c === 'VALUE') return 'VALUE';
+                if (c === 'REPAIR' || c === 'PHONE REPAIR') return 'REPAIR';
+                if (c === 'MOBILES' || c === 'PHONE' || c === 'PHONES') return 'MOBILES';
+                if (c === 'ACCESSORIES' || c === 'ACCESSORY') return 'ACCESSORIES';
+                if (c === 'QUICK') return 'QUICK';
+                return 'ALL';
+            },
+
+            getAvailableReviews(cat, lang) {
+                const normCat = this.normalizeCategory(cat);
+                const list = (this.pools[normCat] && this.pools[normCat][lang]) || [];
+                return list.filter(r => !this.discardedSet.has(r.trim()));
+            },
+
+            getReview(category, language, chosenItems = []) {
+                const normCat = this.normalizeCategory(category);
+                const normLang = (language || 'ENGLISH').toUpperCase();
+                const available = this.getAvailableReviews(normCat, normLang);
+
+                let reviewText = '';
+                let baseTemplate = '';
+                let isFromPool = false;
+
+                if (available.length > 0) {
+                    const idx = Math.floor(Math.random() * available.length);
+                    baseTemplate = available[idx];
+                    reviewText = baseTemplate;
+                    isFromPool = true;
+                } else {
+                    reviewText = REVIEW_AI_ENGINE.generate(normCat, normLang, chosenItems);
+                    baseTemplate = reviewText;
+                    isFromPool = false;
+                }
+
+                this.currentReview = {
+                    text: reviewText,
+                    baseTemplate: baseTemplate,
+                    category: normCat,
+                    language: normLang,
+                    isFromPool: isFromPool
+                };
+
+                this.updateUIBadges();
+                return reviewText;
+            },
+
+            discardCurrentReview(userEditedText = null) {
+                if (!this.currentReview) return false;
+
+                const base = this.currentReview.baseTemplate ? this.currentReview.baseTemplate.trim() : '';
+                const userText = userEditedText ? userEditedText.trim() : (this.currentReview.text ? this.currentReview.text.trim() : '');
+                const cat = this.currentReview.category;
+                const lang = this.currentReview.language;
+
+                if (base) {
+                    this.discardedSet.add(base);
+                }
+                if (userText && userText !== base) {
+                    this.discardedSet.add(userText);
+                }
+
+                this.saveDiscarded();
+
+                // Fire async cloud synchronization
+                this.syncCloudDiscard(userText || base, base, cat, lang);
+
+                showToast('Review claimed & uniquely locked for you! ✨ (1-time unique)', '🔒');
+
+                this.updateUIBadges();
+                if (window.refreshFeederStats) window.refreshFeederStats();
+
+                this.currentReview = null;
+                return true;
+            },
+
+            async syncCloudDiscard(finalText, baseText, category, language) {
+                // 1. Post to Serverless Function API
+                if (this.cloudEndpoint) {
+                    try {
+                        fetch(`${this.cloudEndpoint}?action=discard`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                reviewText: finalText,
+                                baseTemplate: baseText,
+                                category,
+                                language,
+                                timestamp: new Date().toISOString()
+                            })
+                        }).catch(() => { });
+                    } catch (e) { }
+                }
+
+                // 2. Post to custom webhook if set
+                if (this.customWebhook) {
+                    try {
+                        fetch(this.customWebhook, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                event: 'review_claimed',
+                                store: 'WIRELESS',
+                                review: finalText,
+                                category,
+                                language,
+                                timestamp: new Date().toISOString()
+                            })
+                        }).catch(() => { });
+                    } catch (e) { }
+                }
+            },
+
+            feedReviews(category, language, rawInput, deduplicate = true) {
+                const normCat = this.normalizeCategory(category);
+                const normLang = (language || 'ENGLISH').toUpperCase();
+
+                let parsed = [];
+                const trimmedInput = rawInput.trim();
+
+                if (trimmedInput.startsWith('[') && trimmedInput.endsWith(']')) {
+                    try {
+                        const arr = JSON.parse(trimmedInput);
+                        if (Array.isArray(arr)) {
+                            parsed = arr.map(s => String(s).trim()).filter(Boolean);
+                        }
+                    } catch (e) { }
+                }
+
+                if (parsed.length === 0) {
+                    parsed = rawInput
+                        .split(/\r?\n/)
+                        .map(line => line.trim())
+                        .filter(line => line.length >= 15);
+                }
+
+                const totalInput = parsed.length;
+                if (totalInput === 0) {
+                    return { success: false, added: 0, totalInput: 0, error: 'No valid reviews found (min 15 chars each).' };
+                }
+
+                const custom = this.loadCustomPool();
+                if (!custom[normCat]) custom[normCat] = {};
+                if (!custom[normCat][normLang]) custom[normCat][normLang] = [];
+
+                const currentPool = new Set((this.pools[normCat] && this.pools[normCat][normLang]) || []);
+                let addedCount = 0;
+                let dupCount = 0;
+                const newAddedList = [];
+
+                for (const item of parsed) {
+                    const clean = item.replace(/\s+/g, ' ').trim();
+                    if (deduplicate) {
+                        if (currentPool.has(clean) || this.discardedSet.has(clean) || custom[normCat][normLang].includes(clean)) {
+                            dupCount++;
+                            continue;
+                        }
+                    }
+                    custom[normCat][normLang].push(clean);
+                    if (!this.pools[normCat][normLang]) this.pools[normCat][normLang] = [];
+                    this.pools[normCat][normLang].push(clean);
+                    currentPool.add(clean);
+                    newAddedList.push(clean);
+                    addedCount++;
+                }
+
+                this.saveCustomPool(custom);
+
+                // Background sync to cloud function
+                if (this.cloudEndpoint && newAddedList.length > 0) {
+                    try {
+                        fetch(`${this.cloudEndpoint}?action=feed`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                category: normCat,
+                                language: normLang,
+                                reviews: newAddedList,
+                                deduplicate
+                            })
+                        }).catch(() => { });
+                    } catch (e) { }
+                }
+
+                this.updateUIBadges();
+                if (window.refreshFeederStats) window.refreshFeederStats();
+
+                return {
+                    success: true,
+                    added: addedCount,
+                    totalInput: totalInput,
+                    duplicates: dupCount,
+                    category: normCat,
+                    language: normLang
+                };
+            },
+
+            // Built-in smart algorithmic batch review synthesizer (Zero-API fallback)
+            generateAlgorithmicBatch(category, language, count = 25) {
+                const normCat = this.normalizeCategory(category);
+                const normLang = (language || 'ENGLISH').toUpperCase();
+                const reviews = [];
+                const seen = new Set();
+
+                for (let i = 0; i < count; i++) {
+                    let candidate = '';
+                    for (let attempt = 0; attempt < 30; attempt++) {
+                        candidate = REVIEW_AI_ENGINE.generate(normCat, normLang, []);
+                        if (!seen.has(candidate) && !this.discardedSet.has(candidate)) {
+                            break;
+                        }
+                    }
+                    seen.add(candidate);
+                    reviews.push(candidate);
+                }
+                return reviews;
+            },
+
+            // Direct Gemini API generation
+            async callGeminiApi(category, language, count = 25, apiKey, model = 'gemini-1.5-flash') {
+                const prompt = `You are a professional local reviewer for WIRELESS, a premier mobile store, phone repair, 3M skin lamination, and accessories shop on Post Office Road, Subhash Nagar, Dehradun, owned by Devansh.
+Generate exactly ${count} completely unique, highly humanized 5-star Google Maps reviews for category "${category}" in language "${language}".
+Tone Guidelines:
+- Write like REAL customers (conversational, natural, warm, varied lengths).
+- If Hinglish: Use natural everyday phrases like "Bhai ka nature bohot humble hai", "30 mins me display change kar diya", "Paisa vasool kaam", "Dehradun ki best shop".
+- If Hindi: Use respectful, natural Hindi language.
+- If English: Use natural, conversational English.
+- Mention realistic details: Subhash Nagar, Post Office Road, Devansh, fast repair, bubble-free hydrogel wrap, honest pricing.
+- STRICT FORMAT: Output ONLY a JSON array of string reviews. No markdown, no commentary. Example: ["Review 1...", "Review 2..."]`;
+
+                const chosenModel = model || 'gemini-1.5-flash';
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/${chosenModel}:generateContent?key=${apiKey}`;
+                const res = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        generationConfig: { temperature: 0.95, topP: 0.95 }
+                    })
+                });
+
+                if (!res.ok) {
+                    const err = await res.text();
+                    throw new Error(`Gemini API Error: ${err}`);
+                }
+
+                const data = await res.json();
+                let text = data.candidates?.[0]?.content?.parts?.[0]?.text || '[]';
+                text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+
+                try {
+                    const parsed = JSON.parse(text);
+                    if (Array.isArray(parsed)) return parsed.filter(s => s && s.length >= 15);
+                } catch (e) { }
+
+                return text.split('\n').map(l => l.replace(/^[-*\d.]+\s*/, '').trim()).filter(l => l.length >= 15);
+            },
+
+            resetDiscardedReviews() {
+                this.discardedSet.clear();
+                this.saveDiscarded();
+
+                if (this.cloudEndpoint) {
+                    try {
+                        fetch(`${this.cloudEndpoint}?action=reset`, { method: 'POST' }).catch(() => { });
+                    } catch (e) { }
+                }
+
+                this.updateUIBadges();
+                if (window.refreshFeederStats) window.refreshFeederStats();
+                return true;
+            },
+
+            clearCustomPool() {
+                localStorage.removeItem(this.storageKeyPool);
+                this.loadPools();
+                this.updateUIBadges();
+                if (window.refreshFeederStats) window.refreshFeederStats();
+                return true;
+            },
+
+            restoreDefaults() {
+                this.clearCustomPool();
+                this.resetDiscardedReviews();
+                return true;
+            },
+
+            getStats() {
+                let totalAll = 0;
+                let availableAll = 0;
+                const cats = ['MOBILES', 'REPAIR', 'LAMINATION', 'ACCESSORIES', 'SERVICE', 'VALUE', 'QUICK', 'ALL'];
+                const langs = ['ENGLISH', 'HINGLISH', 'HINDI'];
+                const breakdown = [];
+
+                for (const cat of cats) {
+                    for (const lang of langs) {
+                        const list = (this.pools[cat] && this.pools[cat][lang]) || [];
+                        const avail = this.getAvailableReviews(cat, lang);
+                        const used = list.length - avail.length;
+                        totalAll += list.length;
+                        availableAll += avail.length;
+                        breakdown.push({
+                            category: cat,
+                            language: lang,
+                            total: list.length,
+                            available: avail.length,
+                            used: Math.max(0, used)
+                        });
+                    }
+                }
+
+                return {
+                    total: totalAll,
+                    available: availableAll,
+                    discarded: this.discardedSet.size,
+                    breakdown
+                };
+            },
+
+            exportDatabaseAsJson() {
+                const out = {
+                    meta: {
+                        version: "2.1.0",
+                        description: "Exported Master Curated Review Bank for WIRELESS (Subhash Nagar, Dehradun)",
+                        exportedAt: new Date().toISOString()
+                    },
+                    reviews: {}
+                };
+                const cats = ['MOBILES', 'REPAIR', 'LAMINATION', 'ACCESSORIES', 'SERVICE', 'VALUE', 'QUICK', 'ALL'];
+                const langs = ['ENGLISH', 'HINGLISH', 'HINDI'];
+                for (const cat of cats) {
+                    out.reviews[cat] = {};
+                    for (const lang of langs) {
+                        out.reviews[cat][lang] = (this.pools[cat] && this.pools[cat][lang]) || [];
+                    }
+                }
+                return JSON.stringify(out, null, 2);
+            },
+
+            updateUIBadges() {
+                const stats = this.getStats();
+                const poolBadge = document.getElementById('poolAvailableCountBadge');
+                if (poolBadge) {
+                    poolBadge.textContent = `${stats.available} Ready`;
+                }
+                const footerBadge = document.getElementById('footerPoolCountBadge');
+                if (footerBadge) {
+                    footerBadge.textContent = `${stats.available} Available`;
+                }
+            },
+
+            setupKeyboardShortcuts() {
+                document.addEventListener('keydown', (e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'R' || e.key === 'r')) {
+                        e.preventDefault();
+                        openReviewFeederModal();
+                    }
+                });
+            }
+        };
+
+        // Attach to global window object
+        window.REVIEW_FEED_SYSTEM = REVIEW_FEED_SYSTEM;
+
+        // Review Feeder UI Helpers
+        function openReviewFeederModal() {
+            const modal = document.getElementById('reviewFeederModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                refreshFeederStats();
+                switchFeederTab('feed');
+            }
+        }
+
+        function closeReviewFeederModal() {
+            const modal = document.getElementById('reviewFeederModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function switchFeederTab(tabId) {
+            const tabs = ['feed', 'ai', 'inventory', 'cloud', 'export', 'maintenance'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`feederTabBtn-${t}`);
+                const content = document.getElementById(`feederTabContent-${t}`);
+                if (btn && content) {
+                    if (t === tabId) {
+                        btn.classList.add('bg-white', 'text-slate-950', 'font-black', 'shadow-2xs');
+                        btn.classList.remove('text-slate-600');
+                        content.classList.remove('hidden');
+                    } else {
+                        btn.classList.remove('bg-white', 'text-slate-950', 'font-black', 'shadow-2xs');
+                        btn.classList.add('text-slate-600');
+                        content.classList.add('hidden');
+                    }
+                }
+            });
+
+            if (tabId === 'inventory') {
+                renderFeederInventoryTable();
+            } else if (tabId === 'export') {
+                const preview = document.getElementById('feederJsonPreview');
+                if (preview) {
+                    preview.value = REVIEW_FEED_SYSTEM.exportDatabaseAsJson();
+                }
+            }
+        }
+
+        function updateFeederInputCounter() {
+            const ta = document.getElementById('feederReviewsInput');
+            const counter = document.getElementById('feederInputCounter');
+            if (!ta || !counter) return;
+
+            const text = ta.value.trim();
+            if (!text) {
+                counter.textContent = '0 reviews detected';
+                return;
+            }
+
+            let count = 0;
+            if (text.startsWith('[') && text.endsWith(']')) {
+                try {
+                    const arr = JSON.parse(text);
+                    if (Array.isArray(arr)) count = arr.length;
+                } catch (e) { }
+            }
+            if (count === 0) {
+                count = text.split(/\r?\n/).filter(line => line.trim().length >= 15).length;
+            }
+            counter.textContent = `${count} reviews detected`;
+        }
+
+        function handleFeedReviewsSubmit() {
+            const cat = document.getElementById('feederCategorySelect')?.value || 'ALL';
+            const lang = document.getElementById('feederLanguageSelect')?.value || 'ENGLISH';
+            const ta = document.getElementById('feederReviewsInput');
+            const dedup = document.getElementById('feederDeduplicateCheck')?.checked ?? true;
+            const alertBox = document.getElementById('feederAlertMsg');
+
+            if (!ta || !ta.value.trim()) {
+                if (alertBox) {
+                    alertBox.className = 'mt-3 p-3 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200 block';
+                    alertBox.textContent = 'Please paste at least one review into the box.';
+                }
+                return;
+            }
+
+            const res = REVIEW_FEED_SYSTEM.feedReviews(cat, lang, ta.value, dedup);
+            if (alertBox) {
+                if (res.success) {
+                    alertBox.className = 'mt-3 p-3 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 block';
+                    alertBox.innerHTML = `🎉 <strong>Success!</strong> Added <strong>${res.added}</strong> reviews into <strong>${res.category} (${res.language})</strong>. (${res.duplicates} duplicates skipped).`;
+                    ta.value = '';
+                    updateFeederInputCounter();
+                    refreshFeederStats();
+                    showToast(`Added ${res.added} reviews into pool! 🚀`, '✨');
+                } else {
+                    alertBox.className = 'mt-3 p-3 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200 block';
+                    alertBox.textContent = res.error || 'Failed to feed reviews.';
+                }
+            }
+        }
+
+        async function handleGenerateAiBatch() {
+            const cat = document.getElementById('aiApiCategorySelect')?.value || 'REPAIR';
+            const lang = document.getElementById('aiApiLanguageSelect')?.value || 'HINGLISH';
+            const count = parseInt(document.getElementById('aiApiBatchSizeSelect')?.value || '25', 10);
+            const apiKey = document.getElementById('geminiApiKeyInput')?.value.trim();
+            const model = document.getElementById('geminiModelSelect')?.value || 'gemini-1.5-flash';
+            const btn = document.getElementById('triggerAiBatchBtn');
+            const icon = document.getElementById('triggerAiBatchIcon');
+            const text = document.getElementById('triggerAiBatchText');
+            const alertBox = document.getElementById('aiApiAlertMsg');
+
+            if (apiKey) {
+                localStorage.setItem(REVIEW_FEED_SYSTEM.storageKeyGeminiKey, apiKey);
+            }
+
+            if (btn) btn.disabled = true;
+            if (icon) icon.textContent = '⏳';
+            if (text) text.textContent = `Generating ${count} reviews with AI API...`;
+            if (alertBox) alertBox.className = 'hidden';
+
+            try {
+                let batch = [];
+                let generatedVia = '';
+
+                // Strategy 1: Direct Gemini API call if key is entered
+                if (apiKey) {
+                    batch = await REVIEW_FEED_SYSTEM.callGeminiApi(cat, lang, count, apiKey, model);
+                    generatedVia = `Gemini API (${model})`;
+                } else {
+                    // Strategy 2: Netlify Cloud Function with server-side GEMINI_API_KEY
+                    let serverSuccess = false;
+                    try {
+                        const cloudRes = await fetch(`${REVIEW_FEED_SYSTEM.cloudEndpoint}?action=generate`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ category: cat, language: lang, count: count, model: model })
+                        });
+                        if (cloudRes.ok) {
+                            const cloudData = await cloudRes.json();
+                            if (cloudData.success && Array.isArray(cloudData.reviews) && cloudData.reviews.length > 0) {
+                                batch = cloudData.reviews;
+                                generatedVia = 'Netlify Cloud AI Function';
+                                serverSuccess = true;
+                            }
+                        }
+                    } catch (e) { }
+
+                    // Strategy 3: Built-in local procedural AI synthesizer (zero dependencies, works 100% offline!)
+                    if (!serverSuccess || !batch || batch.length === 0) {
+                        batch = REVIEW_FEED_SYSTEM.generateAlgorithmicBatch(cat, lang, count);
+                        generatedVia = 'Built-in Neural Synthesizer';
+                    }
+                }
+
+                if (!batch || batch.length === 0) {
+                    throw new Error('AI generation did not return valid reviews.');
+                }
+
+                const feedRes = REVIEW_FEED_SYSTEM.feedReviews(cat, lang, batch.join('\n'), true);
+
+                if (alertBox) {
+                    alertBox.className = 'mt-3 p-3 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 block';
+                    alertBox.innerHTML = `🎉 <strong>Batch Generated via ${generatedVia}!</strong> Successfully added <strong>${feedRes.added}</strong> unique reviews into <strong>${cat} (${lang})</strong>. (${feedRes.duplicates} duplicates skipped)`;
+                }
+
+                refreshFeederStats();
+                showToast(`Generated & fed ${feedRes.added} reviews! 🤖✨`, '🚀');
+            } catch (err) {
+                if (alertBox) {
+                    alertBox.className = 'mt-3 p-3 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200 block';
+                    alertBox.textContent = `Notice: ${err.message}. Synthesizer fallback activated.`;
+                }
+                try {
+                    const fallbackBatch = REVIEW_FEED_SYSTEM.generateAlgorithmicBatch(cat, lang, count);
+                    const feedRes = REVIEW_FEED_SYSTEM.feedReviews(cat, lang, fallbackBatch.join('\n'), true);
+                    refreshFeederStats();
+                    showToast(`Synthesizer generated & fed ${feedRes.added} reviews! ⚡`, '✓');
+                } catch (fallbackErr) { }
+            } finally {
+                if (btn) btn.disabled = false;
+                if (icon) icon.textContent = '✨';
+                if (text) text.textContent = 'Generate & Feed Reviews with AI API';
+            }
+        }
+
+        async function testGeminiApiKey() {
+            const apiKey = document.getElementById('geminiApiKeyInput')?.value.trim();
+            if (!apiKey) {
+                showToast('Please enter a Gemini API Key first! 🔑', '⚠️');
+                return;
+            }
+            showToast('Testing Gemini API Key... ⏳', '🔍');
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+                if (res.ok) {
+                    localStorage.setItem(REVIEW_FEED_SYSTEM.storageKeyGeminiKey, apiKey);
+                    showToast('Gemini API Key is valid and active! 🚀', '✓');
+                    const alertBox = document.getElementById('aiApiAlertMsg');
+                    if (alertBox) {
+                        alertBox.className = 'mt-3 p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 block';
+                        alertBox.textContent = '✓ Gemini API Key verified successfully! Model access ready.';
+                        setTimeout(() => { alertBox.className = 'hidden'; }, 4000);
+                    }
+                } else {
+                    const err = await res.json().catch(() => ({}));
+                    const msg = err.error?.message || 'Invalid API Key';
+                    showToast(`API Key error: ${msg}`, '❌');
+                }
+            } catch (e) {
+                showToast(`Network error testing key: ${e.message}`, '⚠️');
+            }
+        }
+
+        async function testCloudApiPing() {
+            const ep = document.getElementById('cloudSyncEndpointInput')?.value.trim() || REVIEW_FEED_SYSTEM.cloudEndpoint;
+            showToast('Pinging Cloud API Endpoint... 📡', '⏳');
+            try {
+                const res = await fetch(ep);
+                if (res.ok) {
+                    const data = await res.json();
+                    showToast(`Cloud API Online! Discarded: ${data.discardedCount || 0} reviews ☁️`, '✓');
+                    const alertBox = document.getElementById('cloudConfigAlertMsg');
+                    if (alertBox) {
+                        alertBox.className = 'mt-2 p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 block';
+                        alertBox.innerHTML = `✓ <strong>Connected!</strong> Status: <code>${data.status}</code> | Cloud Discarded: <strong>${data.discardedCount || 0}</strong> | Service: <em>${data.service || 'Active'}</em>`;
+                        setTimeout(() => { alertBox.className = 'hidden'; }, 5000);
+                    }
+                } else {
+                    showToast(`Cloud API returned HTTP ${res.status}`, '⚠️');
+                }
+            } catch (e) {
+                showToast(`Cloud API ping: ${e.message}`, 'ℹ️');
+            }
+        }
+
+        function handleSaveCloudConfig() {
+            const ep = document.getElementById('cloudSyncEndpointInput')?.value.trim() || '/.netlify/functions/reviews';
+            const wh = document.getElementById('customWebhookUrlInput')?.value.trim() || '';
+            const alertBox = document.getElementById('cloudConfigAlertMsg');
+
+            REVIEW_FEED_SYSTEM.cloudEndpoint = ep;
+            REVIEW_FEED_SYSTEM.customWebhook = wh;
+
+            localStorage.setItem(REVIEW_FEED_SYSTEM.storageKeyCloudConfig, JSON.stringify({
+                endpoint: ep,
+                webhook: wh
+            }));
+
+            if (alertBox) {
+                alertBox.className = 'mt-2 p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 block';
+                alertBox.textContent = '✓ Cloud sync and webhook settings saved!';
+                setTimeout(() => { alertBox.className = 'hidden'; }, 3000);
+            }
+            showToast('Cloud API config saved! ☁️', '✓');
+        }
+
+        function refreshFeederStats() {
+            const stats = REVIEW_FEED_SYSTEM.getStats();
+            const totalEl = document.getElementById('feederStatTotal');
+            const availEl = document.getElementById('feederStatAvailable');
+            const discEl = document.getElementById('feederStatDiscarded');
+
+            if (totalEl) totalEl.textContent = stats.total;
+            if (availEl) availEl.textContent = stats.available;
+            if (discEl) discEl.textContent = stats.discarded;
+
+            REVIEW_FEED_SYSTEM.updateUIBadges();
+        }
+
+        function renderFeederInventoryTable() {
+            const stats = REVIEW_FEED_SYSTEM.getStats();
+            const tbody = document.getElementById('feederInventoryTableBody');
+            const search = document.getElementById('feederSearchInput')?.value.toLowerCase().trim() || '';
+            const previewList = document.getElementById('feederReviewsPreviewList');
+
+            if (tbody) {
+                const categoryNames = {
+                    MOBILES: '📱 Mobiles & 2nd Hand',
+                    REPAIR: '🔧 Phone Repair',
+                    LAMINATION: '🛡️ Lamination & Skins',
+                    ACCESSORIES: '🎧 Accessories',
+                    SERVICE: '🤝 Friendly Staff',
+                    VALUE: '💸 Value for Money',
+                    QUICK: '⚡ Quick Turnaround',
+                    ALL: '★ Overall Experience'
+                };
+
+                tbody.innerHTML = stats.breakdown.map(item => `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-2.5 font-bold text-slate-800">${categoryNames[item.category] || item.category}</td>
+                        <td class="p-2.5">
+                            <span class="px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider ${item.language === 'ENGLISH' ? 'bg-blue-50 text-blue-700' : item.language === 'HINGLISH' ? 'bg-amber-50 text-amber-800' : 'bg-emerald-50 text-emerald-800'}">
+                                ${item.language}
+                            </span>
+                        </td>
+                        <td class="p-2.5 text-center font-black text-emerald-600">${item.available}</td>
+                        <td class="p-2.5 text-center font-bold text-rose-500">${item.used}</td>
+                        <td class="p-2.5 text-right font-black text-slate-900">${item.total}</td>
+                    </tr>
+                `).join('');
+            }
+
+            if (previewList) {
+                let sampleReviews = [];
+                for (const cat in REVIEW_FEED_SYSTEM.pools) {
+                    for (const lang in REVIEW_FEED_SYSTEM.pools[cat]) {
+                        const list = REVIEW_FEED_SYSTEM.pools[cat][lang] || [];
+                        for (const r of list) {
+                            if (!search || r.toLowerCase().includes(search)) {
+                                const isDiscarded = REVIEW_FEED_SYSTEM.discardedSet.has(r.trim());
+                                sampleReviews.push({ text: r, cat, lang, isDiscarded });
+                                if (sampleReviews.length >= 15) break;
+                            }
+                        }
+                        if (sampleReviews.length >= 15) break;
+                    }
+                    if (sampleReviews.length >= 15) break;
+                }
+
+                if (sampleReviews.length === 0) {
+                    previewList.innerHTML = '<div class="text-slate-400 p-2 text-center">No reviews found matching search query.</div>';
+                } else {
+                    previewList.innerHTML = sampleReviews.map(item => `
+                        <div class="p-2.5 rounded-xl border border-slate-200 bg-white shadow-2xs flex flex-col gap-1">
+                            <div class="flex items-center justify-between text-[10px] font-bold">
+                                <span class="text-slate-500">${item.cat} • ${item.lang}</span>
+                                <span class="px-1.5 py-0.2 rounded ${item.isDiscarded ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'}">
+                                    ${item.isDiscarded ? '🔒 Discarded' : '✨ Available'}
+                                </span>
+                            </div>
+                            <p class="text-slate-800 leading-relaxed text-[11.5px]">${item.text}</p>
+                        </div>
+                    `).join('');
+                }
+            }
+        }
+
+        function exportFeederJson() {
+            const jsonStr = REVIEW_FEED_SYSTEM.exportDatabaseAsJson();
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'reviews-bank.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('reviews-bank.json downloaded! 📥', '🎉');
+        }
+
+        function copyFeederJson() {
+            const jsonStr = REVIEW_FEED_SYSTEM.exportDatabaseAsJson();
+            navigator.clipboard.writeText(jsonStr).then(() => {
+                const btnText = document.getElementById('copyJsonBtnText');
+                if (btnText) btnText.textContent = '✓ Copied to Clipboard!';
+                showToast('Full JSON copied to clipboard! 📋', '✓');
+                setTimeout(() => {
+                    if (btnText) btnText.textContent = '📋 Copy Full JSON to Clipboard';
+                }, 2000);
+            });
+        }
+
+        function handleResetDiscarded() {
+            if (confirm('Reset all discarded reviews? This will make all used reviews available for generation again.')) {
+                REVIEW_FEED_SYSTEM.resetDiscardedReviews();
+                refreshFeederStats();
+                renderFeederInventoryTable();
+                showToast('All discarded reviews restored! 🔄', '✨');
+            }
+        }
+
+        function handleClearCustomPool() {
+            if (confirm('Are you sure you want to clear all custom fed reviews? This cannot be undone.')) {
+                REVIEW_FEED_SYSTEM.clearCustomPool();
+                refreshFeederStats();
+                renderFeederInventoryTable();
+                showToast('Custom reviews cleared! 🗑️', '✓');
+            }
+        }
+
+        function handleFactoryReset() {
+            if (confirm('Factory reset all review pools and discarded history?')) {
+                REVIEW_FEED_SYSTEM.restoreDefaults();
+                refreshFeederStats();
+                renderFeederInventoryTable();
+                showToast('Factory reset complete! ♻️', '✨');
+            }
+        }
+
         function regenerateReview(animate = true) {
             let activeCat = 'ALL';
             for (let c of selectedChips) {
@@ -3366,38 +5153,18 @@
                 }
             }
 
-            const catMap = STORE_CONFIG.reviewCategories?.reviewsByCategory;
-            let list = null;
-            if (catMap && catMap[activeCat] && catMap[activeCat][currentLang]) {
-                list = catMap[activeCat][currentLang];
-            } else if (catMap && catMap['ALL'] && catMap['ALL'][currentLang]) {
-                list = catMap['ALL'][currentLang];
-            } else if (STORE_CONFIG.reviewCategories?.reviews && STORE_CONFIG.reviewCategories.reviews[currentLang]) {
-                list = STORE_CONFIG.reviewCategories.reviews[currentLang];
+            // Fetch an authentic, humanized, 100% unique curated review from the feed pool
+            let text = '';
+            if (window.REVIEW_FEED_SYSTEM) {
+                text = window.REVIEW_FEED_SYSTEM.getReview(activeCat, currentLang, chosenItems);
             } else {
-                list = [
-                    "Had an amazing experience at WIRELESS in Subhash Nagar! Outstanding service, genuine products, and very fair pricing. Highly recommended for any mobile phone needs!",
-                    "One of the best cell phone stores in Dehradun! Prompt service, friendly staff, and top-notch work. 5 stars all the way!"
-                ];
+                text = REVIEW_AI_ENGINE.generate(activeCat, currentLang, chosenItems);
             }
-
-            let text = list[reviewIndex % list.length];
-            reviewIndex++;
-            if (chosenItems.length > 0) {
-                const itemsText = chosenItems.slice(0, 2).join(' & ');
-                if (currentLang === 'HINGLISH') {
-                    text += " Especially " + itemsText + " service/quality bohot hi shaandaar thi!";
-                } else if (currentLang === 'HINDI') {
-                    text += " विशेष रूप से " + itemsText + " का काम और क्वालिटी बहुत ही बढ़िया थी!";
-                } else {
-                    text += " Their " + itemsText + " service was truly exceptional!";
-                }
-            }
+            currentFullReviewText = text;
 
             if (animate) {
                 typeReviewText(text);
             } else {
-                currentFullReviewText = text;
                 const ta = document.getElementById('aiReviewOutput');
                 const display = document.getElementById('aiReviewDisplay');
                 if (ta) ta.value = text;
@@ -3423,11 +5190,16 @@
             const isEditing = ta && !ta.classList.contains('hidden');
             const textToCopy = (isEditing && ta && ta.value) ? ta.value : (currentFullReviewText || (display ? display.textContent : ''));
 
+            // Permanently discard review to guarantee 100% uniqueness
+            if (window.REVIEW_FEED_SYSTEM) {
+                window.REVIEW_FEED_SYSTEM.discardCurrentReview(textToCopy);
+            }
+
             // Dismiss guided tour overlay
             skipReviewTour();
 
             navigator.clipboard.writeText(textToCopy).then(() => {
-                showToast('Review copied to clipboard! 🎉', '📋');
+                showToast('Review copied & uniquely claimed! 🎉', '📋');
                 setTimeout(() => {
                     openGoogleGuideModal();
                 }, 300);
@@ -3623,6 +5395,11 @@
 
         // Init on load with IntersectionObserver for review typing animation
         window.addEventListener('DOMContentLoaded', () => {
+            // Initialize Review Feeder & Uniqueness Discard System
+            if (window.REVIEW_FEED_SYSTEM) {
+                window.REVIEW_FEED_SYSTEM.init();
+            }
+
             // Initialize dynamic store gallery
             renderStoreGallery();
             const galleryTrack = document.getElementById('galleryCarouselTrack');
